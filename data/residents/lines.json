@@ -1,0 +1,89 @@
+{
+ "_doc": "Line pools for generated residents' dialogue. {name}, {job}, {town}, {holder}, {place} are filled in. Role-pack lines per job can be added under jobs.<job_id>.",
+ "greet": {
+  "good": [
+   "Well met. {name}, {job} here in {town}.",
+   "Oh, it's you. {name}. Anything I can do?",
+   "Morning. {name}, if you're asking."
+  ],
+  "neutral": [
+   "{name}, {job}. Something you need?",
+   "Mm? {name}. I'm busy, but go on.",
+   "You're not from {town}. I'm {name}."
+  ],
+  "bad": [
+   "I know what you did. Make it quick.",
+   "{name}. And I'd rather not be seen talking to you.",
+   "What do you want?"
+  ]
+ },
+ "needs": {
+  "money": [
+   "Wages don't stretch like they used to.",
+   "Coin's thin this season. Thinner than the ice."
+  ],
+  "safety": [
+   "I bar the door at night now. Never used to.",
+   "Something's been taking sheep up the north road."
+  ],
+  "belonging": [
+   "Don't know half the faces here any more. Everyone's new off the road.",
+   "Lonely town, for one this crowded."
+  ],
+  "conviction_arcane": [
+   "The shrine's gone quiet. You can feel it in your teeth.",
+   "Machines everywhere and not a prayer answered."
+  ],
+  "conviction_gear": [
+   "Nothing here works right. Clocks run slow, pumps seize. It's the shrine, mark me.",
+   "We'll never get anywhere while the old stones hum."
+  ],
+  "content": [
+   "Can't complain. Well, I can, but I won't.",
+   "Good enough year, all told."
+  ]
+ },
+ "holder": {
+  "like": [
+   "{holder} keeps the roads open. That's more than the last lot did."
+  ],
+  "dislike": [
+   "{holder} takes and takes. One day there'll be a reckoning."
+  ],
+  "neutral": [
+   "{holder}, the others, it's all the same to folk like me."
+  ]
+ },
+ "no_news": [
+  "Nothing worth repeating.",
+  "Quiet week. Too quiet, some say.",
+  "Only the usual: who's sleeping with whose cousin."
+ ],
+ "jobs": {
+  "smith": {
+   "greet": [
+    "Mind the sparks. {name}, smith."
+   ]
+  },
+  "innkeeper": {
+   "greet": [
+    "Welcome to the {place}. Rooms upstairs, ale down here. {name}."
+   ]
+  },
+  "shrine_keeper": {
+   "greet": [
+    "Peace on you. {name}, I keep the shrine."
+   ]
+  },
+  "foreman": {
+   "greet": [
+    "{name}. Foreman. If you're looking for work, the queue's out back."
+   ]
+  },
+  "warden": {
+   "greet": [
+    "{name}, warden of {town}. Keep the peace and we'll get on."
+   ]
+  }
+ }
+}

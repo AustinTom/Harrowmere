@@ -19,6 +19,8 @@ var _hover: MeshInstance3D
 var _hover_mat: StandardMaterial3D
 var _tick := 0.0
 var _triggers: Array = []
+## Shows the loaded settlement's generated residents (scripts/sim).
+var presence: ResidentPresence = null
 
 
 func load_area(path: String) -> void:
@@ -40,6 +42,13 @@ func load_area(path: String) -> void:
 	for sp in area.get("spawns", []):
 		spawn(str(sp["template"]), _v2i(sp["tile"]))
 	_build_hover()
+	if area.has("settlement"):
+		Residents.reset()
+		Residents.bind_area(area)
+		presence = ResidentPresence.new()
+		presence.name = "ResidentPresence"
+		add_child(presence)
+		presence.setup(self, area)
 	Events.resonance_changed.connect(_on_resonance_changed)
 	Events.flags_changed.connect(_on_flags_changed)
 	_on_flags_changed()
@@ -166,8 +175,13 @@ func spawn(template_id: String, t: Vector2i) -> Variant:
 	if tpl.is_empty():
 		push_error("Unknown actor template: " + template_id)
 		return null
+	return spawn_template(tpl, t)
+
+
+## Spawns from a template dictionary (generated residents use this).
+func spawn_template(tpl: Dictionary, t: Vector2i) -> Variant:
 	var a := Actor.new()
-	a.name = template_id
+	a.name = str(tpl.get("id", "actor"))
 	a.world = self
 	add_child(a)
 	a.apply_template(tpl)
@@ -177,6 +191,13 @@ func spawn(template_id: String, t: Vector2i) -> Variant:
 	if a.faction == "player":
 		player = a
 	return a
+
+
+## Removes an actor from the map entirely (residents going indoors).
+func despawn(a) -> void:
+	actors.erase(a)
+	a.cancel_move()
+	a.queue_free()
 
 
 func start_combat_with(h) -> void:

@@ -1,0 +1,639 @@
+{
+ "_doc": "Per-race data used to generate residents. Stat bias and lean are placeholders until the character system thread's race schema lands; Residents.to_actor_template() is the one place that reads them. Names are built from syllables: given = a + b, family = c + d. All names are original to Harrowmere.",
+ "races": {
+  "human": {
+   "adult": 16,
+   "elder": 60,
+   "max_age": 85,
+   "lean": [
+    -35,
+    25
+   ],
+   "stat_bias": {},
+   "heritages": {
+    "lowlander": 0.9,
+    "godtouched": 0.1
+   },
+   "skin": [
+    "#e9c7a8",
+    "#d4a582",
+    "#b07d5a",
+    "#8a5a3c",
+    "#f0d2b8"
+   ],
+   "given_a": [
+    "Al",
+    "Bran",
+    "Cal",
+    "Dor",
+    "Edda",
+    "Fen",
+    "Gar",
+    "Hal",
+    "Isa",
+    "Jor",
+    "Kel",
+    "Lor",
+    "Mar",
+    "Ned",
+    "Osric",
+    "Per",
+    "Ros",
+    "Sel",
+    "Tam",
+    "Wil",
+    "Ada",
+    "Bet",
+    "Cor",
+    "Del",
+    "Emm",
+    "Hes",
+    "Ivy",
+    "Lan",
+    "Mab",
+    "Nell",
+    "Rue",
+    "Tess"
+   ],
+   "given_b": [
+    "",
+    "a",
+    "an",
+    "en",
+    "ric",
+    "ton",
+    "win",
+    "ey",
+    "ie",
+    "as",
+    "ett",
+    "da",
+    "ver",
+    "lin",
+    "na",
+    "rick",
+    "ford"
+   ],
+   "family_c": [
+    "Ash",
+    "Black",
+    "Bram",
+    "Cart",
+    "Cole",
+    "Dun",
+    "Fair",
+    "Fletch",
+    "Gold",
+    "Hart",
+    "Holt",
+    "Kemp",
+    "Lowe",
+    "Marsh",
+    "Mill",
+    "Pike",
+    "Quill",
+    "Rowe",
+    "Shaw",
+    "Stone",
+    "Tanner",
+    "Thorne",
+    "Wade",
+    "Wren"
+   ],
+   "family_d": [
+    "",
+    "er",
+    "well",
+    "wood",
+    "by",
+    "field",
+    "ley",
+    "son",
+    "ham",
+    "ridge",
+    "wick",
+    "more"
+   ]
+  },
+  "elf": {
+   "adult": 30,
+   "elder": 260,
+   "max_age": 380,
+   "lean": [
+    5,
+    45
+   ],
+   "stat_bias": {
+    "dex": 1,
+    "int": 1,
+    "cha": -1
+   },
+   "skin": [
+    "#e8dccb",
+    "#d6c7b0",
+    "#c3b5a3",
+    "#a99a8a"
+   ],
+   "given_a": [
+    "Ae",
+    "Iss",
+    "Vey",
+    "Thal",
+    "Ori",
+    "Sae",
+    "Lir",
+    "Nym",
+    "Ess",
+    "Ilv",
+    "Qua",
+    "Ys",
+    "Mae",
+    "Cael"
+   ],
+   "given_b": [
+    "ka",
+    "rin",
+    "ael",
+    "is",
+    "wen",
+    "eth",
+    "ion",
+    "ara",
+    "iel",
+    "a",
+    "yr"
+   ],
+   "family_c": [
+    "Vell",
+    "Ossa",
+    "Tide",
+    "Mere",
+    "Salt",
+    "Glass",
+    "Vael",
+    "Deep",
+    "Hush",
+    "Lume"
+   ],
+   "family_d": [
+    "",
+    "wane",
+    "ren",
+    "low",
+    "song",
+    "veil",
+    "mar",
+    "ith"
+   ]
+  },
+  "dwarf": {
+   "adult": 30,
+   "elder": 180,
+   "max_age": 260,
+   "lean": [
+    -25,
+    25
+   ],
+   "stat_bias": {
+    "con": 2,
+    "str": 1,
+    "dex": -1,
+    "cha": -1
+   },
+   "skin": [
+    "#d9b08c",
+    "#c49270",
+    "#a8765a",
+    "#8e6248"
+   ],
+   "given_a": [
+    "Osk",
+    "Brun",
+    "Dag",
+    "Hild",
+    "Kor",
+    "Mag",
+    "Ror",
+    "Thur",
+    "Ulf",
+    "Vig",
+    "Brea",
+    "Gunn",
+    "Sif",
+    "Tor"
+   ],
+   "given_b": [
+    "",
+    "a",
+    "ar",
+    "in",
+    "rik",
+    "da",
+    "um",
+    "is",
+    "ga"
+   ],
+   "family_c": [
+    "Bran",
+    "Cairn",
+    "Deep",
+    "Flint",
+    "Gran",
+    "Hammar",
+    "Iron",
+    "Slate",
+    "Stoun",
+    "Thrum"
+   ],
+   "family_d": [
+    "nel",
+    "holt",
+    "vein",
+    "son",
+    "dottir",
+    "fell",
+    "gard",
+    "back"
+   ]
+  },
+  "halfling": {
+   "adult": 20,
+   "elder": 90,
+   "max_age": 140,
+   "lean": [
+    -20,
+    20
+   ],
+   "stat_bias": {
+    "dex": 2,
+    "str": -2,
+    "cha": 1
+   },
+   "skin": [
+    "#ecc9a6",
+    "#d9ad86",
+    "#c08d66"
+   ],
+   "given_a": [
+    "Tam",
+    "Pip",
+    "Rosie",
+    "Mag",
+    "Bel",
+    "Dob",
+    "Hob",
+    "Lil",
+    "Mol",
+    "Nib",
+    "Pol",
+    "Wim",
+    "Fen",
+    "Clo"
+   ],
+   "given_b": [
+    "",
+    "py",
+    "lo",
+    "kin",
+    "bert",
+    "ly",
+    "wick",
+    "son",
+    "o"
+   ],
+   "family_c": [
+    "Fair",
+    "Good",
+    "Green",
+    "Hay",
+    "Honey",
+    "Lark",
+    "Mead",
+    "Plum",
+    "Sweet",
+    "Under",
+    "Tumble",
+    "Hedge"
+   ],
+   "family_d": [
+    "weather",
+    "barrow",
+    "bottle",
+    "field",
+    "foot",
+    "hill",
+    "row",
+    "sow",
+    "bank"
+   ]
+  },
+  "gnome": {
+   "adult": 25,
+   "elder": 200,
+   "max_age": 300,
+   "lean": [
+    -70,
+    -20
+   ],
+   "stat_bias": {
+    "int": 2,
+    "str": -2
+   },
+   "skin": [
+    "#e3c4a4",
+    "#cfae8c",
+    "#b89675"
+   ],
+   "given_a": [
+    "Fiz",
+    "Bix",
+    "Nim",
+    "Tock",
+    "Quib",
+    "Zan",
+    "Pell",
+    "Rin",
+    "Gim",
+    "Wix",
+    "Lop",
+    "Dree"
+   ],
+   "given_b": [
+    "",
+    "wick",
+    "ble",
+    "zel",
+    "kin",
+    "nock",
+    "ix",
+    "et",
+    "y"
+   ],
+   "family_c": [
+    "Cog",
+    "Gear",
+    "Spark",
+    "Spring",
+    "Tin",
+    "Bolt",
+    "Wheel",
+    "Gauge",
+    "Brass",
+    "Sprocket"
+   ],
+   "family_d": [
+    "wright",
+    "turner",
+    "smith",
+    "wise",
+    "ley",
+    "whistle",
+    "nose"
+   ]
+  },
+  "orc": {
+   "adult": 14,
+   "elder": 50,
+   "max_age": 70,
+   "lean": [
+    -45,
+    5
+   ],
+   "stat_bias": {
+    "str": 2,
+    "con": 1,
+    "int": -1,
+    "cha": -1
+   },
+   "skin": [
+    "#8fa07a",
+    "#7b8c66",
+    "#6a7a58",
+    "#9aa88a"
+   ],
+   "given_a": [
+    "Grosh",
+    "Uth",
+    "Mak",
+    "Durg",
+    "Rash",
+    "Vog",
+    "Kra",
+    "Shel",
+    "Ogra",
+    "Tuk",
+    "Brag",
+    "Hesk"
+   ],
+   "given_b": [
+    "",
+    "a",
+    "ak",
+    "um",
+    "ra",
+    "ash",
+    "ok",
+    "ga"
+   ],
+   "family_c": [
+    "Ash",
+    "Coal",
+    "Furnace",
+    "Slag",
+    "Soot",
+    "Anvil",
+    "Cinder",
+    "Kiln",
+    "Ore",
+    "Smelt"
+   ],
+   "family_d": [
+    "hand",
+    "back",
+    "jaw",
+    "heart",
+    "fist",
+    "born",
+    "tooth"
+   ]
+  },
+  "wrought": {
+   "adult": 0,
+   "elder": 9999,
+   "max_age": 9999,
+   "lean": [
+    -100,
+    -80
+   ],
+   "stat_bias": {
+    "con": 3,
+    "cha": -2
+   },
+   "no_family": true,
+   "skin": [
+    "#8d8f92",
+    "#7a6f5f",
+    "#9a8c6c",
+    "#6c7378"
+   ],
+   "given_a": [
+    "Unit",
+    "Lamp",
+    "Ledger",
+    "Patience",
+    "Seventh",
+    "Copper",
+    "Measure",
+    "Quiet",
+    "Cogent",
+    "Plumb",
+    "Tally",
+    "Steady"
+   ],
+   "given_b": [
+    ""
+   ],
+   "family_c": [
+    "of the ",
+    "from the "
+   ],
+   "family_d": [
+    "Ice",
+    "Vault",
+    "Seam",
+    "Deep Works",
+    "Sunk Hall",
+    "Ninth Spire"
+   ]
+  }
+ },
+ "traits": {
+  "_doc": "Traits change schedules (leisure choice, sleep), need rates, gossip spread and which quest templates can fire.",
+  "early_riser": {
+   "wake": -1,
+   "weight": 10
+  },
+  "night_owl": {
+   "wake": 1,
+   "bed": 2,
+   "weight": 10
+  },
+  "devout": {
+   "leisure": {
+    "shrine": 3,
+    "temple": 3
+   },
+   "conviction_rate": 1.5,
+   "weight": 12
+  },
+  "drinker": {
+   "leisure": {
+    "tavern": 4
+   },
+   "money_rate": 1.3,
+   "weight": 12
+  },
+  "gossip": {
+   "gossip": 2.5,
+   "leisure": {
+    "market": 2,
+    "square": 2,
+    "tavern": 1
+   },
+   "weight": 12
+  },
+  "recluse": {
+   "gossip": 0.3,
+   "belonging_rate": 0.5,
+   "leisure": {
+    "home": 5
+   },
+   "weight": 8
+  },
+  "ambitious": {
+   "money_rate": 0.8,
+   "weight": 10
+  },
+  "greedy": {
+   "weight": 8
+  },
+  "generous": {
+   "weight": 8
+  },
+  "hothead": {
+   "weight": 8
+  },
+  "timid": {
+   "safety_rate": 1.5,
+   "weight": 8
+  },
+  "tinkerer": {
+   "lean_shift": -15,
+   "leisure": {
+    "workshop": 2
+   },
+   "weight": 6
+  },
+  "bookish": {
+   "lean_shift": 10,
+   "leisure": {
+    "library": 3
+   },
+   "weight": 7
+  },
+  "homesick": {
+   "belonging_rate": 1.5,
+   "weight": 6
+  },
+  "restless": {
+   "leisure": {
+    "square": 2,
+    "market": 1
+   },
+   "weight": 6
+  }
+ },
+ "problems": {
+  "_doc": "Personal problems for authored-systemic (role) residents. Each points at a quest template that can fire from it.",
+  "owes_money": {
+   "text": "owes money they can't repay",
+   "template": "debt"
+  },
+  "feuding_neighbour": {
+   "text": "is feuding with a neighbour",
+   "template": "feud"
+  },
+  "missing_relative": {
+   "text": "has a relative who never came home",
+   "template": "missing_person"
+  },
+  "rival_trade": {
+   "text": "is being undercut by a rival",
+   "template": "sabotage"
+  },
+  "contested_claim": {
+   "text": "has a land claim someone else filed first",
+   "template": "claim_dispute"
+  },
+  "strange_heirloom": {
+   "text": "keeps an heirloom that whispers at night",
+   "template": "cursed_object"
+  },
+  "unpaid_wages": {
+   "text": "hasn't been paid in weeks",
+   "template": "strike"
+  },
+  "sick_child": {
+   "text": "has a sick child",
+   "template": "sick_relative"
+  },
+  "lost_keepsake": {
+   "text": "lost something precious on the road",
+   "template": "lost_item"
+  },
+  "secret_faith": {
+   "text": "keeps a faith their employer would sack them for",
+   "template": "faith_crisis"
+  }
+ }
+}

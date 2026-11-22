@@ -29,6 +29,9 @@ var aggro_radius := 0
 var ai_controlled := true
 var follows_player := false
 var color := Color.WHITE
+## Generated residents hide their name label (hover shows it) so a busy
+## street doesn't turn into a wall of text.
+var quiet_label := false
 
 var tile := Vector2i.ZERO
 var world = null
@@ -78,6 +81,7 @@ func apply_template(tpl: Dictionary) -> void:
 		inventory.add(str(inv["id"]), int(inv.get("qty", 1)), inv.get("identified", null))
 	if tpl.has("equip"):
 		equip_entry(inventory.find_first(str(tpl["equip"])))
+	_update_weapon_visual()
 
 
 # ---------------------------------------------------------------- equipment
@@ -237,6 +241,7 @@ func play_attack(target, profile: Dictionary, tint := Color.WHITE) -> void:
 func _process(_delta: float) -> void:
 	if _label == null or is_dead:
 		return
+	_label.visible = not quiet_label or in_combat
 	var txt := display_name
 	if in_combat or hp < max_hp:
 		txt += "\n%d/%d" % [hp, max_hp]

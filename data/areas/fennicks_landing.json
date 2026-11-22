@@ -1,38 +1,358 @@
 {
   "name": "Fennick's Landing",
   "region": "The Meltlands",
-  "size": [40, 30],
+  "size": [
+    40,
+    30
+  ],
   "locations": [
-    {"id": "shrine_green", "name": "Shrine Green", "rect": [0, 0, 20, 30], "resonance": 72},
-    {"id": "pumphouse_yard", "name": "Pumphouse Yard", "rect": [20, 0, 20, 30], "resonance": 18}
+    {
+      "id": "shrine_green",
+      "name": "Shrine Green",
+      "rect": [
+        0,
+        0,
+        20,
+        30
+      ],
+      "resonance": 72
+    },
+    {
+      "id": "pumphouse_yard",
+      "name": "Pumphouse Yard",
+      "rect": [
+        20,
+        0,
+        20,
+        30
+      ],
+      "resonance": 18
+    }
   ],
   "structures": [
-    {"kind": "shrine", "rect": [5, 6, 2, 2]},
-    {"kind": "well", "rect": [12, 12, 1, 1]},
-    {"kind": "house", "rect": [1, 15, 4, 3]},
-    {"kind": "house", "rect": [9, 19, 4, 4]},
-    {"kind": "house", "rect": [2, 24, 5, 3]},
-    {"kind": "house", "rect": [14, 3, 4, 3]},
-    {"kind": "pumphouse", "rect": [27, 4, 6, 5]},
-    {"kind": "coal", "rect": [23, 13, 2, 2]},
-    {"kind": "coal", "rect": [35, 19, 2, 2]},
-    {"kind": "crate", "rect": [31, 12, 1, 1]},
-    {"kind": "crate", "rect": [26, 18, 1, 1]},
-    {"kind": "fence", "rect": [20, 0, 1, 10]},
-    {"kind": "fence", "rect": [20, 16, 1, 14]}
+    {
+      "kind": "shrine",
+      "rect": [
+        5,
+        6,
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "well",
+      "rect": [
+        12,
+        12,
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "house",
+      "rect": [
+        1,
+        15,
+        4,
+        3
+      ]
+    },
+    {
+      "kind": "house",
+      "rect": [
+        9,
+        19,
+        4,
+        4
+      ]
+    },
+    {
+      "kind": "house",
+      "rect": [
+        2,
+        24,
+        5,
+        3
+      ]
+    },
+    {
+      "kind": "house",
+      "rect": [
+        14,
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "kind": "pumphouse",
+      "rect": [
+        27,
+        4,
+        6,
+        5
+      ]
+    },
+    {
+      "kind": "coal",
+      "rect": [
+        23,
+        13,
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "coal",
+      "rect": [
+        35,
+        19,
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        31,
+        12,
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "crate",
+      "rect": [
+        26,
+        18,
+        1,
+        1
+      ]
+    },
+    {
+      "kind": "fence",
+      "rect": [
+        20,
+        0,
+        1,
+        10
+      ]
+    },
+    {
+      "kind": "fence",
+      "rect": [
+        20,
+        16,
+        1,
+        14
+      ]
+    }
   ],
   "spawns": [
-    {"template": "player", "tile": [8, 12]},
-    {"template": "iska", "tile": [7, 13]},
-    {"template": "osk_brannel", "tile": [11, 10]},
-    {"template": "hesta_lowe", "tile": [7, 9]},
-    {"template": "tam_fairweather", "tile": [17, 19]},
-    {"template": "scav_boss", "tile": [30, 14]},
-    {"template": "scav_hook", "tile": [32, 16]},
-    {"template": "scav_brute", "tile": [29, 17]}
+    {
+      "template": "player",
+      "tile": [
+        8,
+        12
+      ]
+    },
+    {
+      "template": "iska",
+      "tile": [
+        7,
+        13
+      ]
+    },
+    {
+      "template": "osk_brannel",
+      "tile": [
+        11,
+        10
+      ]
+    },
+    {
+      "template": "hesta_lowe",
+      "tile": [
+        7,
+        9
+      ]
+    },
+    {
+      "template": "tam_fairweather",
+      "tile": [
+        17,
+        19
+      ]
+    },
+    {
+      "template": "scav_boss",
+      "tile": [
+        30,
+        14
+      ]
+    },
+    {
+      "template": "scav_hook",
+      "tile": [
+        32,
+        16
+      ]
+    },
+    {
+      "template": "scav_brute",
+      "tile": [
+        29,
+        17
+      ]
+    }
   ],
   "triggers": [
-    {"on": "group_cleared", "group": "pump_scavs", "flag": "quest_pump", "value": "cleared",
-     "unless": ["cleared", "done"], "log": "The pumphouse yard is quiet. Osk Brannel will want to hear."}
+    {
+      "on": "group_cleared",
+      "group": "pump_scavs",
+      "flag": "quest_pump",
+      "value": "cleared",
+      "unless": [
+        "cleared",
+        "done"
+      ],
+      "log": "The pumphouse yard is quiet. Osk Brannel will want to hear."
+    }
+  ],
+  "settlement": "fennicks_landing",
+  "place_anchors": {
+    "_doc": "Tiles where the town's generated places sit on this map. Outdoor places (square, shrine, market, guardpost) are where visible residents stand. Indoor places use their door tile: residents walk to it and go inside. Places with no anchor here are off the map: residents walk to the nearest exit.",
+    "home": [
+      [
+        3,
+        18
+      ],
+      [
+        11,
+        23
+      ],
+      [
+        4,
+        27
+      ]
+    ],
+    "square": [
+      [
+        12,
+        14
+      ],
+      [
+        13,
+        11
+      ],
+      [
+        10,
+        13
+      ],
+      [
+        14,
+        13
+      ]
+    ],
+    "market": [
+      [
+        15,
+        16
+      ],
+      [
+        17,
+        15
+      ],
+      [
+        16,
+        18
+      ]
+    ],
+    "shrine": [
+      [
+        6,
+        9
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        7,
+        5
+      ]
+    ],
+    "guardpost": [
+      [
+        11,
+        10
+      ]
+    ],
+    "tavern": [
+      [
+        16,
+        6
+      ]
+    ],
+    "exit": [
+      [
+        0,
+        12
+      ],
+      [
+        0,
+        21
+      ],
+      [
+        8,
+        29
+      ],
+      [
+        18,
+        0
+      ]
+    ]
+  },
+  "deeds": [
+    {
+      "flag": "quest_pump",
+      "value": "active",
+      "id": "took_pump_job",
+      "text": "The newcomer took Osk's pumphouse job. Brave or daft, people can't decide.",
+      "good": 0.5,
+      "mag": 5
+    },
+    {
+      "flag": "quest_pump",
+      "value": "cleared",
+      "id": "pump_cleared",
+      "text": "The newcomer cleared the scavengers out of the old pumphouse.",
+      "good": 1,
+      "mag": 20,
+      "threat": -30
+    },
+    {
+      "flag": "pump_choice",
+      "value": "lit",
+      "id": "boiler_lit",
+      "text": "The newcomer had the pumphouse boiler lit again. There's smoke over the green.",
+      "pool": "gear",
+      "good": 0.3,
+      "mag": 25,
+      "prosperity": 0.15
+    },
+    {
+      "flag": "pump_choice",
+      "value": "cold",
+      "id": "boiler_cold",
+      "text": "The newcomer told Osk to leave the boiler cold. The shrine's breathing easier.",
+      "pool": "arcane",
+      "good": 0.3,
+      "mag": 25
+    }
   ]
 }

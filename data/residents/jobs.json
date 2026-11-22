@@ -1,0 +1,1349 @@
+{
+ "_doc": "Jobs for generated residents. per = residents per job slot (demand), cap = workers per workplace, shift = key into shifts, pool = arcane/neutral/gear (drives lean and look), res = Resonance range the job can exist in, mult = demand multipliers by town specialty or city district kind, essential = every town gets one, role = authored-systemic job that gets a role pack and a personal problem, wage = coin per working day. joins = workers go to the places of that job when they exist (barkeeps work in an innkeeper's tavern). archetype = the character system's archetype id (data/character/archetypes.json) used to expand the resident's stats on spawn.",
+ "shifts": {
+  "day": [
+   [
+    7,
+    17
+   ]
+  ],
+  "early": [
+   [
+    5,
+    14
+   ]
+  ],
+  "late": [
+   [
+    13,
+    22
+   ]
+  ],
+  "night": [
+   [
+    21,
+    30
+   ]
+  ],
+  "split": [
+   [
+    6,
+    10
+   ],
+   [
+    15,
+    19
+   ]
+  ],
+  "dawn": [
+   [
+    5,
+    18
+   ]
+  ],
+  "evening": [
+   [
+    16,
+    24
+   ]
+  ]
+ },
+ "place_kinds": {
+  "home": {
+   "outdoor": false,
+   "name": "%s's house"
+  },
+  "field": {
+   "outdoor": true,
+   "name": "%s's fields"
+  },
+  "mine": {
+   "outdoor": true,
+   "name": "the pithead"
+  },
+  "dock": {
+   "outdoor": true,
+   "name": "the landing"
+  },
+  "market": {
+   "outdoor": true,
+   "name": "the market"
+  },
+  "square": {
+   "outdoor": true,
+   "name": "the square"
+  },
+  "shrine": {
+   "outdoor": true,
+   "name": "the shrine"
+  },
+  "yard": {
+   "outdoor": true,
+   "name": "the yard"
+  },
+  "forest": {
+   "outdoor": true,
+   "name": "the woodlot"
+  },
+  "guardpost": {
+   "outdoor": true,
+   "name": "the watch post"
+  },
+  "camp": {
+   "outdoor": true,
+   "name": "the claims camp"
+  },
+  "tavern": {
+   "outdoor": false,
+   "name": "the %s"
+  },
+  "smithy": {
+   "outdoor": false,
+   "name": "%s's smithy"
+  },
+  "workshop": {
+   "outdoor": false,
+   "name": "%s's workshop"
+  },
+  "foundry": {
+   "outdoor": false,
+   "name": "the foundry"
+  },
+  "mill": {
+   "outdoor": false,
+   "name": "the mill"
+  },
+  "clinic": {
+   "outdoor": false,
+   "name": "the infirmary"
+  },
+  "school": {
+   "outdoor": false,
+   "name": "the schoolroom"
+  },
+  "temple": {
+   "outdoor": false,
+   "name": "the temple"
+  },
+  "office": {
+   "outdoor": false,
+   "name": "the %s office"
+  },
+  "store": {
+   "outdoor": false,
+   "name": "%s's shop"
+  },
+  "library": {
+   "outdoor": false,
+   "name": "the reading room"
+  },
+  "manor": {
+   "outdoor": false,
+   "name": "the %s house"
+  },
+  "tower": {
+   "outdoor": false,
+   "name": "the tower"
+  }
+ },
+ "tavern_names": [
+  "Drowned Lantern",
+  "Thawing Goat",
+  "Coal and Candle",
+  "Wet Boots",
+  "Last Floe",
+  "Lucky Seam",
+  "Crooked Kettle",
+  "Brass Heron",
+  "Muddy Crown",
+  "Patient Ox",
+  "Grey Mitten",
+  "Sleeping Pike"
+ ],
+ "specialty_labor": {
+  "farming": "farmhand",
+  "mining": "miner",
+  "fishing": "fisher",
+  "logging": "woodcutter",
+  "foundry": "foundry_hand",
+  "boomtown": "prospector",
+  "shrine": "farmhand",
+  "stilt": "boatman",
+  "mill": "mill_hand",
+  "crossroads": "porter",
+  "canal": "bargee",
+  "smuggling": "boatman"
+ },
+ "district_labor": {
+  "industrial": "foundry_hand",
+  "docks": "dockhand",
+  "market": "porter",
+  "slum": "laborer",
+  "temple": "laborer",
+  "residential": "laborer",
+  "noble": "servant",
+  "civic": "laborer",
+  "campus": "servant"
+ },
+ "jobs": {
+  "warden": {
+   "name": "Warden",
+   "place": "guardpost",
+   "cap": 1,
+   "per": 9999,
+   "essential": true,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "guard",
+    "authority"
+   ],
+   "wage": 4,
+   "role": true,
+   "archetype": "guard"
+  },
+  "constable": {
+   "name": "Constable",
+   "place": "guardpost",
+   "cap": 6,
+   "per": 70,
+   "min_pop": 120,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "guard"
+   ],
+   "wage": 3,
+   "mult": {
+    "civic": 2.0,
+    "slum": 1.5
+   },
+   "archetype": "guard"
+  },
+  "night_watch": {
+   "name": "Night watch",
+   "place": "guardpost",
+   "cap": 4,
+   "per": 150,
+   "min_pop": 300,
+   "shift": "night",
+   "pool": "neutral",
+   "tags": [
+    "guard"
+   ],
+   "wage": 3,
+   "joins": "constable",
+   "archetype": "guard"
+  },
+  "innkeeper": {
+   "name": "Innkeeper",
+   "place": "tavern",
+   "cap": 1,
+   "per": 220,
+   "essential": true,
+   "shift": "evening",
+   "pool": "neutral",
+   "tags": [
+    "trade",
+    "social"
+   ],
+   "wage": 4,
+   "role": true,
+   "mult": {
+    "crossroads": 1.5,
+    "market": 2.0,
+    "docks": 1.5
+   },
+   "archetype": "merchant"
+  },
+  "barkeep": {
+   "name": "Barkeep",
+   "place": "tavern",
+   "cap": 3,
+   "per": 160,
+   "min_pop": 150,
+   "shift": "evening",
+   "pool": "neutral",
+   "tags": [
+    "social"
+   ],
+   "wage": 2,
+   "mult": {
+    "market": 1.5,
+    "docks": 1.5,
+    "slum": 1.5
+   },
+   "joins": "innkeeper",
+   "archetype": "labourer"
+  },
+  "cook": {
+   "name": "Cook",
+   "place": "tavern",
+   "cap": 2,
+   "per": 180,
+   "min_pop": 100,
+   "shift": "late",
+   "pool": "neutral",
+   "tags": [
+    "craft"
+   ],
+   "wage": 2,
+   "joins": "innkeeper",
+   "archetype": "labourer"
+  },
+  "smith": {
+   "name": "Smith",
+   "place": "smithy",
+   "cap": 3,
+   "per": 120,
+   "essential": true,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "craft",
+    "metal"
+   ],
+   "wage": 3,
+   "role": true,
+   "mult": {
+    "mining": 1.5,
+    "industrial": 1.5
+   },
+   "archetype": "labourer"
+  },
+  "merchant": {
+   "name": "Merchant",
+   "place": "store",
+   "cap": 2,
+   "per": 90,
+   "essential": true,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "trade"
+   ],
+   "wage": 4,
+   "role": true,
+   "mult": {
+    "market": 3.0,
+    "crossroads": 1.5,
+    "noble": 1.5
+   },
+   "archetype": "merchant"
+  },
+  "shopkeep": {
+   "name": "Shopkeeper",
+   "place": "store",
+   "cap": 2,
+   "per": 70,
+   "min_pop": 90,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "trade"
+   ],
+   "wage": 3,
+   "mult": {
+    "market": 2.5
+   },
+   "archetype": "merchant"
+  },
+  "stallholder": {
+   "name": "Stallholder",
+   "place": "market",
+   "cap": 12,
+   "per": 45,
+   "min_pop": 60,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "trade",
+    "social"
+   ],
+   "wage": 2,
+   "mult": {
+    "market": 3.0,
+    "boomtown": 1.5
+   },
+   "archetype": "merchant"
+  },
+  "baker": {
+   "name": "Baker",
+   "place": "store",
+   "cap": 2,
+   "per": 110,
+   "min_pop": 70,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "craft",
+    "food"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "butcher": {
+   "name": "Butcher",
+   "place": "store",
+   "cap": 2,
+   "per": 160,
+   "min_pop": 110,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "craft",
+    "food"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "tailor": {
+   "name": "Tailor",
+   "place": "workshop",
+   "cap": 2,
+   "per": 160,
+   "min_pop": 120,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "craft"
+   ],
+   "wage": 2,
+   "mult": {
+    "noble": 2.0,
+    "market": 1.5
+   },
+   "archetype": "labourer"
+  },
+  "leatherworker": {
+   "name": "Leatherworker",
+   "place": "workshop",
+   "cap": 2,
+   "per": 200,
+   "min_pop": 120,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "craft"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "carpenter": {
+   "name": "Carpenter",
+   "place": "workshop",
+   "cap": 3,
+   "per": 110,
+   "min_pop": 60,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "craft"
+   ],
+   "wage": 3,
+   "mult": {
+    "boomtown": 2.0,
+    "residential": 1.5
+   },
+   "archetype": "labourer"
+  },
+  "fletcher": {
+   "name": "Fletcher",
+   "place": "workshop",
+   "cap": 1,
+   "per": 350,
+   "min_pop": 150,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "craft"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "healer": {
+   "name": "Healer",
+   "place": "clinic",
+   "cap": 2,
+   "per": 200,
+   "essential": true,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "care"
+   ],
+   "wage": 3,
+   "role": true,
+   "archetype": "labourer"
+  },
+  "apothecary": {
+   "name": "Apothecary",
+   "place": "store",
+   "cap": 1,
+   "per": 260,
+   "min_pop": 150,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "care",
+    "trade"
+   ],
+   "wage": 3,
+   "role": true,
+   "archetype": "merchant"
+  },
+  "teacher": {
+   "name": "Schoolteacher",
+   "place": "school",
+   "cap": 2,
+   "per": 160,
+   "min_pop": 90,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "scholar"
+   ],
+   "wage": 2,
+   "mult": {
+    "residential": 1.5
+   },
+   "archetype": "scholar"
+  },
+  "clerk": {
+   "name": "Clerk",
+   "place": "office",
+   "cap": 6,
+   "per": 90,
+   "min_pop": 200,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "clerk"
+   ],
+   "wage": 3,
+   "mult": {
+    "civic": 3.0
+   },
+   "archetype": "scholar"
+  },
+  "assay_agent": {
+   "name": "Assay Office agent",
+   "place": "office",
+   "cap": 2,
+   "per": 300,
+   "min_pop": 120,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "clerk",
+    "authority"
+   ],
+   "wage": 5,
+   "role": true,
+   "mult": {
+    "boomtown": 3.0,
+    "civic": 2.0
+   },
+   "archetype": "scholar"
+  },
+  "appraiser": {
+   "name": "Appraiser",
+   "place": "store",
+   "cap": 1,
+   "per": 400,
+   "min_pop": 200,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "trade"
+   ],
+   "wage": 4,
+   "role": true,
+   "mult": {
+    "market": 2.0,
+    "boomtown": 2.0
+   },
+   "archetype": "merchant"
+  },
+  "moneylender": {
+   "name": "Moneylender",
+   "place": "office",
+   "cap": 1,
+   "per": 500,
+   "min_pop": 200,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "trade",
+    "shady"
+   ],
+   "wage": 6,
+   "role": true,
+   "mult": {
+    "slum": 2.0,
+    "market": 1.5
+   },
+   "archetype": "thug"
+  },
+  "fence": {
+   "name": "Fence",
+   "place": "store",
+   "cap": 1,
+   "per": 700,
+   "min_pop": 300,
+   "shift": "late",
+   "pool": "neutral",
+   "tags": [
+    "shady",
+    "trade"
+   ],
+   "wage": 4,
+   "role": true,
+   "mult": {
+    "slum": 2.5,
+    "docks": 2.0,
+    "smuggling": 4.0
+   },
+   "archetype": "thug"
+  },
+  "librarian": {
+   "name": "Librarian",
+   "place": "library",
+   "cap": 2,
+   "per": 500,
+   "min_pop": 300,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "scholar"
+   ],
+   "wage": 2,
+   "role": true,
+   "mult": {
+    "campus": 3.0,
+    "civic": 1.5
+   },
+   "archetype": "scholar"
+  },
+  "servant": {
+   "name": "Servant",
+   "place": "manor",
+   "cap": 8,
+   "per": 120,
+   "min_pop": 400,
+   "shift": "split",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "mult": {
+    "noble": 5.0
+   },
+   "joins": "noble",
+   "archetype": "labourer"
+  },
+  "noble": {
+   "name": "Landholder",
+   "place": "manor",
+   "cap": 2,
+   "per": 400,
+   "min_pop": 300,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "authority",
+    "wealthy"
+   ],
+   "wage": 10,
+   "role": true,
+   "mult": {
+    "noble": 6.0
+   },
+   "archetype": "merchant"
+  },
+  "farmer": {
+   "name": "Farmer",
+   "place": "field",
+   "cap": 2,
+   "per": 18,
+   "shift": "dawn",
+   "pool": "neutral",
+   "tags": [
+    "farm"
+   ],
+   "wage": 2,
+   "mult": {
+    "farming": 2.5,
+    "shrine": 1.5,
+    "mill": 1.2,
+    "boomtown": 0.2,
+    "mining": 0.3,
+    "foundry": 0.2,
+    "industrial": 0.0,
+    "docks": 0.0,
+    "slum": 0.0,
+    "market": 0.0,
+    "noble": 0.0,
+    "civic": 0.0,
+    "temple": 0.0,
+    "campus": 0.0,
+    "residential": 0.1
+   },
+   "archetype": "farmer"
+  },
+  "farmhand": {
+   "name": "Farmhand",
+   "place": "field",
+   "cap": 6,
+   "per": 9999,
+   "shift": "dawn",
+   "pool": "neutral",
+   "tags": [
+    "farm",
+    "labor"
+   ],
+   "wage": 1,
+   "joins": "farmer",
+   "archetype": "farmer"
+  },
+  "miller": {
+   "name": "Miller",
+   "place": "mill",
+   "cap": 1,
+   "per": 160,
+   "min_pop": 60,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "craft",
+    "food"
+   ],
+   "wage": 3,
+   "role": true,
+   "mult": {
+    "mill": 3.0,
+    "farming": 1.5
+   },
+   "archetype": "labourer"
+  },
+  "mill_hand": {
+   "name": "Mill hand",
+   "place": "mill",
+   "cap": 10,
+   "per": 9999,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "joins": "miller",
+   "archetype": "labourer"
+  },
+  "fisher": {
+   "name": "Fisher",
+   "place": "dock",
+   "cap": 10,
+   "per": 9999,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "labor",
+    "dock"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "boatman": {
+   "name": "Boatman",
+   "place": "dock",
+   "cap": 8,
+   "per": 9999,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "labor",
+    "dock"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "bargee": {
+   "name": "Bargee",
+   "place": "dock",
+   "cap": 8,
+   "per": 9999,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "labor",
+    "dock",
+    "trade"
+   ],
+   "wage": 2,
+   "archetype": "merchant"
+  },
+  "dockhand": {
+   "name": "Dockhand",
+   "place": "dock",
+   "cap": 14,
+   "per": 9999,
+   "shift": "early",
+   "pool": "neutral",
+   "tags": [
+    "labor",
+    "dock"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "woodcutter": {
+   "name": "Woodcutter",
+   "place": "forest",
+   "cap": 8,
+   "per": 9999,
+   "shift": "dawn",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "porter": {
+   "name": "Porter",
+   "place": "square",
+   "cap": 10,
+   "per": 9999,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "laborer": {
+   "name": "Day laborer",
+   "place": "yard",
+   "cap": 14,
+   "per": 9999,
+   "shift": "day",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "prospector": {
+   "name": "Prospector",
+   "place": "camp",
+   "cap": 20,
+   "per": 9999,
+   "shift": "dawn",
+   "pool": "neutral",
+   "tags": [
+    "prospect",
+    "labor"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "hunter": {
+   "name": "Hunter",
+   "place": "forest",
+   "cap": 4,
+   "per": 140,
+   "min_pop": 40,
+   "shift": "dawn",
+   "pool": "neutral",
+   "tags": [
+    "labor"
+   ],
+   "wage": 2,
+   "mult": {
+    "logging": 2.0,
+    "boomtown": 1.5,
+    "industrial": 0.0,
+    "slum": 0.0,
+    "civic": 0.0,
+    "noble": 0.0
+   },
+   "archetype": "labourer"
+  },
+  "miner": {
+   "name": "Miner",
+   "place": "mine",
+   "cap": 25,
+   "per": 9999,
+   "res": [
+    0,
+    70
+   ],
+   "shift": "early",
+   "pool": "gear",
+   "tags": [
+    "labor",
+    "labor_gear"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "foundry_hand": {
+   "name": "Foundry hand",
+   "place": "foundry",
+   "cap": 30,
+   "per": 9999,
+   "res": [
+    0,
+    45
+   ],
+   "shift": "early",
+   "pool": "gear",
+   "tags": [
+    "labor",
+    "labor_gear"
+   ],
+   "wage": 2,
+   "archetype": "labourer"
+  },
+  "foreman": {
+   "name": "Foreman",
+   "place": "foundry",
+   "cap": 1,
+   "per": 120,
+   "min_pop": 150,
+   "res": [
+    0,
+    45
+   ],
+   "shift": "day",
+   "pool": "gear",
+   "tags": [
+    "authority",
+    "labor_gear"
+   ],
+   "wage": 5,
+   "role": true,
+   "mult": {
+    "industrial": 3.0,
+    "foundry": 3.0,
+    "mining": 2.0
+   },
+   "joins": "foundry_hand",
+   "archetype": "merchant"
+  },
+  "union_steward": {
+   "name": "Union steward",
+   "place": "tavern",
+   "cap": 1,
+   "per": 400,
+   "min_pop": 200,
+   "res": [
+    0,
+    45
+   ],
+   "shift": "late",
+   "pool": "gear",
+   "tags": [
+    "labor_gear",
+    "social"
+   ],
+   "wage": 2,
+   "role": true,
+   "mult": {
+    "industrial": 3.0,
+    "slum": 2.0,
+    "foundry": 3.0,
+    "mining": 3.0
+   },
+   "joins": "innkeeper",
+   "archetype": "labourer"
+  },
+  "engineer": {
+   "name": "Engineer",
+   "place": "workshop",
+   "cap": 3,
+   "per": 220,
+   "min_pop": 100,
+   "res": [
+    0,
+    60
+   ],
+   "shift": "day",
+   "pool": "gear",
+   "tags": [
+    "gear_craft"
+   ],
+   "wage": 5,
+   "role": true,
+   "mult": {
+    "industrial": 3.0,
+    "foundry": 2.0,
+    "mill": 1.5
+   },
+   "archetype": "engineer"
+  },
+  "gunsmith": {
+   "name": "Gunsmith",
+   "place": "workshop",
+   "cap": 2,
+   "per": 400,
+   "min_pop": 150,
+   "res": [
+    0,
+    50
+   ],
+   "shift": "day",
+   "pool": "gear",
+   "tags": [
+    "gear_craft",
+    "metal"
+   ],
+   "wage": 5,
+   "role": true,
+   "mult": {
+    "industrial": 2.0,
+    "boomtown": 1.5
+   },
+   "archetype": "engineer"
+  },
+  "clockmaker": {
+   "name": "Clockmaker",
+   "place": "workshop",
+   "cap": 1,
+   "per": 500,
+   "min_pop": 250,
+   "res": [
+    0,
+    50
+   ],
+   "shift": "day",
+   "pool": "gear",
+   "tags": [
+    "gear_craft"
+   ],
+   "wage": 4,
+   "role": true,
+   "mult": {
+    "market": 1.5,
+    "noble": 1.5
+   },
+   "archetype": "engineer"
+  },
+  "stoker": {
+   "name": "Stoker",
+   "place": "foundry",
+   "cap": 6,
+   "per": 140,
+   "min_pop": 100,
+   "res": [
+    0,
+    45
+   ],
+   "shift": "night",
+   "pool": "gear",
+   "tags": [
+    "labor_gear"
+   ],
+   "wage": 2,
+   "mult": {
+    "industrial": 3.0,
+    "foundry": 2.0
+   },
+   "joins": "foundry_hand",
+   "archetype": "labourer"
+  },
+  "lamplighter": {
+   "name": "Lamplighter",
+   "place": "square",
+   "cap": 3,
+   "per": 400,
+   "min_pop": 300,
+   "res": [
+    0,
+    55
+   ],
+   "shift": "evening",
+   "pool": "gear",
+   "tags": [
+    "labor"
+   ],
+   "wage": 1,
+   "archetype": "labourer"
+  },
+  "mechanic": {
+   "name": "Pump mechanic",
+   "place": "yard",
+   "cap": 3,
+   "per": 200,
+   "min_pop": 80,
+   "res": [
+    0,
+    60
+   ],
+   "shift": "day",
+   "pool": "gear",
+   "tags": [
+    "gear_craft"
+   ],
+   "wage": 3,
+   "mult": {
+    "mill": 1.5,
+    "stilt": 2.0,
+    "docks": 1.5
+   },
+   "archetype": "engineer"
+  },
+  "priest": {
+   "name": "Priest",
+   "place": "temple",
+   "cap": 3,
+   "per": 220,
+   "min_pop": 60,
+   "res": [
+    25,
+    100
+   ],
+   "shift": "split",
+   "pool": "arcane",
+   "tags": [
+    "faith"
+   ],
+   "wage": 2,
+   "role": true,
+   "mult": {
+    "temple": 4.0,
+    "shrine": 2.5
+   },
+   "archetype": "priest"
+  },
+  "shrine_keeper": {
+   "name": "Shrine-keeper",
+   "place": "shrine",
+   "cap": 2,
+   "per": 200,
+   "essential": true,
+   "res": [
+    30,
+    100
+   ],
+   "shift": "split",
+   "pool": "arcane",
+   "tags": [
+    "faith"
+   ],
+   "wage": 1,
+   "role": true,
+   "mult": {
+    "shrine": 3.0,
+    "temple": 2.0,
+    "industrial": 0.0
+   },
+   "archetype": "priest"
+  },
+  "acolyte": {
+   "name": "Acolyte",
+   "place": "temple",
+   "cap": 6,
+   "per": 150,
+   "min_pop": 200,
+   "res": [
+    30,
+    100
+   ],
+   "shift": "early",
+   "pool": "arcane",
+   "tags": [
+    "faith"
+   ],
+   "wage": 1,
+   "mult": {
+    "temple": 4.0,
+    "shrine": 2.0
+   },
+   "joins": "priest",
+   "archetype": "priest"
+  },
+  "hedge_wizard": {
+   "name": "Hedge-wizard",
+   "place": "tower",
+   "cap": 1,
+   "per": 300,
+   "min_pop": 60,
+   "res": [
+    40,
+    100
+   ],
+   "shift": "late",
+   "pool": "arcane",
+   "tags": [
+    "arcane_craft",
+    "scholar"
+   ],
+   "wage": 3,
+   "role": true,
+   "mult": {
+    "campus": 3.0,
+    "boomtown": 1.5
+   },
+   "archetype": "mage"
+  },
+  "collegium_scholar": {
+   "name": "Collegium scholar",
+   "place": "library",
+   "cap": 10,
+   "per": 60,
+   "min_pop": 500,
+   "res": [
+    60,
+    100
+   ],
+   "shift": "late",
+   "pool": "arcane",
+   "tags": [
+    "scholar",
+    "arcane_craft"
+   ],
+   "wage": 4,
+   "mult": {
+    "campus": 5.0,
+    "market": 0.0,
+    "slum": 0.0,
+    "industrial": 0.0,
+    "docks": 0.0,
+    "residential": 0.2,
+    "temple": 0.5,
+    "civic": 0.2
+   },
+   "joins": "librarian",
+   "archetype": "mage"
+  },
+  "enchanter": {
+   "name": "Enchanter",
+   "place": "workshop",
+   "cap": 2,
+   "per": 400,
+   "min_pop": 150,
+   "res": [
+    45,
+    100
+   ],
+   "shift": "day",
+   "pool": "arcane",
+   "tags": [
+    "arcane_craft"
+   ],
+   "wage": 5,
+   "role": true,
+   "mult": {
+    "campus": 2.0,
+    "market": 1.5
+   },
+   "archetype": "mage"
+  },
+  "alchemist": {
+   "name": "Alchemist",
+   "place": "workshop",
+   "cap": 1,
+   "per": 350,
+   "min_pop": 120,
+   "res": [
+    35,
+    100
+   ],
+   "shift": "day",
+   "pool": "arcane",
+   "tags": [
+    "arcane_craft",
+    "care"
+   ],
+   "wage": 4,
+   "role": true,
+   "archetype": "mage"
+  },
+  "herbalist": {
+   "name": "Herbalist",
+   "place": "field",
+   "cap": 1,
+   "per": 200,
+   "min_pop": 40,
+   "res": [
+    30,
+    100
+   ],
+   "shift": "dawn",
+   "pool": "arcane",
+   "tags": [
+    "care"
+   ],
+   "wage": 2,
+   "mult": {
+    "shrine": 2.0,
+    "farming": 1.5,
+    "industrial": 0.0
+   },
+   "joins": "farmer",
+   "archetype": "labourer"
+  },
+  "diviner": {
+   "name": "Diviner",
+   "place": "market",
+   "cap": 1,
+   "per": 500,
+   "min_pop": 200,
+   "res": [
+    50,
+    100
+   ],
+   "shift": "late",
+   "pool": "arcane",
+   "tags": [
+    "arcane_craft",
+    "social"
+   ],
+   "wage": 3,
+   "role": true,
+   "mult": {
+    "boomtown": 2.0
+   },
+   "archetype": "mage"
+  },
+  "memory_keeper": {
+   "name": "Memory-keeper",
+   "place": "library",
+   "cap": 4,
+   "per": 120,
+   "min_pop": 300,
+   "res": [
+    40,
+    100
+   ],
+   "shift": "split",
+   "pool": "arcane",
+   "tags": [
+    "scholar"
+   ],
+   "wage": 2,
+   "role": true,
+   "mult": {
+    "campus": 3.0
+   },
+   "joins": "librarian",
+   "archetype": "scholar"
+  }
+ },
+ "commons": [
+  "market",
+  "square",
+  "dock",
+  "mine",
+  "camp",
+  "yard",
+  "forest",
+  "guardpost",
+  "shrine"
+ ]
+}

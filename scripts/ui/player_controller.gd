@@ -204,6 +204,8 @@ func _on_hover(pos: Vector2) -> void:
 		hud.set_hover("", pos)
 		return
 	var txt := "%s  HP %d/%d  AC %d" % [a.display_name, a.hp, a.max_hp, a.ac]
+	if a.has_meta("resident_id"):
+		txt += "\n" + Residents.describe_short(int(a.get_meta("resident_id")))
 	if a.faction == "hostile" and not p.is_dead:
 		var sp := _slot_profile()
 		if not sp.is_empty():
