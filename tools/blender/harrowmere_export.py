@@ -43,7 +43,7 @@ REQUIRED_ANIMS = ["idle", "walk"]
 HAND_SOCKET = "socket_hand_r"
 
 # Rough low-poly budgets (triangles). Warnings only.
-TRI_BUDGET = {"characters": 6000, "items": 1500, "structures": 20000, "animations": 0}
+TRI_BUDGET = {"characters": 25000, "items": 4000, "structures": 60000, "animations": 0}  # upper ends of the art style budgets
 # Sensible heights in metres (1 Blender unit = 1 m = 1 tile).
 HEIGHT_RANGE = {"characters": (0.5, 3.5), "items": (0.05, 3.0), "structures": (0.1, 30.0)}
 ID_RE = re.compile(r"^[a-z0-9]+(_[a-z0-9]+)*(_\d+x\d+)?$")

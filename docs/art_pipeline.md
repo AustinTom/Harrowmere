@@ -29,12 +29,13 @@ placeholder, so you can replace things one at a time.
 | **Structures:** origin at the centre of the footprint, floor on Z = 0, footprint the size of its tiles (X = width, Y = depth). | Structures fill their tile rectangle from the area file. |
 | **Items:** origin at the grip, pointing toward you in Front view. | It goes straight into the hand socket. |
 | **Weapon socket:** an Empty named `socket_hand_r`, parented to the right hand bone (Bone parent), placed in the palm with the same axes as the character (-Y forward, Z up) in rest pose. | Held items attach there. Without it the game uses a bone called hand.R / hand_r / RightHand, then the hip. |
-| **Low poly budget** (warnings only): characters 6,000 tris, items 1,500, structures 20,000. | The camera is far away and towns are dense. |
+| **Triangle budget** (warnings only, the upper end of the art style budgets): characters 25,000, held items 4,000, structures 60,000. Landmarks may go higher; give them an entry and ignore the warning. | Towns are dense. The art style doc sets the target ranges (resident 8-12k, hero 15-25k, house 20-60k). |
 | Ids are **lowercase_with_underscores** and match the game data. | That's how the game finds files without any config. |
 
 Materials: anything glTF supports works (Principled BSDF, image textures,
-vertex colours). For a low-poly look, a small palette texture or vertex
-colours keep draw calls down. Keep textures next to the model or packed into the .glb.
+vertex colours). The art style guide (docs/art/README.md) sets surfaces, texel
+density, and the `owner_*` / `glow_*` material slot names the game will drive.
+Keep textures next to the model or packed into the .glb.
 
 The game's camera looks down from the south-east (+X, +Z in Godot), so the
 front and right side of buildings face the player.

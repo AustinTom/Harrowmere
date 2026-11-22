@@ -9,7 +9,7 @@ extends RefCounted
 const Registry := preload("res://scripts/core/models.gd")
 const REQUIRED_ANIMS := ["idle", "walk"]
 const KNOWN_ANIMS := ["idle", "walk", "run", "attack_melee", "attack_ranged", "cast", "hit", "death", "talk", "work", "sit"]
-const TRI_BUDGET := {"characters": 6000, "items": 1500, "structures": 20000}
+const TRI_BUDGET := {"characters": 25000, "items": 4000, "structures": 60000} # docs/art/README.md (art style thread)
 const HEIGHT_RANGE := {"characters": [0.5, 3.5], "items": [0.05, 3.0], "structures": [0.1, 30.0]}
 
 var lines: PackedStringArray = []
