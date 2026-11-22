@@ -91,8 +91,73 @@ static func attack_stat(profile: Dictionary) -> String:
 	return "str"
 
 
+## Sum of a modifier on an actor. Works with anything that has mod_total()
+## (Actor, CharacterSheet); plain test doubles count as 0.
+static func mods(actor, target: String) -> int:
+	if actor != null and actor.has_method("mod_total"):
+		return roundi(actor.mod_total(target))
+	return 0
+
+
+static func has_flag(actor, flag: String) -> bool:
+	return actor != null and actor.has_method("has_flag") and actor.has_flag(flag)
+
+
+static func reach_kind(profile: Dictionary) -> String:
+	return "ranged" if profile.get("ranged", false) else "melee"
+
+
+## d20 bonus: stat modifier + weapon skill (rank-based proficiency) + modifiers.
 static func attack_bonus(attacker, profile: Dictionary) -> int:
-	return mod(int(attacker.stats[attack_stat(profile)])) + PROFICIENCY
+	var skill := DB.weapon_skill(profile)
+	var b := mod(int(attacker.stats[attack_stat(profile)]))
+	if attacker.has_method("weapon_skill_bonus"):
+		b += attacker.weapon_skill_bonus(skill)
+	else:
+		b += PROFICIENCY
+	b += mods(attacker, "attack") + mods(attacker, "attack:" + skill) + mods(attacker, "attack:" + reach_kind(profile))
+	b += mods(attacker, "attack:" + str(profile.get("pool", "neutral")))
+	return b + int(profile.get("to_hit", 0))
+
+
+static func damage_bonus(attacker, profile: Dictionary) -> int:
+	var skill := DB.weapon_skill(profile)
+	return mods(attacker, "damage") + mods(attacker, "damage:" + skill) + mods(attacker, "damage:" + reach_kind(profile))
+
+
+static func crit_threshold(attacker) -> int:
+	return clampi(20 - mods(attacker, "crit_range"), 15, 20)
+
+
+## Rolls a d20 for an attack; the Lucky trait rerolls a natural 1 once.
+static func attack_d20(attacker) -> int:
+	var d := d20()
+	if d == 1 and has_flag(attacker, "reroll_natural_1"):
+		d = d20()
+	return d
+
+
+## A target's saving throw against a DC. Returns true when it succeeds.
+static func saving_throw(target, stat_id: String, dc: int, vs_magic := false) -> bool:
+	var b := mod(int(target.stats.get(stat_id, 10)))
+	if target.has_method("save_bonus"):
+		b = target.save_bonus(stat_id, vs_magic)
+	return d20() + b >= dc
+
+
+## Statuses a technique or spell puts on a target that it hit.
+static func roll_statuses(attacker, target, effects: Array, dc: int, save_stat: String, vs_magic: bool, r: Dictionary) -> void:
+	for e in effects:
+		if e.get("type") != "status":
+			continue
+		if rng.randf() > float(e.get("chance", 1.0)):
+			continue
+		var sd: Dictionary = DB.statuses.get(str(e["status"]), {})
+		if save_stat != "" and saving_throw(target, save_stat, dc, vs_magic):
+			r["lines"].append("%s resists being %s (%s save vs DC %d)." % [target.display_name, str(sd.get("name", e["status"])).to_lower(), save_stat.to_upper(), dc])
+			continue
+		r["statuses"].append({"id": str(e["status"]), "duration": int(e.get("duration", 2))})
+		r["lines"].append("%s is [color=%s]%s[/color] for %d rounds." % [target.display_name, str(sd.get("color", "#ffffff")), str(sd.get("name", e["status"])).to_lower(), int(e.get("duration", 2))])
 
 
 static func hit_chance(bonus: int, ac: int) -> float:
@@ -101,8 +166,9 @@ static func hit_chance(bonus: int, ac: int) -> float:
 
 
 static func _blank() -> Dictionary:
-	return {"hit": false, "crit": false, "misfire": false, "damage": 0,
-		"self_damage": 0, "heal": 0, "effects": [], "lines": []}
+	return {"hit": false, "crit": false, "misfire": false, "damage": 0, "damage_type": "physical",
+		"self_damage": 0, "heal": 0, "effects": [], "statuses": [], "push": 0, "drain_heal": 0,
+		"cleanse": "", "repair": false, "lines": []}
 
 
 static func resolve_attack(attacker, target, p: Dictionary, resonance: int) -> Dictionary:
@@ -111,7 +177,8 @@ static func resolve_attack(attacker, target, p: Dictionary, resonance: int) -> D
 	var tn: String = target.display_name
 	var wn: String = str(p.get("label", p.get("name", "attack")))
 	if p.get("pool", "neutral") == "gear":
-		var chance := misfire_chance(float(p.get("misfire", 0.02)), resonance, int(attacker.aptitude))
+		var base := float(p.get("misfire", 0.02)) + float(p.get("misfire_add", 0.0)) + mods_f(attacker, "misfire")
+		var chance := misfire_chance(base, resonance, int(attacker.aptitude))
 		if rng.randf() < chance:
 			r["misfire"] = true
 			var line := "[color=#ffb347]%s's %s misfires![/color] (%d%% chance at Resonance %d)" % [an, wn, roundi(chance * 100), resonance]
@@ -121,15 +188,17 @@ static func resolve_attack(attacker, target, p: Dictionary, resonance: int) -> D
 			r["lines"].append(line)
 			return r
 	var bonus := attack_bonus(attacker, p)
-	var d := d20()
+	var d := attack_d20(attacker)
 	var total := d + bonus
 	var ac: int = int(target.ac)
-	r["crit"] = d == 20
-	r["hit"] = d == 20 or (d != 1 and total >= ac)
+	r["crit"] = d >= crit_threshold(attacker)
+	r["hit"] = r["crit"] or (d != 1 and total >= ac)
 	if not r["hit"]:
 		r["lines"].append("%s attacks %s with %s: %d+%d=%d vs AC %d, miss." % [an, tn, wn, d, bonus, total, ac])
 		return r
-	var dmg := roll_dice(str(p.get("damage", "1d3")), r["crit"]) + mod(int(attacker.stats[attack_stat(p)]))
+	var dmg := roll_dice(str(p.get("damage", "1d3")), r["crit"]) + mod(int(attacker.stats[attack_stat(p)])) + damage_bonus(attacker, p)
+	if p.has("extra_damage"):
+		dmg += roll_dice(str(p["extra_damage"]), r["crit"])
 	var extra_txt := ""
 	if p.has("bonus_damage"):
 		var mult := magic_multiplier("arcane", resonance, int(attacker.aptitude))
@@ -148,33 +217,21 @@ static func resolve_attack(attacker, target, p: Dictionary, resonance: int) -> D
 	if special.has("slow_on_crit") and r["crit"]:
 		r["effects"].append({"name": "slowed", "ap_loss": 3})
 		r["lines"].append("Frost spreads through %s. Slowed, loses 3 AP." % tn)
+	if p.has("ability_effects"):
+		var save: Dictionary = p.get("save", {}) if p.get("save") is Dictionary else {}
+		var dc := 8 + bonus - int(p.get("to_hit", 0))
+		roll_statuses(attacker, target, p["ability_effects"], dc, str(save.get("stat", "")), false, r)
+	r["push"] = int(p.get("push", 0))
 	return r
 
 
+static func mods_f(actor, target: String) -> float:
+	if actor != null and actor.has_method("mod_total"):
+		return float(actor.mod_total(target))
+	return 0.0
+
+
+## Old entry point for spells, kept for compatibility. All abilities now
+## resolve through AbilityRules.resolve().
 static func resolve_spell(caster, target, skill: Dictionary, resonance: int, spell_power: int) -> Dictionary:
-	var r := _blank()
-	var school: String = skill.get("school", "arcane")
-	var mult := magic_multiplier(school, resonance, int(caster.aptitude))
-	var stat_mod := mod(int(caster.stats[skill.get("stat", "int")]))
-	var cn: String = caster.display_name
-	var tn: String = target.display_name
-	var sn: String = skill.get("name", "spell")
-	if skill.get("kind") == "heal":
-		var amount := maxi(1, roundi((roll_dice(str(skill["heal"])) + stat_mod + spell_power) * mult))
-		r["heal"] = amount
-		r["hit"] = true
-		r["lines"].append("%s casts %s on %s: heals %d (x%.2f at Resonance %d)." % [cn, sn, tn, amount, mult, resonance])
-		return r
-	var bonus := stat_mod + PROFICIENCY
-	var d := d20()
-	var total := d + bonus
-	var ac: int = int(target.ac)
-	r["crit"] = d == 20
-	r["hit"] = d == 20 or (d != 1 and total >= ac)
-	if not r["hit"]:
-		r["lines"].append("%s casts %s at %s: %d+%d=%d vs AC %d, miss." % [cn, sn, tn, d, bonus, total, ac])
-		return r
-	var dmg := maxi(1, roundi((roll_dice(str(skill["damage"]), r["crit"]) + spell_power) * mult))
-	r["damage"] = dmg
-	r["lines"].append("%s casts %s at %s%s: %d+%d=%d vs AC %d, [b]%d damage[/b] (x%.2f at Resonance %d)." % [cn, sn, tn, " [color=#ffd700]CRITICAL[/color]" if r["crit"] else "", d, bonus, total, ac, dmg, mult, resonance])
-	return r
+	return AbilityRules.resolve(caster, target, skill, resonance, spell_power)

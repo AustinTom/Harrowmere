@@ -1,9 +1,13 @@
 {
   "player": {
-    "name": "Wayfarer", "faction": "player", "color": "#4f7cc9", "race": "human",
-    "stats": {"str": 14, "dex": 14, "con": 14, "int": 12, "wis": 10, "cha": 10},
-    "hp": 30, "ac": 14, "ap": 6, "aptitude": 0,
-    "skills": ["arcane_bolt"],
+    "name": "Wayfarer", "faction": "player", "color": "#4f7cc9",
+    "sheet": {
+      "race": "human", "heritage": "lowlander", "background": "freeholder", "archetype": "wayfarer", "gender": "x",
+      "level": 1, "cp": 2, "grade": "hero", "natural_ac": 2,
+      "base_stats": {"str": 14, "dex": 14, "con": 14, "int": 12, "wis": 10, "cha": 10},
+      "skill_ranks": {"blades": 1, "firearms": 1, "bows": 1, "arcana": 1},
+      "tiers": {"evocation": 1}
+    },
     "inventory": [
       {"id": "fen_hookblade"}, {"id": "repeating_carbine"}, {"id": "shelf_longbow"},
       {"id": "healing_draught", "qty": 2}, {"id": "assayer_lens", "qty": 1}, {"id": "coin", "qty": 12}
@@ -11,10 +15,14 @@
     "equip": "fen_hookblade"
   },
   "iska": {
-    "name": "Iska Vell", "faction": "ally", "follows_player": true, "color": "#8f6cc4", "race": "elf",
-    "stats": {"str": 8, "dex": 14, "con": 10, "int": 16, "wis": 13, "cha": 12},
-    "hp": 20, "ac": 12, "ap": 6, "aptitude": 60,
-    "skills": ["arcane_bolt", "mend_wounds"],
+    "name": "Iska Vell", "faction": "ally", "follows_player": true, "color": "#8f6cc4",
+    "sheet": {
+      "race": "elf", "background": "collegium_dropout", "archetype": "hedge_wizard", "gender": "f",
+      "level": 1, "cp": 0, "grade": "hero",
+      "base_stats": {"str": 8, "dex": 12, "con": 11, "int": 15, "wis": 13, "cha": 13},
+      "skill_ranks": {"arcana": 2, "faith": 1},
+      "tiers": {"evocation": 1, "lantern": 1}
+    },
     "inventory": [{"id": "starglass_staff"}, {"id": "healing_draught", "qty": 1}],
     "equip": "starglass_staff", "dialogue": "iska"
   },
@@ -38,22 +46,31 @@
   },
   "scav_boss": {
     "name": "Rook Harl", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#b94a3c",
-    "stats": {"str": 10, "dex": 14, "con": 12, "int": 10, "wis": 10, "cha": 12},
-    "hp": 14, "ac": 13, "ap": 6, "aptitude": -30,
+    "sheet": {
+      "race": "human", "archetype": "gunman", "level": 1, "grade": "minion", "natural_ac": 1,
+      "base_stats": {"str": 10, "dex": 14, "con": 12, "int": 10, "wis": 10, "cha": 12},
+      "skill_ranks": {"firearms": 1, "gunsmithing": 1, "blades": 1}, "tiers": {"ballistics": 1}
+    },
     "inventory": [{"id": "repeating_carbine"}, {"id": "frostvein_dagger"}, {"id": "coin", "qty": 25}],
     "equip": "repeating_carbine"
   },
   "scav_hook": {
     "name": "Scavenger", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#9c5a3c",
-    "stats": {"str": 12, "dex": 12, "con": 11, "int": 9, "wis": 9, "cha": 8},
-    "hp": 10, "ac": 12, "ap": 6, "aptitude": -10,
+    "sheet": {
+      "race": "human", "archetype": "scavenger", "level": 1, "grade": "minion", "natural_ac": 1,
+      "base_stats": {"str": 12, "dex": 12, "con": 11, "int": 9, "wis": 9, "cha": 8},
+      "skill_ranks": {"blades": 1}, "tiers": {"blade": 1}
+    },
     "inventory": [{"id": "fen_hookblade"}, {"id": "healing_draught", "qty": 1}],
     "equip": "fen_hookblade"
   },
   "scav_brute": {
     "name": "Scavenger Brute", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#7e3b30",
-    "stats": {"str": 13, "dex": 10, "con": 14, "int": 8, "wis": 9, "cha": 8},
-    "hp": 15, "ac": 11, "ap": 6, "aptitude": -40,
+    "sheet": {
+      "race": "human", "archetype": "steam_brute", "level": 1, "grade": "minion", "natural_ac": 1,
+      "base_stats": {"str": 13, "dex": 10, "con": 14, "int": 8, "wis": 9, "cha": 8},
+      "skill_ranks": {"heavy_gear": 1, "engineering": 1}, "tiers": {"steamworks": 1}
+    },
     "inventory": [{"id": "boiler_lance"}, {"id": "coin", "qty": 6}],
     "equip": "boiler_lance"
   }

@@ -25,6 +25,7 @@ var turn_index := 0
 var _turn_serial := 0
 var _mode_serial := 0
 var _rt_thinking := {}
+var _round_clock := 0.0
 
 
 func _ready() -> void:
@@ -74,7 +75,8 @@ func start(hostiles: Array) -> void:
 	for a in combatants:
 		a.cancel_move()
 		a.in_combat = true
-		a.initiative = Rules.d20() + Rules.mod(int(a.stats["dex"]))
+		a.initiative = Rules.d20() + (a.initiative_bonus() if a.has_method("initiative_bonus") else Rules.mod(int(a.stats["dex"])))
+		a.relentless_used = false
 		a.ap = float(a.ap_max)
 		a.ap_debt = 0
 		a.skip_refill_once = false
@@ -112,6 +114,9 @@ func _finish(victory: bool) -> void:
 		a.ap = float(a.ap_max)
 		a.ap_debt = 0
 		a.set_turn_highlight(false)
+	for a in combatants.duplicate():
+		if a.summoned and not a.is_dead:
+			_dismiss(a)
 	combatants.clear()
 	_rt_thinking.clear()
 	GameState.clock_running = victory
@@ -123,6 +128,8 @@ func _finish(victory: bool) -> void:
 
 
 func on_actor_died(actor) -> void:
+	if actor.faction == "hostile" and not actor.summoned and actor.sheet != null:
+		award_xp(actor.sheet.xp_value(), "defeating %s" % actor.display_name)
 	if not active:
 		return
 	var idx := combatants.find(actor)
@@ -148,6 +155,9 @@ func _begin_turn(index: int) -> void:
 	turn_index = posmod(index, combatants.size())
 	_turn_serial += 1
 	var a = combatants[turn_index]
+	_round_passes(a)
+	if a.is_dead or not combatants.has(a):
+		return # died to an ailment or a summon expired; both move the turn on
 	if a.skip_refill_once:
 		a.skip_refill_once = false
 		a.ap = maxf(0.0, floorf(a.ap))
@@ -195,6 +205,12 @@ func _advance() -> void:
 
 func _process(delta: float) -> void:
 	if not active:
+		# Out of combat, buffs and ailments still run down, one round per ROUND_SECONDS.
+		_round_clock += delta
+		if _round_clock >= ROUND_SECONDS and world != null:
+			_round_clock = 0.0
+			for a in world.party_all():
+				a.tick_statuses()
 		return
 	if mode == TURN_BASED:
 		# Auto-end the player's turn once they are out of AP and idle.
@@ -202,6 +218,12 @@ func _process(delta: float) -> void:
 		if cur != null and not cur.ai_controlled and cur.ap < 1.0 and not cur.busy and not cur.moving:
 			_advance()
 		return
+	_round_clock += delta
+	if _round_clock >= ROUND_SECONDS:
+		_round_clock -= ROUND_SECONDS
+		for a in combatants.duplicate():
+			if not a.is_dead:
+				_round_passes(a)
 	var regen := delta / ROUND_SECONDS
 	for a in combatants.duplicate():
 		if a.is_dead:
@@ -317,20 +339,33 @@ func do_attack(attacker, target, use_alt := false) -> bool:
 	return true
 
 
-func do_cast(caster, target, skill_id: String) -> bool:
-	var skill: Dictionary = DB.get_skill(skill_id)
-	if skill.is_empty() or not caster.known_skills.has(skill_id):
+## Uses any active ability: spells, prayers, devices, techniques, summons.
+## target is an actor (or the caster for self and party abilities).
+func do_cast(caster, target, ability_id: String) -> bool:
+	var ab: Dictionary = DB.get_ability(ability_id)
+	if ab.is_empty() or not caster.known_skills.has(ability_id):
 		return false
+	var kind := str(ab.get("kind", ""))
+	if kind == "passive":
+		return false
+	if kind == "weapon":
+		return await do_technique(caster, target, ability_id)
+	var tgt_kind := str(ab.get("target", "enemy"))
+	if tgt_kind == "self" or int(ab.get("range", 0)) == 0 or kind in ["summon", "utility"]:
+		target = caster
 	if caster.busy or caster.is_dead or target == null or target.is_dead:
 		return false
-	if Rules.tile_distance(caster.tile, target.tile) > Rules.ft_to_tiles(int(skill.get("range", 30))):
+	if AbilityRules.is_magic(ab) and caster.has_flag("silenced"):
+		Events.post("[color=gray]%s is silenced and can't cast.[/color]" % caster.display_name)
 		return false
-	if skill.get("kind") == "attack" and not active and target.faction == "hostile":
+	if Rules.tile_distance(caster.tile, target.tile) > Rules.ft_to_tiles(int(ab.get("range", 30))) and target != caster:
+		return false
+	if tgt_kind == "enemy" and not active and target.faction == "hostile":
 		world.start_combat_with(target)
 		if not can_act(caster):
 			return false
 	caster.busy = true
-	if not await wait_for_ap(caster, float(skill.get("ap", 4))):
+	if not await wait_for_ap(caster, float(ab.get("ap", 4))):
 		caster.busy = false
 		_note_no_ap(caster)
 		return false
@@ -338,15 +373,209 @@ func do_cast(caster, target, skill_id: String) -> bool:
 		caster.busy = false
 		return false
 	var res: int = world.resonance_at(caster.tile)
-	var r := Rules.resolve_spell(caster, target, skill, res, caster.spell_power())
+	if kind == "summon":
+		_summon(caster, ab)
+		caster.busy = false
+		return true
+	if kind == "utility":
+		_utility(caster, ab)
+		caster.busy = false
+		return true
+	var targets := targets_for(caster, target, ab)
 	if target != caster:
-		await caster.play_attack(target, {"projectile": true}, Color(str(skill.get("color", "#ffffff"))))
-	if caster.is_dead or target.is_dead:
+		await caster.play_attack(target, {"projectile": true}, Color(str(ab.get("color", "#ffffff"))))
+	if caster.is_dead:
 		caster.busy = false
 		return false
-	_apply(caster, target, r)
+	var first := true
+	for t in targets:
+		if t.is_dead:
+			continue
+		var r := AbilityRules.resolve(caster, t, ab, res, caster.spell_power(), first)
+		first = false
+		if r["misfire"]:
+			_apply(caster, caster, r)
+			break
+		_apply(caster, t, r)
 	caster.busy = false
 	return true
+
+
+## Every actor an ability affects: area (enemies around the target), party
+## abilities (allies around the caster or target), chains, or just the target.
+func targets_for(caster, target, ab: Dictionary) -> Array:
+	var pool: Array = combatants if active else world.actors
+	var radius := Rules.ft_to_tiles(int(ab.get("area", 0))) if int(ab.get("area", 0)) > 0 else 0
+	var tgt_kind := str(ab.get("target", "enemy"))
+	var out: Array = [target]
+	if tgt_kind == "allies":
+		out = []
+		for o in pool:
+			if not o.is_dead and ai.same_side(caster, o) and Rules.tile_distance(o.tile, target.tile) <= maxi(radius, 1):
+				out.append(o)
+		if not out.has(caster) and Rules.tile_distance(caster.tile, target.tile) <= maxi(radius, 1):
+			out.append(caster)
+	elif radius > 0:
+		for o in pool:
+			if o != target and not o.is_dead and not ai.same_side(caster, o) and o.faction != "neutral" and Rules.tile_distance(o.tile, target.tile) <= radius:
+				out.append(o)
+	elif int(ab.get("chain", 0)) > 0:
+		var left := int(ab["chain"])
+		var cands: Array = []
+		for o in pool:
+			if o != target and not o.is_dead and not ai.same_side(caster, o) and o.faction != "neutral" and Rules.tile_distance(o.tile, target.tile) <= 3:
+				cands.append(o)
+		cands.sort_custom(func(x, y): return Rules.tile_distance(x.tile, target.tile) < Rules.tile_distance(y.tile, target.tile))
+		out.append_array(cands.slice(0, left))
+	return out
+
+
+## A weapon technique: the equipped weapon's attack, modified by the ability.
+func do_technique(attacker, target, ability_id: String) -> bool:
+	var ab: Dictionary = DB.get_ability(ability_id)
+	if attacker.busy or attacker.is_dead or target == null or target.is_dead:
+		return false
+	var w: Dictionary = attacker.weapon_data()
+	var why := AbilityRules.technique_blocker(w, ab)
+	if why != "":
+		if not attacker.ai_controlled:
+			Events.post("[color=gray]%s[/color]" % why)
+		return false
+	var p := AbilityRules.technique_profile(w, ab)
+	if Rules.tile_distance(attacker.tile, target.tile) > Rules.ft_to_tiles(int(p.get("range", 5))):
+		return false
+	if not active and target.faction == "hostile":
+		world.start_combat_with(target)
+		if not can_act(attacker):
+			return false
+	attacker.busy = true
+	if not await wait_for_ap(attacker, float(p["ap"])):
+		attacker.busy = false
+		_note_no_ap(attacker)
+		return false
+	if target.is_dead or attacker.is_dead:
+		attacker.busy = false
+		return false
+	var res: int = world.resonance_at(attacker.tile)
+	var targets: Array = [target]
+	if ab.get("cleave", false):
+		for o in combatants:
+			if o != target and not o.is_dead and not ai.same_side(attacker, o) and Rules.tile_distance(o.tile, attacker.tile) <= 1:
+				targets.append(o)
+	elif int(ab.get("area", 0)) > 0:
+		targets = targets_for(attacker, target, ab)
+	var tint := Color("#ffe08a") if p.get("pool") == "gear" else Color(str(ab.get("color", "#dddddd")))
+	await attacker.play_attack(target, p, tint)
+	if attacker.is_dead:
+		attacker.busy = false
+		return false
+	var stop := false
+	for t in targets:
+		for i in int(ab.get("hits", 1)):
+			if t.is_dead or attacker.is_dead:
+				break
+			var r := Rules.resolve_attack(attacker, t, p, res)
+			_apply(attacker, t, r)
+			if r["misfire"]:
+				stop = true
+				break
+		if stop:
+			break
+	if ab.has("self_status") and not attacker.is_dead:
+		attacker.add_status(str(ab["self_status"]), 2, attacker.display_name)
+	attacker.busy = false
+	return true
+
+
+func _summon(caster, ab: Dictionary) -> void:
+	var made := 0
+	for i in int(ab.get("count", 1)):
+		var spot = world._free_tile_near(caster.tile, caster)
+		if spot == null:
+			break
+		var s = world.spawn(str(ab["summon"]), spot)
+		if s == null:
+			break
+		s.faction = "hostile" if caster.faction == "hostile" else "ally"
+		s.group = caster.group
+		s.summoned = true
+		s.summon_rounds = int(ab.get("duration", 5))
+		s.ai_controlled = true
+		made += 1
+		if active:
+			s.in_combat = true
+			s.ap = 0.0
+			s.initiative = caster.initiative
+			var idx := combatants.find(caster)
+			combatants.insert(idx + 1 if idx >= 0 else combatants.size(), s)
+			if idx >= 0 and idx < turn_index:
+				turn_index += 1
+	Events.post("%s uses %s: %d %s answer%s the call for %d rounds." % [caster.display_name, ab.get("name", "?"), made, DB.get_actor_template(str(ab["summon"])).get("name", "?"), "" if made != 1 else "s", int(ab.get("duration", 5))])
+
+
+func _dismiss(a) -> void:
+	Events.post("[color=gray]%s fades away.[/color]" % a.display_name)
+	var idx := combatants.find(a)
+	if idx >= 0:
+		combatants.remove_at(idx)
+		if idx < turn_index:
+			turn_index -= 1
+	var was_current := is_turn_based() and idx >= 0 and idx == turn_index
+	a.is_dead = true
+	world.actors.erase(a)
+	a.queue_free()
+	if was_current and not _check_end():
+		_begin_turn.call_deferred(turn_index)
+
+
+## What happens to one actor when a round passes for it.
+func _round_passes(a) -> void:
+	a.tick_statuses()
+	if a.summoned and not a.is_dead:
+		a.summon_rounds -= 1
+		if a.summon_rounds <= 0:
+			_dismiss(a)
+
+
+func _utility(caster, ab: Dictionary) -> void:
+	match str(ab.get("effect", "")):
+		"identify":
+			for holder in world.party_all():
+				for e in holder.inventory.entries:
+					if not e["identified"]:
+						e["identified"] = true
+						var real: Dictionary = DB.get_item(e["id"])
+						Events.post("[color=#9fd8ff]%s uses %s. It is a [b]%s[/b].[/color] %s" % [caster.display_name, ab.get("name", "?"), real.get("name", "?"), real.get("desc", "")])
+						holder.inventory.changed.emit()
+						Events.inventory_changed.emit()
+						return
+			Events.post("There is nothing unknown in the party's packs.")
+		"detect_magic":
+			var found: PackedStringArray = []
+			for holder in world.party_all():
+				for e in holder.inventory.entries:
+					var it: Dictionary = DB.get_item(e["id"])
+					if it.get("pool") == "arcane" or it.has("bonus_damage") or it.has("spell_power"):
+						found.append(DB.entry_name(e))
+			Events.post("%s senses magic in: %s." % [caster.display_name, ", ".join(found) if not found.is_empty() else "nothing"])
+		_:
+			# light, reveal, speak_dead: hooks for exploration systems.
+			Events.post("%s uses %s. (Its effect '%s' needs the exploration systems, not built yet.)" % [caster.display_name, ab.get("name", "?"), ab.get("effect", "?")])
+
+
+## Gives XP to every living party member (followers level up too).
+func award_xp(amount: int, why := "") -> void:
+	if amount <= 0 or world == null:
+		return
+	var members: Array = []
+	for m in world.party():
+		if not m.summoned:
+			members.append(m)
+	if members.is_empty():
+		return
+	Events.post("[color=#ffe08a]+%d XP%s.[/color]" % [amount, (" for " + why) if why != "" else ""])
+	for m in members:
+		m.add_xp(amount)
 
 
 func do_use_item(actor, entry: Dictionary) -> bool:
@@ -410,12 +639,48 @@ func _apply(attacker, target, r: Dictionary) -> void:
 		world.float_text(attacker.global_position, "misfire!", Color("#ffb347"))
 	if r["self_damage"] > 0:
 		attacker.take_damage(r["self_damage"])
+	var did := false
 	if r["damage"] > 0:
-		target.take_damage(r["damage"], r["crit"])
-	elif r["heal"] > 0:
-		target.heal(r["heal"])
-	elif not r["misfire"]:
+		target.take_damage(r["damage"], r["crit"], str(r.get("damage_type", "physical")))
+		did = true
+	if r.get("heal", 0) > 0:
+		target.heal(r["heal"], bool(r.get("repair", false)))
+		did = true
+	if r.get("cleanse", "") != "":
+		var n: int = target.clear_statuses(str(r["cleanse"]))
+		if n > 0:
+			Events.post("%s is cleansed of %d ailment%s." % [target.display_name, n, "" if n == 1 else "s"])
+		did = true
+	if r.get("drain_heal", 0) > 0 and not attacker.is_dead:
+		attacker.heal(r["drain_heal"])
+	if not did and not r["misfire"] and not r["hit"]:
 		world.float_text(target.global_position, "miss", Color("#bbbbbb"))
 	for e in r["effects"]:
 		if not target.is_dead:
 			apply_ap_loss(target, int(e.get("ap_loss", 0)))
+	for st in r.get("statuses", []):
+		if target.is_dead:
+			break
+		target.add_status(str(st["id"]), int(st["duration"]), attacker.display_name)
+		var on_apply: Dictionary = DB.statuses.get(str(st["id"]), {}).get("on_apply", {})
+		if on_apply.get("type") == "ap_loss":
+			apply_ap_loss(target, int(on_apply.get("amount", 0)))
+	if int(r.get("push", 0)) > 0 and not target.is_dead:
+		_push(attacker, target, int(r["push"]))
+
+
+func _push(from, target, tiles: int) -> void:
+	var dir: Vector2i = target.tile - from.tile
+	dir = Vector2i(signi(dir.x), signi(dir.y))
+	if dir == Vector2i.ZERO:
+		return
+	var moved := 0
+	for i in tiles:
+		var nxt: Vector2i = target.tile + dir
+		if world.is_blocked(nxt, target):
+			break
+		target.cancel_move()
+		target.set_tile_immediate(nxt)
+		moved += 1
+	if moved > 0:
+		Events.post("%s is knocked back %d ft." % [target.display_name, moved * 5])

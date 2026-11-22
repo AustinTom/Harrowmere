@@ -42,6 +42,7 @@ static func buy_stats(s: CharacterSheet, weights: Dictionary, rng: RandomNumberG
 	var base := int(c.get("stat_base", 8))
 	var cap := int(c.get("stat_max_before_race", 17))
 	var points := int(c.get("stat_points", 20))
+	var table: Array = c.get("cost", [])
 	var st := {}
 	for k in CharacterSheet.STATS:
 		st[k] = base
@@ -50,25 +51,24 @@ static func buy_stats(s: CharacterSheet, weights: Dictionary, rng: RandomNumberG
 		guard += 1
 		var best := ""
 		var best_score := -1.0
+		var best_step := 0
 		for k in CharacterSheet.STATS:
+			var v: int = st[k]
+			if v >= cap:
+				continue
+			var step := CharacterSheet._tier_cost(table, v + 1, "up_to")
+			if step <= 0 or step > points:
+				continue
 			var w := float(weights.get(k, 1)) + 0.25
-			if st[k] >= cap:
-				continue
-			var trial: Dictionary = st.duplicate()
-			trial[k] += 1
-			var step := CharacterSheet.creation_cost(trial) - CharacterSheet.creation_cost(st)
-			if step > points:
-				continue
-			var score := w * rng.randf_range(0.85, 1.15) / (1.0 + (st[k] - base) * 0.35) / step
+			var score: float = w * rng.randf_range(0.85, 1.15) / (1.0 + (v - base) * 0.35) / step
 			if score > best_score:
 				best_score = score
 				best = k
+				best_step = step
 		if best == "":
 			break
-		var nxt: Dictionary = st.duplicate()
-		nxt[best] += 1
-		points -= CharacterSheet.creation_cost(nxt) - CharacterSheet.creation_cost(st)
-		st = nxt
+		st[best] = int(st[best]) + 1
+		points -= best_step
 	s.base_stats = st
 
 
@@ -105,7 +105,7 @@ static func auto_spend(s: CharacterSheet, rng: RandomNumberGenerator) -> void:
 					opts.append(["stat", key, 0.6 / (j + 1)])
 		for k in 2:
 			var stid := str(top_stats[k])
-			if s.can_buy("stat", stid)["ok"]:
+			if s.level >= 2 and s.can_buy("stat", stid)["ok"]:
 				opts.append(["stat", stid, 0.5 / (k + 1)])
 		if opts.is_empty():
 			break

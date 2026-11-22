@@ -33,9 +33,13 @@ var aptitude_override = null ## int, or null to derive aptitude from spending
 var legacy_proficient := false ## old flat templates: proficient with every weapon
 
 ## Not saved. Set by the owner (Actor.refresh) from statuses and equipment.
-var extra_modifiers: Array = []
+var extra_modifiers: Array = []:
+	set(v):
+		extra_modifiers = v
+		_mod_cache.clear()
 
 var _static_mods_cache = null
+var _mod_cache := {}
 
 
 # ---------------------------------------------------------------- save / load
@@ -92,8 +96,10 @@ func to_dict() -> Dictionary:
 	return d
 
 
+## Call after changing the build directly (buy() and add_xp() do it for you).
 func invalidate() -> void:
 	_static_mods_cache = null
+	_mod_cache.clear()
 
 
 # ---------------------------------------------------------------- data lookups
@@ -148,16 +154,27 @@ func static_modifiers() -> Array:
 
 
 func all_modifiers() -> Array:
+	if extra_modifiers.is_empty():
+		return static_modifiers()
 	return static_modifiers() + extra_modifiers
 
 
 ## Sum of "add" for one modifier target, e.g. "ac", "skill:stealth", "resist:fire".
+## Flags are stored under "flag:<name>".
 func mod_total(target: String) -> float:
-	var t := 0.0
+	if _mod_cache.is_empty():
+		_build_mod_cache()
+	return float(_mod_cache.get(target, 0.0))
+
+
+func _build_mod_cache() -> void:
+	_mod_cache["_built"] = 1.0
 	for m in all_modifiers():
-		if str(m.get("target", "")) == target:
-			t += float(m.get("add", 0))
-	return t
+		if m.has("flag"):
+			_mod_cache["flag:" + str(m["flag"])] = 1.0
+		else:
+			var t := str(m.get("target", ""))
+			_mod_cache[t] = float(_mod_cache.get(t, 0.0)) + float(m.get("add", 0))
 
 
 func mod_int(target: String) -> int:
@@ -165,10 +182,7 @@ func mod_int(target: String) -> int:
 
 
 func has_flag(flag: String) -> bool:
-	for m in all_modifiers():
-		if str(m.get("flag", "")) == flag:
-			return true
-	return false
+	return mod_total("flag:" + flag) > 0.0
 
 
 # ---------------------------------------------------------------- stats
@@ -334,8 +348,10 @@ func aptitude() -> int:
 		return clampi(int(aptitude_override) + mod_int("aptitude"), -100, 100)
 	var a: Dictionary = prog().get("aptitude", {})
 	var p := pool_points()
-	var n := float(a.get("neutral_weight", 1)) * p["neutral"]
-	var lean := 100.0 * (p["arcane"] - p["gear"]) / (p["arcane"] + p["gear"] + n + float(a.get("damping", 5)))
+	var n: float = float(a.get("neutral_weight", 1)) * float(p["neutral"])
+	var pa: float = p["arcane"]
+	var pg: float = p["gear"]
+	var lean: float = 100.0 * (pa - pg) / (pa + pg + n + float(a.get("damping", 5)))
 	var base := int(race_data().get("aptitude_base", 0)) + int(heritage_data().get("aptitude_base", 0))
 	return clampi(base + roundi(lean) + mod_int("aptitude"), -100, 100)
 
@@ -511,11 +527,12 @@ func can_buy(kind: String, id: String) -> Dictionary:
 			var apt_req: Dictionary = tr.get("aptitude_req", {})
 			if apt_req.has(pool):
 				var need := int(apt_req[pool][nxt])
-				var apt := aptitude()
-				if pool == "arcane" and need > 0 and apt < need:
-					return _no("Needs Arcane aptitude %d (you have %+d)." % [need, apt])
-				if pool == "gear" and need < 0 and apt > need:
-					return _no("Needs Gear aptitude %d (you have %+d)." % [-need, apt])
+				if need != 0:
+					var apt := aptitude()
+					if pool == "arcane" and need > 0 and apt < need:
+						return _no("Needs Arcane aptitude %d (you have %+d)." % [need, apt])
+					if pool == "gear" and need < 0 and apt > need:
+						return _no("Needs Gear aptitude %d (you have %+d)." % [-need, apt])
 			return _cost_ok(int(tr.get("cost", 1)))
 	return _no("Unknown purchase.")
 

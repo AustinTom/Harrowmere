@@ -532,7 +532,7 @@ def build(disc_id, tier, name, tpl, p, flavour):
 
 
 def slug(name):
-    return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
+    return re.sub(r"[^a-z0-9]+", "_", name.lower().replace("'", "")).strip("_")
 
 
 def main():

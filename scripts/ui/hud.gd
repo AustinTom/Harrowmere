@@ -22,6 +22,7 @@ var _dlg_opts: VBoxContainer
 var _dlg_actor = null
 var _dlg_data: Dictionary = {}
 var _banner_time := 0.0
+var _char: CharacterPanel
 
 
 func _ready() -> void:
@@ -44,7 +45,7 @@ func _ready() -> void:
 	_hotbar.add_theme_color_override("font_color", Color("#ffd84d"))
 	pv.add_child(_hotbar)
 	var keys := Label.new()
-	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-4: action   T: turn-based <-> real-time   Space: end turn   I: inventory   Wheel: zoom"
+	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-9: action   [ ]: ability page   T: turn-based <-> real-time   Space: end turn   I: inventory   C: character   Wheel: zoom"
 	keys.add_theme_color_override("font_color", Color("#9aa7b3"))
 	keys.add_theme_font_size_override("font_size", 13)
 	pv.add_child(keys)
@@ -114,7 +115,13 @@ func _ready() -> void:
 	dv.add_child(_dlg_opts)
 	_dlg.visible = false
 
+	_char = CharacterPanel.new()
+	_char.world = world
+	_char.visible = false
+	root.add_child(_char)
+
 	Events.log_message.connect(_on_log)
+	Events.leveled_up.connect(_on_leveled_up)
 	Events.inventory_changed.connect(_on_inventory_changed)
 	combat.combat_started.connect(_on_combat_started)
 	combat.combat_ended.connect(_on_combat_ended)
@@ -160,8 +167,12 @@ func _process(delta: float) -> void:
 			lines.append("%s  (down)" % a.display_name)
 			continue
 		var ap_txt := "%d/%d" % [floori(maxf(a.ap, 0.0)), a.ap_max] if a.in_combat else "-"
-		var apt := "balanced" if a.aptitude == 0 else ("Arcane %+d" % a.aptitude if a.aptitude > 0 else "Gear %d" % -a.aptitude)
-		lines.append("%s   HP %d/%d   AP %s   %s   [%s]" % [a.display_name, a.hp, a.max_hp, ap_txt, DB.entry_name(a.equipped_entry()) if a.equipped_entry() != null else "Fists", apt])
+		var apt := CharacterSheet.aptitude_word(a.aptitude)
+		var cp_txt := ("   %d CP, press C" % a.sheet.cp) if a.sheet.cp > 0 and not a.ai_controlled else ""
+		var fx := ""
+		for st in a.statuses:
+			fx += "  " + str(DB.statuses.get(st["id"], {}).get("name", st["id"])).to_lower()
+		lines.append("%s  L%d   HP %d/%d   AP %s   %s   [%s]%s%s" % [a.display_name, a.sheet.level, a.hp, a.max_hp, ap_txt, DB.entry_name(a.equipped_entry()) if a.equipped_entry() != null else "Fists", apt, fx, cp_txt])
 	_party.text = "\n".join(lines)
 	_hotbar.text = controller.hotbar_text() if controller else ""
 
@@ -185,6 +196,8 @@ func _process(delta: float) -> void:
 		_center(_dlg, 170)
 	if _inv.visible:
 		_center(_inv)
+	if _char.visible:
+		_center(_char)
 
 
 func banner(text: String, c := Color.WHITE, secs := 2.0) -> void:
@@ -226,8 +239,23 @@ func toggle_inventory() -> void:
 		refresh_inventory()
 
 
+func toggle_character() -> void:
+	_char.visible = not _char.visible
+	if _char.visible:
+		_inv.visible = false
+		_char.refresh()
+		_center(_char)
+
+
+func _on_leveled_up(actor, level: int) -> void:
+	if actor.faction == "player":
+		banner("Level %d!  Press C to spend %d CP" % [level, actor.sheet.cp], Color("#ffd84d"), 3.0)
+	Events.post("[color=#ffd84d][b]%s reaches level %d.[/b][/color]" % [actor.display_name, level])
+
+
 func close_panels() -> void:
 	_inv.visible = false
+	_char.visible = false
 	close_dialogue()
 
 

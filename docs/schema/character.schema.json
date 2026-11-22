@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harrowmere/character.schema.json",
+  "title": "Harrowmere character system data",
+  "description": "Schemas for data/character/*.json and the saved character sheet. Validate with: python3 tools/validate_character_data.py",
+  "$defs": {
+    "stat": {"enum": ["str", "dex", "con", "int", "wis", "cha"]},
+    "pool": {"enum": ["arcane", "gear", "neutral"]},
+    "dice": {"type": "string", "pattern": "^([0-9]*d[0-9]+([+-][0-9]+)?|[0-9]+)$"},
+    "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "stat_block": {"type": "object", "propertyNames": {"$ref": "#/$defs/stat"}, "additionalProperties": {"type": "integer"}},
+    "modifier": {
+      "description": "Either {target, add} or {flag}. Targets: stat:<stat>, skill:<skill>, attack, attack:<skill|pool|ranged|melee>, damage, damage:<skill|melee|ranged|type>, ac, ap_max, hp_max, initiative, save:<stat|all|magic>, resist:<damage type|all> (percent), spell_power, spell_power:<arcane|divine>, misfire, backfire (chance 0-1), crit_range, aptitude, cp_start, cp_per_10_levels, schematic_picks, standing:<faction|all>, leadership_aura.",
+      "oneOf": [
+        {"type": "object", "required": ["target", "add"], "properties": {"target": {"type": "string"}, "add": {"type": "number"}}, "additionalProperties": false},
+        {"type": "object", "required": ["flag"], "properties": {"flag": {"type": "string"}}, "additionalProperties": false}
+      ]
+    },
+    "modifiers": {"type": "array", "items": {"$ref": "#/$defs/modifier"}},
+    "status_effect": {
+      "type": "object", "required": ["type", "status", "duration"],
+      "properties": {"type": {"const": "status"}, "status": {"$ref": "#/$defs/id"}, "duration": {"type": "integer", "minimum": 1}, "chance": {"type": "number", "minimum": 0, "maximum": 1}}
+    },
+    "names": {
+      "type": "object",
+      "required": ["given_m", "given_f", "given_x", "family_prefix", "family_suffix"],
+      "properties": {"given_m": {"type": "array"}, "given_f": {"type": "array"}, "given_x": {"type": "array"}, "family_prefix": {"type": "array"}, "family_suffix": {"type": "array"}}
+    },
+    "race": {
+      "type": "object",
+      "required": ["name", "size", "body", "hp_base", "hp_per_level", "stat_mods", "aptitude_base", "traits", "lore", "names"],
+      "properties": {
+        "name": {"type": "string"}, "plural": {"type": "string"}, "folk_name": {"type": "string"},
+        "size": {"enum": ["small", "medium", "large"]},
+        "body": {"type": "object", "required": ["skeleton", "height_m", "scale"], "properties": {
+          "skeleton": {"type": "string"}, "height_m": {"type": "number"},
+          "scale": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3}}},
+        "hp_base": {"type": "integer"}, "hp_per_level": {"type": "integer"}, "lifespan": {"type": "integer"},
+        "stat_mods": {"$ref": "#/$defs/stat_block"}, "aptitude_base": {"type": "integer", "minimum": -100, "maximum": 100},
+        "traits": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "default_heritage": {"type": "string"},
+        "heritages": {"type": "object", "additionalProperties": {"type": "object", "required": ["name", "stat_mods", "aptitude_base", "traits"], "properties": {
+          "name": {"type": "string"}, "stat_mods": {"$ref": "#/$defs/stat_block"}, "aptitude_base": {"type": "integer"},
+          "traits": {"type": "array", "items": {"$ref": "#/$defs/id"}}, "lore": {"type": "string"}}}},
+        "lore": {"type": "string"},
+        "standing": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "names": {"$ref": "#/$defs/names"}
+      }
+    },
+    "trait": {"type": "object", "required": ["name", "desc", "modifiers"], "properties": {"name": {"type": "string"}, "desc": {"type": "string"}, "modifiers": {"$ref": "#/$defs/modifiers"}}},
+    "background": {"type": "object", "required": ["name", "desc", "races", "traits", "start_skill_ranks"], "properties": {
+      "name": {"type": "string"}, "desc": {"type": "string"},
+      "races": {"oneOf": [{"const": "any"}, {"type": "array", "items": {"type": "string"}}]},
+      "traits": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+      "start_skill_ranks": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1, "maximum": 5}}}},
+    "skill": {"type": "object", "required": ["name", "pool", "group", "stat", "desc"], "properties": {
+      "name": {"type": "string"}, "pool": {"$ref": "#/$defs/pool"},
+      "group": {"enum": ["combat", "magic", "stealth", "social", "knowledge", "craft"]},
+      "stat": {"$ref": "#/$defs/stat"}, "alt_stat": {"$ref": "#/$defs/stat"}, "desc": {"type": "string"}}},
+    "discipline": {"type": "object", "required": ["name", "kind", "pool", "school", "skill", "stat", "desc"], "properties": {
+      "name": {"type": "string"}, "kind": {"enum": ["school", "domain", "trade", "style", "craft"]},
+      "pool": {"$ref": "#/$defs/pool"}, "school": {"enum": ["arcane", "divine", "gear", "neutral"]},
+      "skill": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "array", "items": {"$ref": "#/$defs/id"}}]},
+      "stat": {"$ref": "#/$defs/stat"}, "schematic_picks": {"type": "integer"}, "patron": {"type": "string"},
+      "color": {"type": "string"}, "desc": {"type": "string"}}},
+    "ability": {"type": "object", "required": ["name", "discipline", "tier", "kind", "pool", "school", "stat", "desc"], "properties": {
+      "name": {"type": "string"}, "discipline": {"$ref": "#/$defs/id"}, "tier": {"type": "integer", "minimum": 1, "maximum": 5},
+      "kind": {"enum": ["attack", "control", "curse", "boon", "heal", "cleanse", "summon", "passive", "utility", "weapon"]},
+      "template": {"type": "string"}, "pool": {"$ref": "#/$defs/pool"}, "school": {"enum": ["arcane", "divine", "gear", "neutral"]},
+      "stat": {"$ref": "#/$defs/stat"}, "target": {"enum": ["enemy", "ally", "allies", "self", "tile"]},
+      "ap": {"type": "integer"}, "range": {"type": "integer"}, "area": {"type": "integer"}, "chain": {"type": "integer"},
+      "damage": {"$ref": "#/$defs/dice"}, "damage_type": {"type": "string"}, "heal": {"$ref": "#/$defs/dice"},
+      "drain": {"type": "number"}, "push": {"type": "integer"},
+      "save": {"type": "object", "required": ["stat"], "properties": {"stat": {"$ref": "#/$defs/stat"}, "half": {"type": "boolean"}}},
+      "effects": {"type": "array", "items": {"oneOf": [{"$ref": "#/$defs/status_effect"}, {"type": "object", "properties": {"type": {"const": "cleanse"}, "kind": {"type": "string"}}}]}},
+      "modifiers": {"$ref": "#/$defs/modifiers"},
+      "summon": {"type": "string"}, "count": {"type": "integer"}, "duration": {"type": "integer"},
+      "effect": {"enum": ["identify", "detect_magic", "reveal", "light", "speak_dead"]},
+      "device": {"type": "boolean"}, "misfire": {"type": "number"},
+      "weapon_skill": {"type": "array", "items": {"type": "string"}}, "ap_delta": {"type": "integer"}, "to_hit": {"type": "integer"},
+      "extra_damage": {"$ref": "#/$defs/dice"}, "hits": {"type": "integer"}, "cleave": {"type": "boolean"},
+      "misfire_add": {"type": "number"}, "self_status": {"type": "string"},
+      "construct_only": {"type": "boolean"}, "construct_ok": {"type": "boolean"}, "nonmagic": {"type": "boolean"},
+      "color": {"type": "string"}, "desc": {"type": "string"}}},
+    "status": {"type": "object", "required": ["name", "kind", "desc"], "properties": {
+      "name": {"type": "string"}, "kind": {"enum": ["harm", "boon"]}, "color": {"type": "string"},
+      "modifiers": {"$ref": "#/$defs/modifiers"},
+      "tick": {"type": "object", "required": ["type", "dice"], "properties": {"type": {"enum": ["damage", "heal"]}, "dice": {"$ref": "#/$defs/dice"}, "damage_type": {"type": "string"}}},
+      "on_apply": {"type": "object", "properties": {"type": {"const": "ap_loss"}, "amount": {"type": "integer"}}},
+      "desc": {"type": "string"}}},
+    "archetype": {"type": "object", "required": ["name", "stats", "skills", "disciplines"], "properties": {
+      "name": {"type": "string"}, "stats": {"$ref": "#/$defs/stat_block"},
+      "skills": {"type": "array", "items": {"$ref": "#/$defs/id"}}, "disciplines": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+      "desc": {"type": "string"}}},
+    "sheet": {
+      "description": "A saved character (CharacterSheet.to_dict()). Also accepted as an actor template's \"sheet\".",
+      "type": "object", "required": ["race", "level", "base_stats"],
+      "properties": {
+        "race": {"type": "string"}, "heritage": {"type": ["string", "null"]}, "background": {"type": "string"},
+        "archetype": {"type": "string"}, "gender": {"enum": ["m", "f", "x"]},
+        "level": {"type": "integer", "minimum": 1, "maximum": 50}, "xp": {"type": "integer"}, "cp": {"type": "integer"},
+        "base_stats": {"$ref": "#/$defs/stat_block"},
+        "skill_ranks": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 5}},
+        "tiers": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 5}},
+        "learned": {"type": "array", "items": {"type": "string"}},
+        "schematics": {"type": "array", "items": {"type": "string"}},
+        "schematic_picks_used": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "external_spend": {"type": "object", "additionalProperties": {"type": "integer"}},
+        "grade": {"enum": ["minion", "standard", "elite", "boss", "hero"]},
+        "natural_ac": {"type": "integer"}, "hp_bonus": {"type": "integer"},
+        "aptitude_override": {"type": ["integer", "null"]}, "legacy_proficient": {"type": "boolean"}
+      }
+    },
+    "gen": {
+      "description": "Compact generated character, expanded by CharacterGen.generate(). Put it on an actor template as \"gen\".",
+      "type": "object", "required": ["archetype", "level", "seed"],
+      "properties": {"archetype": {"type": "string"}, "level": {"type": "integer", "minimum": 1, "maximum": 50},
+        "race": {"type": ["string", "null"]}, "heritage": {"type": ["string", "null"]}, "background": {"type": "string"},
+        "gender": {"enum": ["m", "f", "x", null]}, "grade": {"type": "string"}, "seed": {"type": "integer"}}
+    }
+  }
+}

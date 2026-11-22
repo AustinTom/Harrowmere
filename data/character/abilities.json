@@ -1984,7 +1984,7 @@
   "heal": "8d6+5",
   "desc": "Mends almost anything."
  },
- "mother_s_embrace": {
+ "mothers_embrace": {
   "name": "Mother's Embrace",
   "discipline": "lantern",
   "tier": 5,
@@ -2027,7 +2027,7 @@
   ],
   "desc": "Roots and creepers grab at feet."
  },
- "sower_s_blessing": {
+ "sowers_blessing": {
   "name": "Sower's Blessing",
   "discipline": "harvest",
   "tier": 1,
@@ -2530,7 +2530,7 @@
   "heal": "3d6",
   "desc": "Pulls the dying back from the edge."
  },
- "ferryman_s_toll": {
+ "ferrymans_toll": {
   "name": "Ferryman's Toll",
   "discipline": "grave",
   "tier": 3,
@@ -2844,7 +2844,7 @@
   },
   "desc": "The full storm."
  },
- "gale_king_s_wrath": {
+ "gale_kings_wrath": {
   "name": "Gale King's Wrath",
   "discipline": "storm",
   "tier": 5,
@@ -2938,7 +2938,7 @@
   ],
   "desc": "The dice roll your way."
  },
- "smuggler_s_prayer": {
+ "smugglers_prayer": {
   "name": "Smuggler's Prayer",
   "discipline": "veil",
   "tier": 2,
@@ -3027,7 +3027,7 @@
   },
   "desc": "The target's luck runs out."
  },
- "gambler_s_grace": {
+ "gamblers_grace": {
   "name": "Gambler's Grace",
   "discipline": "veil",
   "tier": 4,
@@ -3073,7 +3073,7 @@
   ],
   "desc": "Nobody is sure whose side they're on."
  },
- "sister_s_kiss": {
+ "sisters_kiss": {
   "name": "Sister's Kiss",
   "discipline": "veil",
   "tier": 5,
@@ -4829,7 +4829,7 @@
   ],
   "desc": "Hard to put down."
  },
- "titan_s_swing": {
+ "titans_swing": {
   "name": "Titan's Swing",
   "discipline": "heavy_arms",
   "tier": 5,
@@ -5271,7 +5271,7 @@
   ],
   "desc": "Lights out."
  },
- "brawler_s_rage": {
+ "brawlers_rage": {
   "name": "Brawler's Rage",
   "discipline": "pugilism",
   "tier": 5,
@@ -6037,7 +6037,7 @@
   "nonmagic": true,
   "desc": "Treats poison and wounds."
  },
- "hunter_s_mark": {
+ "hunters_mark": {
   "name": "Hunter's Mark",
   "discipline": "fieldcraft",
   "tier": 3,
