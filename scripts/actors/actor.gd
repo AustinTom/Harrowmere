@@ -1,8 +1,9 @@
 class_name Actor
 extends Node3D
 ## Any character on the map: player, follower, resident or enemy.
-## Built from a template in data/actors.json. Visuals are primitives
-## so a real model can be dropped in later by replacing _build_visual().
+## Built from a template in data/actors.json. The body is the model the
+## Models registry finds for the template (see docs/art_pipeline.md), or
+## placeholder primitives when there is none yet.
 
 signal died(actor)
 
@@ -48,6 +49,13 @@ var _label: Label3D
 var _weapon_mesh: MeshInstance3D
 var _weapon_mat: StandardMaterial3D
 var _visual: Node3D
+var _model: Node3D = null # the custom model, when there is one
+var _anim: ModelAnimator = null
+var _hand: Node3D = null # where the weapon goes
+var _weapon_model: Node3D = null
+var _weapon_model_id := ""
+var _flash_mat: StandardMaterial3D
+var _height := 1.7
 
 
 func apply_template(tpl: Dictionary) -> void:
@@ -72,7 +80,7 @@ func apply_template(tpl: Dictionary) -> void:
 	ai_controlled = faction != "player"
 	follows_player = bool(tpl.get("follows_player", false))
 	color = Color(str(tpl.get("color", "#ffffff")))
-	_build_visual()
+	_build_visual(tpl)
 	inventory.changed.connect(_update_weapon_visual)
 	for inv in tpl.get("inventory", []):
 		inventory.add(str(inv["id"]), int(inv.get("qty", 1)), inv.get("identified", null))
@@ -171,10 +179,13 @@ func move_along(path: Array, combat = null) -> void:
 		await step_to(t)
 	if token == _move_token:
 		moving = false
+		if not is_dead:
+			anim("idle")
 
 
 func step_to(t: Vector2i) -> void:
 	face_tile(t)
+	anim("walk")
 	tile = t
 	_tween = create_tween()
 	_tween.tween_property(self, "position", world.tile_to_world(t), STEP_TIME)
@@ -191,6 +202,8 @@ func take_damage(n: int, crit := false) -> void:
 	_flash(Color("#ffffff"))
 	if hp <= 0:
 		die()
+	else:
+		anim("hit", 0.05)
 
 
 func heal(n: int) -> void:
@@ -208,9 +221,12 @@ func die() -> void:
 	_label.visible = false
 	_ring.visible = false
 	_turn_ring.visible = false
+	if anim("death", 0.1):
+		died.emit(self)
+		return
 	var tw := create_tween()
 	tw.tween_property(_visual, "rotation:x", -PI / 2.0, 0.35)
-	tw.parallel().tween_property(_visual, "position:y", 0.28, 0.35)
+	tw.parallel().tween_property(_visual, "position:y", 0.28 if _model == null else 0.0, 0.35)
 	died.emit(self)
 
 
@@ -221,9 +237,21 @@ func set_turn_highlight(on: bool) -> void:
 		_turn_ring.visible = on and not is_dead
 
 
+## Plays the attack and returns at the moment it lands. With a model the
+## clip plays and the hit lands at the spec's "hit_time" (default 40% in,
+## at most 0.5 s); without one the placeholder lunges.
 func play_attack(target, profile: Dictionary, tint := Color.WHITE) -> void:
 	face_tile(target.tile)
-	if profile.get("ranged", false) or profile.get("projectile", false):
+	var ranged: bool = profile.get("ranged", false) or profile.get("projectile", false)
+	var action := "cast" if profile.get("projectile", false) and not profile.has("pool") else ("attack_ranged" if ranged else "attack_melee")
+	if anim(action, 0.05):
+		var spec_hit = _model.get_meta("hit_time", -1.0)
+		var wait: float = spec_hit if spec_hit >= 0.0 else minf(_anim.length(action) * 0.4, 0.5)
+		await get_tree().create_timer(wait).timeout
+		if ranged:
+			await world.fire_projectile(global_position + Vector3(0, _height * 0.6, 0), target.global_position + Vector3(0, target._height * 0.55, 0), tint)
+		return
+	if ranged:
 		await world.fire_projectile(global_position + Vector3(0, 1.0, 0), target.global_position + Vector3(0, 0.9, 0), tint)
 	else:
 		var start := position
@@ -250,9 +278,63 @@ func _mat(c: Color) -> StandardMaterial3D:
 	return m
 
 
-func _build_visual() -> void:
+## Plays a named animation if the model has it. Returns false when there is
+## no model or no matching clip, so callers can fall back to a tween.
+func anim(action: String, blend := 0.15) -> bool:
+	return _anim != null and _anim.play(action, blend)
+
+
+func has_model() -> bool:
+	return _model != null
+
+
+func _build_visual(tpl: Dictionary = {}) -> void:
 	_visual = Node3D.new()
+	_visual.name = "Visual"
 	add_child(_visual)
+	var spec: Dictionary = Models.character_spec(tpl) if not tpl.is_empty() else {}
+	if not spec.is_empty():
+		_model = Models.instantiate(spec)
+	if _model != null:
+		_build_model_visual(spec)
+	else:
+		_build_placeholder_visual()
+	_build_overlays()
+
+
+func _build_model_visual(spec: Dictionary) -> void:
+	_visual.add_child(_model)
+	if spec.has("hit_time"):
+		_model.set_meta("hit_time", float(spec["hit_time"]))
+	_anim = ModelAnimator.new(_model, spec)
+	_hand = Models.find_or_make_hand_socket(_model, str(spec.get("hand_socket", "socket_hand_r")))
+	var box := Models.bounds(_model, self)
+	if box.size.y > 0.1:
+		_height = box.end.y
+	# One shared overlay on every mesh so hits can flash the whole model.
+	_flash_mat = StandardMaterial3D.new()
+	_flash_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_flash_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_flash_mat.albedo_color = Color(1, 1, 1, 0)
+	for mi in Models.mesh_instances(_model):
+		mi.material_overlay = _flash_mat
+	# The placeholder weapon stick is still used for items without a model.
+	_weapon_mat = _mat(Color.GRAY)
+	_weapon_mesh = MeshInstance3D.new()
+	var wb := BoxMesh.new()
+	wb.size = Vector3(0.07, 0.07, 0.9)
+	_weapon_mesh.mesh = wb
+	_weapon_mesh.material_override = _weapon_mat
+	if _hand != null:
+		_weapon_mesh.position = Vector3(0, 0, 0.4) # sockets point forward (+Z in model space)
+		_hand.add_child(_weapon_mesh)
+	else:
+		_weapon_mesh.position = Vector3(0.33, _height * 0.5, -0.25)
+		_visual.add_child(_weapon_mesh)
+	anim("idle", 0.0)
+
+
+func _build_placeholder_visual() -> void:
 	var size_scale := 0.78 if race in ["halfling", "gnome"] else (0.9 if race == "dwarf" else 1.0)
 	_visual.scale = Vector3(size_scale * (1.15 if race == "dwarf" else 1.0), size_scale, size_scale * (1.15 if race == "dwarf" else 1.0))
 
@@ -283,7 +365,10 @@ func _build_visual() -> void:
 	_weapon_mesh.position = Vector3(0.33, 0.85, -0.25)
 	_weapon_mesh.material_override = _weapon_mat
 	_visual.add_child(_weapon_mesh)
+	_height = 1.68 * size_scale
 
+
+func _build_overlays() -> void:
 	var ring_col: Color = {"player": Color("#4fa3ff"), "ally": Color("#5fe08a"), "hostile": Color("#ff4d4d")}.get(faction, Color("#d9d9d9"))
 	_ring = _disc(0.42, ring_col, 0.55)
 	add_child(_ring)
@@ -298,7 +383,7 @@ func _build_visual() -> void:
 	_label.font_size = 40
 	_label.pixel_size = 0.008
 	_label.outline_size = 8
-	_label.position.y = 2.05
+	_label.position.y = _height + 0.37
 	_label.modulate = ring_col.lightened(0.3)
 	add_child(_label)
 
@@ -323,14 +408,48 @@ func _update_weapon_visual() -> void:
 	if _weapon_mesh == null:
 		return
 	var w := weapon_data()
-	_weapon_mesh.visible = w.get("id", "fists") != "fists"
+	var wid := str(w.get("id", "fists"))
+	_set_weapon_model(wid)
+	_weapon_mesh.visible = wid != "fists" and _weapon_model == null
 	var pool_col := {"gear": Color("#c79a4a"), "arcane": Color("#62c6d9"), "neutral": Color("#9a958c")}
 	_weapon_mat.albedo_color = pool_col.get(str(w.get("pool", "neutral")), Color.GRAY)
 	_weapon_mat.emission_enabled = w.get("pool") == "arcane"
 	_weapon_mat.emission = Color("#62c6d9")
 
 
+## Swaps the held-item model. Item models are authored with the grip at the
+## origin, pointing forward; they go on the hand socket, or where the
+## placeholder stick sits on a model without one.
+func _set_weapon_model(item_id: String) -> void:
+	if item_id == _weapon_model_id:
+		return
+	_weapon_model_id = item_id
+	if _weapon_model != null:
+		_weapon_model.queue_free()
+		_weapon_model = null
+	if item_id == "fists" or item_id == "":
+		return
+	var spec := Models.item_spec(item_id)
+	if spec.is_empty():
+		return
+	_weapon_model = Models.instantiate(spec)
+	if _weapon_model == null:
+		return
+	if _hand != null:
+		_hand.add_child(_weapon_model)
+	else:
+		# Placeholder body or no socket: hold it at the right hip, pointing forward.
+		_weapon_model.position = Vector3(0.33, minf(_height * 0.5, 0.85), -0.1)
+		_weapon_model.rotation_degrees.y += 180.0
+		_visual.add_child(_weapon_model)
+
+
 func _flash(c: Color) -> void:
+	if _model != null:
+		var tw2 := create_tween()
+		tw2.tween_property(_flash_mat, "albedo_color", Color(c, 0.7), 0.05)
+		tw2.tween_property(_flash_mat, "albedo_color", Color(c, 0.0), 0.2)
+		return
 	var tw := create_tween()
 	tw.tween_property(_body_mat, "albedo_color", c, 0.05)
 	tw.tween_property(_body_mat, "albedo_color", color, 0.2)

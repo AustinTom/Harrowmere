@@ -1,3 +1,8 @@
 .godot/
-*.import
 export/
+# .import files hold each model's import settings, so they ARE committed.
+# Blender autosaves and backups
+*.blend1
+*.blend2
+art-src/**/*.blend@
+__pycache__/

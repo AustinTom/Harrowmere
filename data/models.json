@@ -1,0 +1,13 @@
+{
+  "_doc": "Optional overrides for the art pipeline. A model that follows the folder convention in docs/art_pipeline.md needs no entry here. Add one only to point at a different file, share a model, fix scale/turn/offset, rename clips, or set race defaults.",
+  "defaults": {
+    "characters": {},
+    "items": {},
+    "structures": {}
+  },
+  "characters": {},
+  "race_defaults": {},
+  "items": {},
+  "structures": {},
+  "animations": {}
+}

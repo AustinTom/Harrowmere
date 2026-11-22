@@ -25,6 +25,7 @@ func _ready() -> void:
 	add_child(combat)
 	world.load_area(AREA)
 	combat.turn_changed.connect(world.on_turn_changed)
+	print(Models.report())
 
 	rig = preload("res://scripts/world/camera_rig.gd").new()
 	rig.name = "CameraRig"
