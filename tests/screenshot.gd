@@ -22,6 +22,11 @@ func _ready() -> void:
 	await _wait(0.5)
 	_save("03_inventory.png")
 	main.hud.toggle_inventory()
+	main.world.player.add_xp(600)
+	main.hud.toggle_character()
+	await _wait(0.6)
+	_save("06_character_sheet.png")
+	main.hud.toggle_character()
 	var p = main.world.player
 	p.set_tile_immediate(Vector2i(22, 12))
 	_find(main.world, "iska").set_tile_immediate(Vector2i(21, 13))

@@ -6,6 +6,8 @@ signal log_message(text: String)
 signal resonance_changed(location_id: String, value: int)
 signal flags_changed
 signal inventory_changed
+signal character_changed(actor) ## stats, skills, tiers, CP or XP changed
+signal leveled_up(actor, level: int)
 
 
 ## Posts a line to the in-game log (BBCode allowed) and to stdout.

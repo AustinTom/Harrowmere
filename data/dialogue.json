@@ -36,6 +36,7 @@
         "options": [
           {"text": "Relight the boiler. People need work.", "effects": [
             {"type": "set_flag", "flag": "quest_pump", "value": "done"},
+            {"type": "give_xp", "amount": 450},
             {"type": "set_flag", "flag": "pump_choice", "value": "lit"},
             {"type": "shift_resonance", "location": "pumphouse_yard", "amount": -15},
             {"type": "shift_resonance", "location": "shrine_green", "amount": -12},
@@ -44,6 +45,7 @@
           ], "next": "lit"},
           {"text": "Leave it cold. Let the shrine breathe.", "effects": [
             {"type": "set_flag", "flag": "quest_pump", "value": "done"},
+            {"type": "give_xp", "amount": 450},
             {"type": "set_flag", "flag": "pump_choice", "value": "cold"},
             {"type": "shift_resonance", "location": "pumphouse_yard", "amount": 20},
             {"type": "shift_resonance", "location": "shrine_green", "amount": 6},

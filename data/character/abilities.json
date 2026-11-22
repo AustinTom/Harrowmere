@@ -1,0 +1,6157 @@
+{
+ "arcane_bolt": {
+  "name": "Arcane Bolt",
+  "discipline": "evocation",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 4,
+  "range": 60,
+  "damage": "2d6",
+  "desc": "A bolt of raw arcane force."
+ },
+ "kindle": {
+  "name": "Kindle",
+  "discipline": "evocation",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 4,
+  "range": 50,
+  "damage": "1d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 2,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Sets a target alight."
+ },
+ "frost_lance": {
+  "name": "Frost Lance",
+  "discipline": "evocation",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "cold",
+  "ap": 5,
+  "range": 40,
+  "damage": "4d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "chilled",
+    "duration": 3,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A spear of ice that numbs as it strikes."
+ },
+ "thunderclap": {
+  "name": "Thunderclap",
+  "discipline": "evocation",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 5,
+  "range": 60,
+  "area": 10,
+  "damage": "2d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A crack of force that knocks the breath out of everyone nearby."
+ },
+ "fireball": {
+  "name": "Fireball",
+  "discipline": "evocation",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "The classic. Mind your friends."
+ },
+ "chain_spark": {
+  "name": "Chain Spark",
+  "discipline": "evocation",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 4,
+  "range": 60,
+  "damage": "4d6",
+  "chain": 1,
+  "desc": "Lightning that leaps to a second target."
+ },
+ "ice_storm": {
+  "name": "Ice Storm",
+  "discipline": "evocation",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "cold",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "4d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "slowed",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Hail and frost over a wide circle."
+ },
+ "searing_ray": {
+  "name": "Searing Ray",
+  "discipline": "evocation",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 6,
+  "range": 40,
+  "damage": "6d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 4,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A white-hot beam."
+ },
+ "meteor_fall": {
+  "name": "Meteor Fall",
+  "discipline": "evocation",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Calls burning stone down from the sky."
+ },
+ "starfire_lance": {
+  "name": "Starfire Lance",
+  "discipline": "evocation",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "desc": "Pure arcane force, enough to punch through a wall."
+ },
+ "ward": {
+  "name": "Ward",
+  "discipline": "abjuration",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "A shimmering shield around an ally."
+ },
+ "dispel": {
+  "name": "Dispel",
+  "discipline": "abjuration",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "cleanse",
+  "kind": "cleanse",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "heal": "1d4",
+  "effects": [
+   {
+    "type": "cleanse",
+    "kind": "harm"
+   }
+  ],
+  "desc": "Strips hostile magic and ailments from an ally."
+ },
+ "warded_mind": {
+  "name": "Warded Mind",
+  "discipline": "abjuration",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "save:magic",
+    "add": 2
+   }
+  ],
+  "desc": "Practised defences against hostile spells."
+ },
+ "barrier": {
+  "name": "Barrier",
+  "discipline": "abjuration",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 3
+   }
+  ],
+  "desc": "Turns aside spells and blows alike."
+ },
+ "repel": {
+  "name": "Repel",
+  "discipline": "abjuration",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "push",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 4,
+  "range": 30,
+  "damage": "3d6",
+  "push": 2,
+  "desc": "Hurls an enemy away."
+ },
+ "null_field": {
+  "name": "Null Field",
+  "discipline": "abjuration",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "silenced",
+    "duration": 3
+   }
+  ],
+  "desc": "A circle where no spell can be cast."
+ },
+ "greater_ward": {
+  "name": "Greater Ward",
+  "discipline": "abjuration",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 6
+   }
+  ],
+  "desc": "A lasting shield."
+ },
+ "banishing_word": {
+  "name": "Banishing Word",
+  "discipline": "abjuration",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 6,
+  "range": 40,
+  "damage": "6d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A word that tears at anything that doesn't belong."
+ },
+ "aegis": {
+  "name": "Aegis",
+  "discipline": "abjuration",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 4
+   }
+  ],
+  "desc": "Shields the whole party."
+ },
+ "unmaking": {
+  "name": "Unmaking",
+  "discipline": "abjuration",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "damage": "5d6",
+  "damage_type": "force",
+  "desc": "Unpicks the target's own magic and leaves them reeling."
+ },
+ "acid_splash": {
+  "name": "Acid Splash",
+  "discipline": "conjuration",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "acid",
+  "ap": 4,
+  "range": 50,
+  "damage": "1d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "corroded",
+    "duration": 2,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A gout of conjured acid."
+ },
+ "summon_familiar": {
+  "name": "Summon Familiar",
+  "discipline": "conjuration",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "familiar",
+  "count": 1,
+  "duration": 5,
+  "desc": "A small spirit-beast that fights at your side."
+ },
+ "grasping_mist": {
+  "name": "Grasping Mist",
+  "discipline": "conjuration",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "A clinging fog that holds feet in place."
+ },
+ "summon_hound": {
+  "name": "Summon Hound",
+  "discipline": "conjuration",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "spectral_hound",
+  "count": 1,
+  "duration": 6,
+  "desc": "A spectral hound with real teeth."
+ },
+ "acid_rain": {
+  "name": "Acid Rain",
+  "discipline": "conjuration",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "acid",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "corroded",
+    "duration": 3,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A brief, very bad shower."
+ },
+ "summon_ember_spirit": {
+  "name": "Summon Ember Spirit",
+  "discipline": "conjuration",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "ember_spirit",
+  "count": 1,
+  "duration": 7,
+  "desc": "A spirit of living flame."
+ },
+ "blink_strike": {
+  "name": "Blink Strike",
+  "discipline": "conjuration",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "force",
+  "ap": 3,
+  "range": 5,
+  "damage": "6d8",
+  "desc": "Step through nothing and strike from behind."
+ },
+ "summon_meltwater_spirit": {
+  "name": "Summon Meltwater Spirit",
+  "discipline": "conjuration",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "meltwater_spirit",
+  "count": 1,
+  "duration": 8,
+  "desc": "A spirit from the thawing rivers."
+ },
+ "grasping_deep": {
+  "name": "Grasping Deep",
+  "discipline": "conjuration",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 4
+   }
+  ],
+  "damage": "5d6",
+  "damage_type": "force",
+  "desc": "Black hands from below drag at everything."
+ },
+ "summon_gate_beast": {
+  "name": "Summon Gate Beast",
+  "discipline": "conjuration",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "gate_beast",
+  "count": 1,
+  "duration": 9,
+  "desc": "Something large, from somewhere else."
+ },
+ "detect_magic": {
+  "name": "Detect Magic",
+  "discipline": "divination",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "detect_magic",
+  "desc": "Shows enchanted items and magic nearby."
+ },
+ "glimpse_ahead": {
+  "name": "Glimpse Ahead",
+  "discipline": "divination",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 2
+   }
+  ],
+  "desc": "A moment's foresight."
+ },
+ "identify": {
+  "name": "Identify",
+  "discipline": "divination",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "identify",
+  "desc": "Learn what an unknown item really is."
+ },
+ "true_strike": {
+  "name": "True Strike",
+  "discipline": "divination",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 3
+   }
+  ],
+  "desc": "Shows an ally exactly where to strike."
+ },
+ "third_eye": {
+  "name": "Third Eye",
+  "discipline": "divination",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "skill:perception",
+    "add": 2
+   },
+   {
+    "target": "attack",
+    "add": 1
+   }
+  ],
+  "desc": "You see a little of what's coming."
+ },
+ "expose_weakness": {
+  "name": "Expose Weakness",
+  "discipline": "divination",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "Shows everyone where the target is weakest."
+ },
+ "scry": {
+  "name": "Scry",
+  "discipline": "divination",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "reveal",
+  "desc": "Reveals hidden sites and enemies in the area."
+ },
+ "precognition": {
+  "name": "Precognition",
+  "discipline": "divination",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 2
+   }
+  ],
+  "desc": "You already know where the blow will land."
+ },
+ "fate_thread": {
+  "name": "Fate Thread",
+  "discipline": "divination",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 4
+   }
+  ],
+  "desc": "The whole party sees the next few seconds."
+ },
+ "doom_sight": {
+  "name": "Doom Sight",
+  "discipline": "divination",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 4
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "Shows every enemy's death, and their weak points."
+ },
+ "daze": {
+  "name": "Daze",
+  "discipline": "enchantment",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Scrambles the target's thoughts for a moment."
+ },
+ "charm": {
+  "name": "Charm",
+  "discipline": "enchantment",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "charmed",
+    "duration": 1
+   }
+  ],
+  "desc": "Makes an enemy reluctant to hurt you."
+ },
+ "fear": {
+  "name": "Fear",
+  "discipline": "enchantment",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 2
+   }
+  ],
+  "desc": "A wave of dread."
+ },
+ "inspire": {
+  "name": "Inspire",
+  "discipline": "enchantment",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "inspired",
+    "duration": 3
+   }
+  ],
+  "desc": "Fills an ally with confidence."
+ },
+ "slumber": {
+  "name": "Slumber",
+  "discipline": "enchantment",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Puts a group to sleep, briefly."
+ },
+ "sap_will": {
+  "name": "Sap Will",
+  "discipline": "enchantment",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "weakened",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "Drains the target's will to fight."
+ },
+ "dominate": {
+  "name": "Dominate",
+  "discipline": "enchantment",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "charmed",
+    "duration": 2
+   }
+  ],
+  "desc": "Takes the fight out of an enemy entirely."
+ },
+ "mind_spike": {
+  "name": "Mind Spike",
+  "discipline": "enchantment",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 5,
+  "range": 60,
+  "damage": "5d6",
+  "desc": "A needle of thought."
+ },
+ "mass_terror": {
+  "name": "Mass Terror",
+  "discipline": "enchantment",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 5
+   }
+  ],
+  "desc": "Panic spreads through the enemy."
+ },
+ "psychic_scream": {
+  "name": "Psychic Scream",
+  "discipline": "enchantment",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "5d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A shriek inside every skull nearby."
+ },
+ "glare": {
+  "name": "Glare",
+  "discipline": "illusion",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 2
+   }
+  ],
+  "desc": "A flash of false light."
+ },
+ "blur": {
+  "name": "Blur",
+  "discipline": "illusion",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 2
+   }
+  ],
+  "desc": "Your outline wavers."
+ },
+ "phantom_blade": {
+  "name": "Phantom Blade",
+  "discipline": "illusion",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 4,
+  "range": 60,
+  "damage": "3d6",
+  "desc": "A blade that isn't there, and still cuts."
+ },
+ "mirror_images": {
+  "name": "Mirror Images",
+  "discipline": "illusion",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 5
+   }
+  ],
+  "desc": "Copies of you take the blows."
+ },
+ "veil_the_party": {
+  "name": "Veil the Party",
+  "discipline": "illusion",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 3
+   }
+  ],
+  "desc": "The whole party fades from sight."
+ },
+ "phantasmal_terror": {
+  "name": "Phantasmal Terror",
+  "discipline": "illusion",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 3
+   }
+  ],
+  "damage": "3d6",
+  "damage_type": "force",
+  "desc": "Shows the target what it fears most."
+ },
+ "colour_burst": {
+  "name": "Colour Burst",
+  "discipline": "illusion",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "4d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A blinding explosion of colour."
+ },
+ "vanish": {
+  "name": "Vanish",
+  "discipline": "illusion",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 6
+   }
+  ],
+  "desc": "Gone, for a while."
+ },
+ "waking_nightmare": {
+  "name": "Waking Nightmare",
+  "discipline": "illusion",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 5,
+  "range": 50,
+  "damage": "6d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 4,
+    "chance": 1.0
+   }
+  ],
+  "desc": "The target can't stop seeing it."
+ },
+ "grand_mirage": {
+  "name": "Grand Mirage",
+  "discipline": "illusion",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 5
+   }
+  ],
+  "desc": "Replaces the whole battlefield with a lie."
+ },
+ "chill_touch": {
+  "name": "Chill Touch",
+  "discipline": "necromancy",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 3,
+  "range": 5,
+  "damage": "2d8",
+  "desc": "A grave-cold hand."
+ },
+ "life_leech": {
+  "name": "Life Leech",
+  "discipline": "necromancy",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "drain",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 4,
+  "range": 30,
+  "damage": "2d6",
+  "drain": 0.5,
+  "desc": "Steals a little life to mend your own."
+ },
+ "rot": {
+  "name": "Rot",
+  "discipline": "necromancy",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 4,
+  "range": 50,
+  "damage": "2d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "poisoned",
+    "duration": 3,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Flesh sickens and sloughs."
+ },
+ "raise_bones": {
+  "name": "Raise Bones",
+  "discipline": "necromancy",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "risen_bones",
+  "count": 1,
+  "duration": 6,
+  "desc": "A skeleton claws its way up to serve."
+ },
+ "wither": {
+  "name": "Wither",
+  "discipline": "necromancy",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 15,
+  "effects": [
+   {
+    "type": "status",
+    "status": "weakened",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "Saps the strength of everyone nearby."
+ },
+ "vampiric_grasp": {
+  "name": "Vampiric Grasp",
+  "discipline": "necromancy",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "drain",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 4,
+  "range": 30,
+  "damage": "5d6",
+  "drain": 0.5,
+  "desc": "Drinks deeply."
+ },
+ "plague_cloud": {
+  "name": "Plague Cloud",
+  "discipline": "necromancy",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "poison",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "4d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "poisoned",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A cloud of grave-sickness."
+ },
+ "raise_ghoul": {
+  "name": "Raise Ghoul",
+  "discipline": "necromancy",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "ghoul",
+  "count": 1,
+  "duration": 8,
+  "desc": "A hungry dead thing that obeys, mostly."
+ },
+ "death_knell": {
+  "name": "Death Knell",
+  "discipline": "necromancy",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "desc": "Stops a heart."
+ },
+ "barrow_legion": {
+  "name": "Barrow Legion",
+  "discipline": "necromancy",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "barrow_wight",
+  "count": 2,
+  "duration": 9,
+  "desc": "Calls the old dead out of the barrows."
+ },
+ "iron_skin": {
+  "name": "Iron Skin",
+  "discipline": "transmutation",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "Skin hard as plate, briefly."
+ },
+ "quicken": {
+  "name": "Quicken",
+  "discipline": "transmutation",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "hasted",
+    "duration": 2
+   }
+  ],
+  "desc": "Speeds an ally up."
+ },
+ "mire": {
+  "name": "Mire",
+  "discipline": "transmutation",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "Turns the ground to mud."
+ },
+ "ox_strength": {
+  "name": "Ox Strength",
+  "discipline": "transmutation",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "strengthened",
+    "duration": 3
+   }
+  ],
+  "desc": "The strength of a draught ox."
+ },
+ "quickening_wave": {
+  "name": "Quickening Wave",
+  "discipline": "transmutation",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "hasted",
+    "duration": 3
+   }
+  ],
+  "desc": "Speeds the whole party."
+ },
+ "slow": {
+  "name": "Slow",
+  "discipline": "transmutation",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "slowed",
+    "duration": 3
+   }
+  ],
+  "desc": "Thickens the air around the enemy."
+ },
+ "stone_grip": {
+  "name": "Stone Grip",
+  "discipline": "transmutation",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 2
+   }
+  ],
+  "desc": "Turns the target's limbs briefly to stone."
+ },
+ "rust_touch": {
+  "name": "Rust Touch",
+  "discipline": "transmutation",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "acid",
+  "ap": 3,
+  "range": 5,
+  "damage": "5d8",
+  "effects": [
+   {
+    "type": "status",
+    "status": "jammed",
+    "duration": 4,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Corrodes metal at a touch. Machines hate it."
+ },
+ "flesh_to_stone": {
+  "name": "Flesh to Stone",
+  "discipline": "transmutation",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 2
+   }
+  ],
+  "damage": "5d6",
+  "damage_type": "force",
+  "desc": "Petrifies the target."
+ },
+ "shatter": {
+  "name": "Shatter",
+  "discipline": "transmutation",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "arcane",
+  "stat": "int",
+  "color": "#e0b070",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Makes everything nearby brittle, then breaks it."
+ },
+ "mend_wounds": {
+  "name": "Mend Wounds",
+  "discipline": "lantern",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "2d6",
+  "desc": "A short prayer that closes wounds."
+ },
+ "lantern_light": {
+  "name": "Lantern Light",
+  "discipline": "lantern",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "light",
+  "desc": "A warm light that the dead avoid."
+ },
+ "cleansing_flame": {
+  "name": "Cleansing Flame",
+  "discipline": "lantern",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "cleanse",
+  "kind": "cleanse",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "heal": "2d4",
+  "effects": [
+   {
+    "type": "cleanse",
+    "kind": "harm"
+   }
+  ],
+  "desc": "Burns away poison and curses."
+ },
+ "radiant_rebuke": {
+  "name": "Radiant Rebuke",
+  "discipline": "lantern",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 4,
+  "range": 60,
+  "damage": "3d6",
+  "desc": "A flash of holy light."
+ },
+ "healing_circle": {
+  "name": "Healing Circle",
+  "discipline": "lantern",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "mass_heal",
+  "kind": "heal",
+  "target": "allies",
+  "ap": 5,
+  "range": 0,
+  "area": 20,
+  "heal": "3d6",
+  "desc": "Heals everyone near the priest."
+ },
+ "hearthward": {
+  "name": "Hearthward",
+  "discipline": "lantern",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 3
+   }
+  ],
+  "desc": "The Mother's protection."
+ },
+ "renewal": {
+  "name": "Renewal",
+  "discipline": "lantern",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "regen",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "regenerating",
+    "duration": 5
+   }
+  ],
+  "desc": "Wounds keep closing for a while."
+ },
+ "sunburst": {
+  "name": "Sunburst",
+  "discipline": "lantern",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "4d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A burst of noon-bright light."
+ },
+ "restoration": {
+  "name": "Restoration",
+  "discipline": "lantern",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "8d6+5",
+  "desc": "Mends almost anything."
+ },
+ "mothers_embrace": {
+  "name": "Mother's Embrace",
+  "discipline": "lantern",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#9dffb0",
+  "template": "mass_heal",
+  "kind": "heal",
+  "target": "allies",
+  "ap": 6,
+  "range": 0,
+  "area": 20,
+  "heal": "7d6",
+  "desc": "The Lantern Mother's own warmth."
+ },
+ "entangle": {
+  "name": "Entangle",
+  "discipline": "harvest",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "Roots and creepers grab at feet."
+ },
+ "sowers_blessing": {
+  "name": "Sower's Blessing",
+  "discipline": "harvest",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "regen",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "regenerating",
+    "duration": 3
+   }
+  ],
+  "desc": "Slow, steady healing."
+ },
+ "thornlash": {
+  "name": "Thornlash",
+  "discipline": "harvest",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 4,
+  "range": 50,
+  "damage": "2d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "bleeding",
+    "duration": 3,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A whip of thorns."
+ },
+ "barkskin": {
+  "name": "Barkskin",
+  "discipline": "harvest",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 3
+   }
+  ],
+  "desc": "Skin like oak bark."
+ },
+ "locust_swarm": {
+  "name": "Locust Swarm",
+  "discipline": "harvest",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 3,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A biting, buzzing cloud."
+ },
+ "bounty": {
+  "name": "Bounty",
+  "discipline": "harvest",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "mass_heal",
+  "kind": "heal",
+  "target": "allies",
+  "ap": 5,
+  "range": 0,
+  "area": 20,
+  "heal": "3d6",
+  "desc": "The harvest feeds everyone."
+ },
+ "blight": {
+  "name": "Blight",
+  "discipline": "harvest",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "poison",
+  "ap": 5,
+  "range": 50,
+  "damage": "5d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "poisoned",
+    "duration": 4,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Withers the living like a failed crop."
+ },
+ "oakheart": {
+  "name": "Oakheart",
+  "discipline": "harvest",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "hp_max",
+    "add": 10
+   }
+  ],
+  "desc": "Sturdy as an old oak."
+ },
+ "wrath_of_the_field": {
+  "name": "Wrath of the Field",
+  "discipline": "harvest",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "The ground itself rises up."
+ },
+ "greenwake": {
+  "name": "Greenwake",
+  "discipline": "harvest",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#c9d96a",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "regenerating",
+    "duration": 4
+   }
+  ],
+  "desc": "Spring comes to the whole party."
+ },
+ "bless": {
+  "name": "Bless",
+  "discipline": "iron_oath",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "blessed",
+    "duration": 2
+   }
+  ],
+  "desc": "The Oathwarden's favour."
+ },
+ "shield_of_faith": {
+  "name": "Shield of Faith",
+  "discipline": "iron_oath",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "Faith made solid."
+ },
+ "smite": {
+  "name": "Smite",
+  "discipline": "iron_oath",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 3,
+  "range": 5,
+  "damage": "3d8",
+  "desc": "A holy blow."
+ },
+ "oath_of_courage": {
+  "name": "Oath of Courage",
+  "discipline": "iron_oath",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "save:all",
+    "add": 1
+   }
+  ],
+  "desc": "You swore not to run."
+ },
+ "battle_hymn": {
+  "name": "Battle Hymn",
+  "discipline": "iron_oath",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "blessed",
+    "duration": 3
+   }
+  ],
+  "desc": "A hymn the whole party fights to."
+ },
+ "holy_brand": {
+  "name": "Holy Brand",
+  "discipline": "iron_oath",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "dot",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 4,
+  "range": 50,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 3,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Burns the Oath's mark into an enemy."
+ },
+ "righteous_fury": {
+  "name": "Righteous Fury",
+  "discipline": "iron_oath",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "strengthened",
+    "duration": 6
+   }
+  ],
+  "desc": "Holy anger."
+ },
+ "sacred_shield": {
+  "name": "Sacred Shield",
+  "discipline": "iron_oath",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 4
+   }
+  ],
+  "desc": "Shields the faithful."
+ },
+ "judgement": {
+  "name": "Judgement",
+  "discipline": "iron_oath",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "desc": "The Oathwarden's verdict."
+ },
+ "unbreakable_line": {
+  "name": "Unbreakable Line",
+  "discipline": "iron_oath",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#d8c0a0",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 6
+   }
+  ],
+  "desc": "Nobody gets through."
+ },
+ "toll_the_dead": {
+  "name": "Toll the Dead",
+  "discipline": "grave",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 4,
+  "range": 60,
+  "damage": "2d6",
+  "desc": "A bell only the target hears."
+ },
+ "speak_with_the_dead": {
+  "name": "Speak with the Dead",
+  "discipline": "grave",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "speak_dead",
+  "desc": "A corpse answers three questions."
+ },
+ "turn_the_dead": {
+  "name": "Turn the Dead",
+  "discipline": "grave",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 2
+   }
+  ],
+  "desc": "The dead remember they should be resting."
+ },
+ "last_rites": {
+  "name": "Last Rites",
+  "discipline": "grave",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "3d6",
+  "desc": "Pulls the dying back from the edge."
+ },
+ "ferrymans_toll": {
+  "name": "Ferryman's Toll",
+  "discipline": "grave",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "drain",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 4,
+  "range": 30,
+  "damage": "4d6",
+  "drain": 0.5,
+  "desc": "The Ferryman takes his fee from your enemy."
+ },
+ "grave_ward": {
+  "name": "Grave Ward",
+  "discipline": "grave",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 3
+   }
+  ],
+  "desc": "Death looks the other way."
+ },
+ "soul_cage": {
+  "name": "Soul Cage",
+  "discipline": "grave",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Holds the target's soul still."
+ },
+ "pale_lantern": {
+  "name": "Pale Lantern",
+  "discipline": "grave",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 6,
+  "range": 60,
+  "area": 15,
+  "damage": "4d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A cold light that burns the unquiet."
+ },
+ "final_rest": {
+  "name": "Final Rest",
+  "discipline": "grave",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "necrotic",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "desc": "Sends the target to the Ferryman."
+ },
+ "death_ward": {
+  "name": "Death Ward",
+  "discipline": "grave",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#a8a8c8",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "flag": "relentless"
+   }
+  ],
+  "desc": "Once per fight, a killing blow leaves you at 1 HP."
+ },
+ "gust": {
+  "name": "Gust",
+  "discipline": "storm",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "push",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 4,
+  "range": 30,
+  "damage": "1d6",
+  "push": 2,
+  "desc": "A blast of wind."
+ },
+ "shocking_grasp": {
+  "name": "Shocking Grasp",
+  "discipline": "storm",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 3,
+  "range": 5,
+  "damage": "2d8",
+  "desc": "Lightning in the palm."
+ },
+ "call_lightning": {
+  "name": "Call Lightning",
+  "discipline": "storm",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "bolt",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 4,
+  "range": 60,
+  "damage": "3d6",
+  "desc": "A bolt from a clear sky."
+ },
+ "tailwind": {
+  "name": "Tailwind",
+  "discipline": "storm",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "hasted",
+    "duration": 3
+   }
+  ],
+  "desc": "The wind at an ally's back."
+ },
+ "thunderwave": {
+  "name": "Thunderwave",
+  "discipline": "storm",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A wall of thunder."
+ },
+ "squall": {
+  "name": "Squall",
+  "discipline": "storm",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 3
+   }
+  ],
+  "desc": "Rain so hard nobody can see."
+ },
+ "storm_lash": {
+  "name": "Storm Lash",
+  "discipline": "storm",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 6,
+  "range": 40,
+  "damage": "6d6",
+  "desc": "A whip of lightning."
+ },
+ "eye_of_the_storm": {
+  "name": "Eye of the Storm",
+  "discipline": "storm",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 6
+   }
+  ],
+  "desc": "Calm at the centre."
+ },
+ "tempest": {
+  "name": "Tempest",
+  "discipline": "storm",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "blast",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "The full storm."
+ },
+ "gale_kings_wrath": {
+  "name": "Gale King's Wrath",
+  "discipline": "storm",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "wis",
+  "color": "#80b8ff",
+  "template": "lance",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1,
+    "chance": 1.0
+   }
+  ],
+  "desc": "The god's own thunderbolt."
+ },
+ "shadow_cloak": {
+  "name": "Shadow Cloak",
+  "discipline": "veil",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 2
+   }
+  ],
+  "desc": "The Sister hides you."
+ },
+ "whispered_doubt": {
+  "name": "Whispered Doubt",
+  "discipline": "veil",
+  "tier": 1,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 2
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "A voice in the ear: you're going to lose."
+ },
+ "luck_of_the_draw": {
+  "name": "Luck of the Draw",
+  "discipline": "veil",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 3
+   }
+  ],
+  "desc": "The dice roll your way."
+ },
+ "smugglers_prayer": {
+  "name": "Smuggler's Prayer",
+  "discipline": "veil",
+  "tier": 2,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "skill:lockpicking",
+    "add": 2
+   },
+   {
+    "target": "skill:pickpocket",
+    "add": 2
+   }
+  ],
+  "desc": "Locks and pockets open more easily."
+ },
+ "veiled_strike": {
+  "name": "Veiled Strike",
+  "discipline": "veil",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "touch",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 3,
+  "range": 5,
+  "damage": "4d8",
+  "desc": "A blow nobody sees coming."
+ },
+ "cloak_the_party": {
+  "name": "Cloak the Party",
+  "discipline": "veil",
+  "tier": 3,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 3
+   }
+  ],
+  "desc": "Hides the whole party."
+ },
+ "twist_fate": {
+  "name": "Twist Fate",
+  "discipline": "veil",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 6
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "The target's luck runs out."
+ },
+ "gamblers_grace": {
+  "name": "Gambler's Grace",
+  "discipline": "veil",
+  "tier": 4,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 2
+   }
+  ],
+  "desc": "You're never quite where they aimed."
+ },
+ "mass_confusion": {
+  "name": "Mass Confusion",
+  "discipline": "veil",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "charmed",
+    "duration": 1
+   }
+  ],
+  "desc": "Nobody is sure whose side they're on."
+ },
+ "sisters_kiss": {
+  "name": "Sister's Kiss",
+  "discipline": "veil",
+  "tier": 5,
+  "pool": "arcane",
+  "school": "divine",
+  "stat": "cha",
+  "color": "#9080a0",
+  "template": "drain",
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "psychic",
+  "ap": 5,
+  "range": 30,
+  "damage": "7d6",
+  "drain": 0.5,
+  "desc": "Takes something the target won't miss until later."
+ },
+ "aimed_shot": {
+  "name": "Aimed Shot",
+  "discipline": "ballistics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 1,
+  "to_hit": 3,
+  "desc": "Take your time."
+ },
+ "quick_draw": {
+  "name": "Quick Draw",
+  "discipline": "ballistics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "initiative",
+    "add": 3
+   }
+  ],
+  "desc": "Gun out first."
+ },
+ "leg_shot": {
+  "name": "Leg Shot",
+  "discipline": "ballistics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "slowed",
+    "duration": 3
+   }
+  ],
+  "desc": "Slows the target down."
+ },
+ "rapid_fire": {
+  "name": "Rapid Fire",
+  "discipline": "ballistics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 2,
+  "to_hit": -2,
+  "hits": 2,
+  "desc": "Two shots, fast."
+ },
+ "piercing_round": {
+  "name": "Piercing Round",
+  "discipline": "ballistics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 1,
+  "to_hit": 2,
+  "extra_damage": "2d6",
+  "desc": "A hardened round that punches through armour."
+ },
+ "gunslinger": {
+  "name": "Gunslinger",
+  "discipline": "ballistics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack:firearms",
+    "add": 1
+   },
+   {
+    "target": "damage:firearms",
+    "add": 1
+   }
+  ],
+  "desc": "Practice."
+ },
+ "suppressing_fire": {
+  "name": "Suppressing Fire",
+  "discipline": "ballistics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 2,
+  "area": 10,
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 4
+   }
+  ],
+  "desc": "Keeps heads down."
+ },
+ "deadeye": {
+  "name": "Deadeye",
+  "discipline": "ballistics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "crit_range",
+    "add": 1
+   }
+  ],
+  "desc": "Crits on 19-20."
+ },
+ "fan_the_hammer": {
+  "name": "Fan the Hammer",
+  "discipline": "ballistics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 3,
+  "to_hit": -3,
+  "hits": 3,
+  "desc": "Empties the cylinder."
+ },
+ "killshot": {
+  "name": "Killshot",
+  "discipline": "ballistics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#c79a4a",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "firearms"
+  ],
+  "ap_delta": 3,
+  "to_hit": 3,
+  "extra_damage": "6d6",
+  "desc": "One shot, one kill."
+ },
+ "scald_jet": {
+  "name": "Scald Jet",
+  "discipline": "steamworks",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "device",
+  "device": true,
+  "misfire": 0.04,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 4,
+  "range": 15,
+  "damage": "1d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 2,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A jet of boiling steam from a hand pump."
+ },
+ "pressure_gauge": {
+  "name": "Pressure Gauge",
+  "discipline": "steamworks",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "misfire",
+    "add": -0.02
+   }
+  ],
+  "desc": "You watch the needle. Devices misfire 2% less."
+ },
+ "steam_cloud": {
+  "name": "Steam Cloud",
+  "discipline": "steamworks",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "device",
+  "device": true,
+  "misfire": 0.05,
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 2
+   }
+  ],
+  "desc": "A scalding white cloud."
+ },
+ "piston_punch": {
+  "name": "Piston Punch",
+  "discipline": "steamworks",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "heavy_gear"
+  ],
+  "ap_delta": 1,
+  "extra_damage": "1d6",
+  "push": 2,
+  "desc": "Drives the target back."
+ },
+ "boiler_vent": {
+  "name": "Boiler Vent",
+  "discipline": "steamworks",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "device",
+  "device": true,
+  "misfire": 0.06,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Dumps a boiler's worth of steam."
+ },
+ "iron_plating": {
+  "name": "Iron Plating",
+  "discipline": "steamworks",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 2
+   }
+  ],
+  "desc": "Riveted plates under the coat."
+ },
+ "overpressure": {
+  "name": "Overpressure",
+  "discipline": "steamworks",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "heavy_gear"
+  ],
+  "ap_delta": 2,
+  "extra_damage": "4d6",
+  "misfire_add": 0.04,
+  "desc": "Past the red line."
+ },
+ "steam_shroud": {
+  "name": "Steam Shroud",
+  "discipline": "steamworks",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 4
+   }
+  ],
+  "desc": "Wreathed in steam."
+ },
+ "furnace_heart": {
+  "name": "Furnace Heart",
+  "discipline": "steamworks",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ap_max",
+    "add": 1
+   },
+   {
+    "target": "resist:fire",
+    "add": 25
+   }
+  ],
+  "desc": "A pocket boiler that never goes out."
+ },
+ "piston_hammerblow": {
+  "name": "Piston Hammerblow",
+  "discipline": "steamworks",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "str",
+  "color": "#d0a080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "heavy_gear"
+  ],
+  "ap_delta": 3,
+  "extra_damage": "6d6",
+  "misfire_add": 0.05,
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Everything the boiler has, in one blow."
+ },
+ "spark_gap": {
+  "name": "Spark Gap",
+  "discipline": "galvanics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.04,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 4,
+  "range": 40,
+  "damage": "2d6",
+  "desc": "A crackling arc from a hand coil."
+ },
+ "static_coat": {
+  "name": "Static Coat",
+  "discipline": "galvanics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "A charged field that pushes blows aside."
+ },
+ "shock_baton": {
+  "name": "Shock Baton",
+  "discipline": "galvanics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.05,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 3,
+  "range": 5,
+  "damage": "3d8",
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1,
+    "chance": 1.0
+   }
+  ],
+  "desc": "A charged rod."
+ },
+ "galvanic_stimulus": {
+  "name": "Galvanic Stimulus",
+  "discipline": "galvanics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "3d6",
+  "construct_ok": true,
+  "desc": "A jolt that restarts the heart, or the engine."
+ },
+ "arc_chain": {
+  "name": "Arc Chain",
+  "discipline": "galvanics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.06,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Lightning that jumps between targets."
+ },
+ "capacitor_bank": {
+  "name": "Capacitor Bank",
+  "discipline": "galvanics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ap_max",
+    "add": 1
+   }
+  ],
+  "desc": "Stored charge for when you need it."
+ },
+ "coil_cage": {
+  "name": "Coil Cage",
+  "discipline": "galvanics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.07,
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "A cage of arcs."
+ },
+ "overload": {
+  "name": "Overload",
+  "discipline": "galvanics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.07,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 6,
+  "range": 40,
+  "damage": "6d6",
+  "desc": "Dumps the whole cell at once."
+ },
+ "storm_engine": {
+  "name": "Storm Engine",
+  "discipline": "galvanics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.08,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "lightning",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A backpack generator, fully open."
+ },
+ "lightning_rod": {
+  "name": "Lightning Rod",
+  "discipline": "galvanics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#a0c0ff",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "resist:lightning",
+    "add": 50
+   },
+   {
+    "target": "attack:gear",
+    "add": 2
+   }
+  ],
+  "desc": "Grounded."
+ },
+ "spotting_scope": {
+  "name": "Spotting Scope",
+  "discipline": "optics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 2
+   }
+  ],
+  "desc": "Sight in and fire."
+ },
+ "flash_lamp": {
+  "name": "Flash Lamp",
+  "discipline": "optics",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.04,
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 2
+   }
+  ],
+  "desc": "Magnesium in the eyes."
+ },
+ "rangefinder": {
+  "name": "Rangefinder",
+  "discipline": "optics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack:ranged",
+    "add": 1
+   }
+  ],
+  "desc": "You know exactly how far it is."
+ },
+ "mark_target": {
+  "name": "Mark Target",
+  "discipline": "optics",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "A mirror flash shows everyone where to shoot."
+ },
+ "magnesium_flare": {
+  "name": "Magnesium Flare",
+  "discipline": "optics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.06,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 3,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A blinding white burst."
+ },
+ "assay_lens": {
+  "name": "Assay Lens",
+  "discipline": "optics",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "utility",
+  "kind": "utility",
+  "target": "self",
+  "ap": 4,
+  "range": 0,
+  "effect": "identify",
+  "desc": "Reads an item's properties through the lens. Can miss curses."
+ },
+ "long_glass": {
+  "name": "Long Glass",
+  "discipline": "optics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack:ranged",
+    "add": 2
+   }
+  ],
+  "desc": "A brass telescope sight."
+ },
+ "heliograph_burn": {
+  "name": "Heliograph Burn",
+  "discipline": "optics",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.07,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 6,
+  "range": 40,
+  "damage": "6d6",
+  "desc": "Focused sunlight, or lamp light, through a great lens."
+ },
+ "prism_cannon": {
+  "name": "Prism Cannon",
+  "discipline": "optics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "device",
+  "device": true,
+  "misfire": 0.08,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "radiant",
+  "ap": 6,
+  "range": 40,
+  "damage": "8d6+5",
+  "desc": "A beam of focused light that cuts steel."
+ },
+ "total_clarity": {
+  "name": "Total Clarity",
+  "discipline": "optics",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "dex",
+  "color": "#e0e0ff",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "focused",
+    "duration": 4
+   }
+  ],
+  "desc": "The whole party sees through your lenses."
+ },
+ "powder_bomb": {
+  "name": "Powder Bomb",
+  "discipline": "demolition",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.04,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 5,
+  "range": 60,
+  "area": 10,
+  "damage": "1d6",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Black powder in a tin."
+ },
+ "smoke_pot": {
+  "name": "Smoke Pot",
+  "discipline": "demolition",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.04,
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 2
+   }
+  ],
+  "desc": "Thick choking smoke."
+ },
+ "acid_flask": {
+  "name": "Acid Flask",
+  "discipline": "demolition",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.05,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "acid",
+  "ap": 4,
+  "range": 50,
+  "damage": "2d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "corroded",
+    "duration": 3,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Glass, cork, acid."
+ },
+ "caltrops": {
+  "name": "Caltrops",
+  "discipline": "demolition",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.05,
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "area": 10,
+  "save": {
+   "stat": "dex"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "slowed",
+    "duration": 2
+   }
+  ],
+  "desc": "Spikes underfoot."
+ },
+ "dynamite_bundle": {
+  "name": "Dynamite Bundle",
+  "discipline": "demolition",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.06,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 5,
+  "range": 60,
+  "area": 20,
+  "damage": "4d6+3",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Three sticks and a short fuse."
+ },
+ "shrapnel_charge": {
+  "name": "Shrapnel Charge",
+  "discipline": "demolition",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.06,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "physical",
+  "ap": 5,
+  "range": 60,
+  "area": 15,
+  "damage": "3d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "bleeding",
+    "duration": 3,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Nails and bolts packed round the charge."
+ },
+ "sticky_bomb": {
+  "name": "Sticky Bomb",
+  "discipline": "demolition",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.07,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 5,
+  "range": 50,
+  "damage": "5d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 4,
+    "chance": 1.0
+   }
+  ],
+  "desc": "Tar and powder that clings."
+ },
+ "blasting_expert": {
+  "name": "Blasting Expert",
+  "discipline": "demolition",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "damage:fire",
+    "add": 2
+   },
+   {
+    "target": "resist:fire",
+    "add": 25
+   }
+  ],
+  "desc": "You know how to stand."
+ },
+ "demolition_charge": {
+  "name": "Demolition Charge",
+  "discipline": "demolition",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.08,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "Brings the building down."
+ },
+ "firestorm_barrage": {
+  "name": "Firestorm Barrage",
+  "discipline": "demolition",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#ff9050",
+  "template": "device",
+  "device": true,
+  "misfire": 0.08,
+  "kind": "attack",
+  "target": "enemy",
+  "damage_type": "fire",
+  "ap": 6,
+  "range": 60,
+  "area": 20,
+  "damage": "6d6+5",
+  "effects": [
+   {
+    "type": "status",
+    "status": "burning",
+    "duration": 4,
+    "chance": 0.5
+   }
+  ],
+  "save": {
+   "stat": "dex",
+   "half": true
+  },
+  "desc": "A string of incendiaries."
+ },
+ "clockwork_beetle": {
+  "name": "Clockwork Beetle",
+  "discipline": "automata",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "clockwork_beetle",
+  "count": 1,
+  "duration": 5,
+  "desc": "A wind-up beetle with a nasty bite."
+ },
+ "field_repair": {
+  "name": "Field Repair",
+  "discipline": "automata",
+  "tier": 1,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "repair",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 5,
+  "heal": "3d6",
+  "construct_only": true,
+  "desc": "Patches up a Wrought or automaton."
+ },
+ "tune_up": {
+  "name": "Tune-up",
+  "discipline": "automata",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "steady",
+    "duration": 3
+   }
+  ],
+  "desc": "Adjusts an ally's devices."
+ },
+ "spring_turret": {
+  "name": "Spring Turret",
+  "discipline": "automata",
+  "tier": 2,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "spring_turret",
+  "count": 1,
+  "duration": 6,
+  "desc": "A clockwork crossbow on a tripod."
+ },
+ "overclock": {
+  "name": "Overclock",
+  "discipline": "automata",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "hasted",
+    "duration": 3
+   }
+  ],
+  "desc": "Pushes a machine (or a person) past spec."
+ },
+ "brass_hound": {
+  "name": "Brass Hound",
+  "discipline": "automata",
+  "tier": 3,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "brass_hound",
+  "count": 1,
+  "duration": 7,
+  "desc": "A steam-driven guard dog."
+ },
+ "iron_bulwark": {
+  "name": "Iron Bulwark",
+  "discipline": "automata",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "iron_bulwark",
+  "count": 1,
+  "duration": 8,
+  "desc": "A walking wall of riveted iron."
+ },
+ "master_mechanic": {
+  "name": "Master Mechanic",
+  "discipline": "automata",
+  "tier": 4,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "skill:mechanics",
+    "add": 2
+   },
+   {
+    "target": "misfire",
+    "add": -0.03
+   }
+  ],
+  "desc": "Nothing you own breaks."
+ },
+ "steam_colossus": {
+  "name": "Steam Colossus",
+  "discipline": "automata",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "summon",
+  "kind": "summon",
+  "target": "tile",
+  "ap": 6,
+  "range": 20,
+  "summon": "steam_colossus",
+  "count": 1,
+  "duration": 9,
+  "desc": "A war engine twice your height."
+ },
+ "ossuan_override": {
+  "name": "Ossuan Override",
+  "discipline": "automata",
+  "tier": 5,
+  "pool": "gear",
+  "school": "gear",
+  "stat": "int",
+  "color": "#b0b0a0",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "int"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "charmed",
+    "duration": 2
+   }
+  ],
+  "desc": "Old command codes that some machines still obey."
+ },
+ "feint": {
+  "name": "Feint",
+  "discipline": "blade",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 0,
+  "to_hit": 3,
+  "desc": "A false opening."
+ },
+ "bleeding_cut": {
+  "name": "Bleeding Cut",
+  "discipline": "blade",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "bleeding",
+    "duration": 2
+   }
+  ],
+  "desc": "A cut that won't close."
+ },
+ "riposte": {
+  "name": "Riposte",
+  "discipline": "blade",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 1
+   }
+  ],
+  "desc": "Parry, then answer."
+ },
+ "twin_cut": {
+  "name": "Twin Cut",
+  "discipline": "blade",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 2,
+  "to_hit": -2,
+  "hits": 2,
+  "desc": "Two quick cuts."
+ },
+ "disarming_strike": {
+  "name": "Disarming Strike",
+  "discipline": "blade",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "weakened",
+    "duration": 3
+   }
+  ],
+  "desc": "Knocks the weapon arm aside."
+ },
+ "blade_dancer": {
+  "name": "Blade Dancer",
+  "discipline": "blade",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack:blades",
+    "add": 1
+   },
+   {
+    "target": "ac",
+    "add": 1
+   }
+  ],
+  "desc": "Steel and footwork."
+ },
+ "whirlwind": {
+  "name": "Whirlwind",
+  "discipline": "blade",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 2,
+  "cleave": true,
+  "desc": "Cuts everyone around you."
+ },
+ "vital_strike": {
+  "name": "Vital Strike",
+  "discipline": "blade",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 2,
+  "extra_damage": "3d6",
+  "desc": "Finds the gap in the armour."
+ },
+ "thousand_cuts": {
+  "name": "Thousand Cuts",
+  "discipline": "blade",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 3,
+  "to_hit": -2,
+  "hits": 3,
+  "desc": "Too fast to follow."
+ },
+ "masterstroke": {
+  "name": "Masterstroke",
+  "discipline": "blade",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blades"
+  ],
+  "ap_delta": 3,
+  "to_hit": 4,
+  "extra_damage": "5d6",
+  "desc": "The perfect cut."
+ },
+ "crushing_blow": {
+  "name": "Crushing Blow",
+  "discipline": "heavy_arms",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 1,
+  "extra_damage": "1d8",
+  "desc": "Put your weight behind it."
+ },
+ "brace": {
+  "name": "Brace",
+  "discipline": "heavy_arms",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "Plant your feet."
+ },
+ "sweep": {
+  "name": "Sweep",
+  "discipline": "heavy_arms",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 2,
+  "cleave": true,
+  "desc": "A wide arc."
+ },
+ "knockdown": {
+  "name": "Knockdown",
+  "discipline": "heavy_arms",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 2,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Puts them on the ground."
+ },
+ "sunder": {
+  "name": "Sunder",
+  "discipline": "heavy_arms",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 3
+   }
+  ],
+  "desc": "Breaks their guard, and their armour."
+ },
+ "iron_grip": {
+  "name": "Iron Grip",
+  "discipline": "heavy_arms",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "damage:melee",
+    "add": 1
+   }
+  ],
+  "desc": "Harder hits."
+ },
+ "earthshaker": {
+  "name": "Earthshaker",
+  "discipline": "heavy_arms",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 3,
+  "cleave": true,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Hits the ground hard enough to floor everyone."
+ },
+ "juggernaut": {
+  "name": "Juggernaut",
+  "discipline": "heavy_arms",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "hp_max",
+    "add": 10
+   }
+  ],
+  "desc": "Hard to put down."
+ },
+ "titans_swing": {
+  "name": "Titan's Swing",
+  "discipline": "heavy_arms",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "blunt",
+   "polearms"
+  ],
+  "ap_delta": 3,
+  "extra_damage": "3d8",
+  "cleave": true,
+  "desc": "Nothing stands in the arc."
+ },
+ "unstoppable": {
+  "name": "Unstoppable",
+  "discipline": "heavy_arms",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#a08070",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 6
+   }
+  ],
+  "desc": "Shrug it off."
+ },
+ "aimed_arrow": {
+  "name": "Aimed Arrow",
+  "discipline": "archery",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 1,
+  "to_hit": 3,
+  "desc": "Draw, breathe, loose."
+ },
+ "pinning_shot": {
+  "name": "Pinning Shot",
+  "discipline": "archery",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "Pins a foot or a sleeve."
+ },
+ "double_shot": {
+  "name": "Double Shot",
+  "discipline": "archery",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 2,
+  "to_hit": -2,
+  "hits": 2,
+  "desc": "Two arrows on the string."
+ },
+ "hawkeye": {
+  "name": "Hawkeye",
+  "discipline": "archery",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack:ranged",
+    "add": 1
+   }
+  ],
+  "desc": "Sharp eyes."
+ },
+ "barbed_arrow": {
+  "name": "Barbed Arrow",
+  "discipline": "archery",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 1,
+  "extra_damage": "1d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "bleeding",
+    "duration": 3
+   }
+  ],
+  "desc": "Hard to pull out."
+ },
+ "volley": {
+  "name": "Volley",
+  "discipline": "archery",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 2,
+  "area": 10,
+  "desc": "A rain of arrows."
+ },
+ "heartseeker": {
+  "name": "Heartseeker",
+  "discipline": "archery",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 2,
+  "extra_damage": "3d8",
+  "desc": "Straight to the heart."
+ },
+ "wind_reader": {
+  "name": "Wind Reader",
+  "discipline": "archery",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "crit_range",
+    "add": 1
+   }
+  ],
+  "desc": "You read the wind."
+ },
+ "arrow_storm": {
+  "name": "Arrow Storm",
+  "discipline": "archery",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 3,
+  "extra_damage": "2d6",
+  "area": 15,
+  "desc": "The sky goes dark."
+ },
+ "perfect_shot": {
+  "name": "Perfect Shot",
+  "discipline": "archery",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#a0c080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "bows"
+  ],
+  "ap_delta": 3,
+  "to_hit": 5,
+  "extra_damage": "6d6",
+  "desc": "Through the eye."
+ },
+ "haymaker": {
+  "name": "Haymaker",
+  "discipline": "pugilism",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 1,
+  "extra_damage": "1d6",
+  "desc": "A big swing."
+ },
+ "iron_fists": {
+  "name": "Iron Fists",
+  "discipline": "pugilism",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "damage:melee",
+    "add": 1
+   }
+  ],
+  "desc": "Knuckles like stones."
+ },
+ "headbutt": {
+  "name": "Headbutt",
+  "discipline": "pugilism",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 1,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 1
+   }
+  ],
+  "desc": "Crude, effective."
+ },
+ "grapple": {
+  "name": "Grapple",
+  "discipline": "pugilism",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 1,
+  "save": {
+   "stat": "str"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "Holds them in place."
+ },
+ "flurry": {
+  "name": "Flurry",
+  "discipline": "pugilism",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 2,
+  "to_hit": -2,
+  "hits": 3,
+  "desc": "A storm of punches."
+ },
+ "thick_skin": {
+  "name": "Thick Skin",
+  "discipline": "pugilism",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "hp_max",
+    "add": 5
+   }
+  ],
+  "desc": "You've taken worse."
+ },
+ "gut_punch": {
+  "name": "Gut Punch",
+  "discipline": "pugilism",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 2,
+  "extra_damage": "2d6",
+  "effects": [
+   {
+    "type": "status",
+    "status": "weakened",
+    "duration": 4
+   }
+  ],
+  "desc": "Knocks the wind out."
+ },
+ "second_wind": {
+  "name": "Second Wind",
+  "discipline": "pugilism",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "self_heal",
+  "kind": "heal",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "heal": "5d8",
+  "desc": "Shake it off and keep going."
+ },
+ "knockout": {
+  "name": "Knockout",
+  "discipline": "pugilism",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [
+   "brawling"
+  ],
+  "ap_delta": 3,
+  "extra_damage": "3d6",
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "stunned",
+    "duration": 2
+   }
+  ],
+  "desc": "Lights out."
+ },
+ "brawlers_rage": {
+  "name": "Brawler's Rage",
+  "discipline": "pugilism",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "str",
+  "color": "#c09070",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "strengthened",
+    "duration": 6
+   }
+  ],
+  "desc": "Red mist."
+ },
+ "sidestep": {
+  "name": "Sidestep",
+  "discipline": "skirmish",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 2
+   }
+  ],
+  "desc": "Not where they swung."
+ },
+ "light_feet": {
+  "name": "Light Feet",
+  "discipline": "skirmish",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 1
+   }
+  ],
+  "desc": "Always moving."
+ },
+ "tumble": {
+  "name": "Tumble",
+  "discipline": "skirmish",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 3
+   }
+  ],
+  "desc": "Roll out of trouble."
+ },
+ "quick_step": {
+  "name": "Quick Step",
+  "discipline": "skirmish",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "initiative",
+    "add": 2
+   }
+  ],
+  "desc": "First to move."
+ },
+ "hit_and_fade": {
+  "name": "Hit and Fade",
+  "discipline": "skirmish",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 1,
+  "to_hit": 2,
+  "self_status": "shielded",
+  "desc": "Strike and get clear."
+ },
+ "evasion": {
+  "name": "Evasion",
+  "discipline": "skirmish",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "save:dex",
+    "add": 3
+   }
+  ],
+  "desc": "Dive clear of blasts."
+ },
+ "blur_of_steel": {
+  "name": "Blur of Steel",
+  "discipline": "skirmish",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 2,
+  "hits": 2,
+  "desc": "Two strikes on the move."
+ },
+ "untouchable": {
+  "name": "Untouchable",
+  "discipline": "skirmish",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ac",
+    "add": 2
+   }
+  ],
+  "desc": "They can't pin you down."
+ },
+ "windrunner": {
+  "name": "Windrunner",
+  "discipline": "skirmish",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "ap_max",
+    "add": 1
+   }
+  ],
+  "desc": "An extra step every round."
+ },
+ "dance_of_blades": {
+  "name": "Dance of Blades",
+  "discipline": "skirmish",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 3,
+  "hits": 2,
+  "cleave": true,
+  "desc": "Through the whole crowd and out the other side."
+ },
+ "backstab": {
+  "name": "Backstab",
+  "discipline": "shadow",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 1,
+  "extra_damage": "2d6",
+  "desc": "Where it hurts."
+ },
+ "poisoned_blade": {
+  "name": "Poisoned Blade",
+  "discipline": "shadow",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "poisoned",
+    "duration": 2
+   }
+  ],
+  "desc": "A smear of something nasty."
+ },
+ "slip_away": {
+  "name": "Slip Away",
+  "discipline": "shadow",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 3
+   }
+  ],
+  "desc": "Into the shadows."
+ },
+ "throat_strike": {
+  "name": "Throat Strike",
+  "discipline": "shadow",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 1,
+  "effects": [
+   {
+    "type": "status",
+    "status": "silenced",
+    "duration": 3
+   }
+  ],
+  "desc": "No more spells, no more shouting."
+ },
+ "blinding_powder": {
+  "name": "Blinding Powder",
+  "discipline": "shadow",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "con"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "blinded",
+    "duration": 3
+   }
+  ],
+  "desc": "Pepper and lime."
+ },
+ "cold_blood": {
+  "name": "Cold Blood",
+  "discipline": "shadow",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "crit_range",
+    "add": 1
+   }
+  ],
+  "desc": "Crits on 19-20."
+ },
+ "assassinate": {
+  "name": "Assassinate",
+  "discipline": "shadow",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 2,
+  "to_hit": 2,
+  "extra_damage": "4d6",
+  "desc": "One blow."
+ },
+ "venom_master": {
+  "name": "Venom Master",
+  "discipline": "shadow",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "damage:poison",
+    "add": 2
+   },
+   {
+    "target": "resist:poison",
+    "add": 50
+   }
+  ],
+  "desc": "Poisons you know by taste."
+ },
+ "death_from_the_dark": {
+  "name": "Death from the Dark",
+  "discipline": "shadow",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "weapon",
+  "kind": "weapon",
+  "target": "enemy",
+  "weapon_skill": [],
+  "ap_delta": 3,
+  "to_hit": 3,
+  "extra_damage": "7d6",
+  "desc": "They never see it."
+ },
+ "ghost": {
+  "name": "Ghost",
+  "discipline": "shadow",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "dex",
+  "color": "#606080",
+  "template": "self_boon",
+  "kind": "boon",
+  "target": "self",
+  "ap": 2,
+  "range": 0,
+  "effects": [
+   {
+    "type": "status",
+    "status": "veiled",
+    "duration": 6
+   }
+  ],
+  "desc": "Gone."
+ },
+ "rally": {
+  "name": "Rally",
+  "discipline": "command",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "inspired",
+    "duration": 2
+   }
+  ],
+  "desc": "On me!"
+ },
+ "shout_down": {
+  "name": "Shout Down",
+  "discipline": "command",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 2
+   }
+  ],
+  "desc": "A bellow that rattles the enemy."
+ },
+ "field_orders": {
+  "name": "Field Orders",
+  "discipline": "command",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "boon",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "hasted",
+    "duration": 3
+   }
+  ],
+  "desc": "Tells an ally exactly where to go."
+ },
+ "tactician": {
+  "name": "Tactician",
+  "discipline": "command",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "initiative",
+    "add": 3
+   }
+  ],
+  "desc": "You planned for this."
+ },
+ "hold_the_line": {
+  "name": "Hold the Line",
+  "discipline": "command",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 4,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "shielded",
+    "duration": 3
+   }
+  ],
+  "desc": "Shields up, together."
+ },
+ "focus_fire": {
+  "name": "Focus Fire",
+  "discipline": "command",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "Everyone, that one."
+ },
+ "battle_cry": {
+  "name": "Battle Cry",
+  "discipline": "command",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "area": 15,
+  "save": {
+   "stat": "wis"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "frightened",
+    "duration": 3
+   }
+  ],
+  "desc": "A roar that breaks nerve."
+ },
+ "veteran": {
+  "name": "Veteran",
+  "discipline": "command",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "save:all",
+    "add": 2
+   }
+  ],
+  "desc": "Seen it all."
+ },
+ "last_stand": {
+  "name": "Last Stand",
+  "discipline": "command",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "mass_boon",
+  "kind": "boon",
+  "target": "allies",
+  "ap": 5,
+  "range": 30,
+  "area": 20,
+  "effects": [
+   {
+    "type": "status",
+    "status": "warded",
+    "duration": 6
+   }
+  ],
+  "desc": "Nobody falls today."
+ },
+ "inspiring_presence": {
+  "name": "Inspiring Presence",
+  "discipline": "command",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "cha",
+  "color": "#ffd080",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "attack",
+    "add": 1
+   },
+   {
+    "target": "leadership_aura",
+    "add": 1
+   }
+  ],
+  "desc": "People fight better near you."
+ },
+ "bandage": {
+  "name": "Bandage",
+  "discipline": "fieldcraft",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "1d6",
+  "nonmagic": true,
+  "desc": "Clean linen and a steady hand."
+ },
+ "snare": {
+  "name": "Snare",
+  "discipline": "fieldcraft",
+  "tier": 1,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "save": {
+   "stat": "dex"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 2
+   }
+  ],
+  "desc": "A quick noose in the grass."
+ },
+ "herbal_poultice": {
+  "name": "Herbal Poultice",
+  "discipline": "fieldcraft",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "regen",
+  "kind": "boon",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "effects": [
+   {
+    "type": "status",
+    "status": "regenerating",
+    "duration": 4
+   }
+  ],
+  "nonmagic": true,
+  "desc": "Moss, honey and yarrow."
+ },
+ "tracker": {
+  "name": "Tracker",
+  "discipline": "fieldcraft",
+  "tier": 2,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "skill:survival",
+    "add": 2
+   },
+   {
+    "target": "skill:perception",
+    "add": 1
+   }
+  ],
+  "desc": "Reads the ground."
+ },
+ "splint_and_salve": {
+  "name": "Splint and Salve",
+  "discipline": "fieldcraft",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "cleanse",
+  "kind": "cleanse",
+  "target": "ally",
+  "ap": 3,
+  "range": 30,
+  "heal": "3d4",
+  "effects": [
+   {
+    "type": "cleanse",
+    "kind": "harm"
+   }
+  ],
+  "nonmagic": true,
+  "desc": "Treats poison and wounds."
+ },
+ "hunters_mark": {
+  "name": "Hunter's Mark",
+  "discipline": "fieldcraft",
+  "tier": 3,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "curse",
+  "kind": "curse",
+  "target": "enemy",
+  "ap": 4,
+  "range": 40,
+  "effects": [
+   {
+    "type": "status",
+    "status": "exposed",
+    "duration": 3
+   }
+  ],
+  "save": {
+   "stat": "wis"
+  },
+  "desc": "You know where to aim."
+ },
+ "field_surgeon": {
+  "name": "Field Surgeon",
+  "discipline": "fieldcraft",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "heal",
+  "kind": "heal",
+  "target": "ally",
+  "ap": 4,
+  "range": 30,
+  "heal": "7d6+4",
+  "nonmagic": true,
+  "desc": "Saws, needles and nerve."
+ },
+ "weathered": {
+  "name": "Weathered",
+  "discipline": "fieldcraft",
+  "tier": 4,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "resist:cold",
+    "add": 25
+   },
+   {
+    "target": "hp_max",
+    "add": 5
+   }
+  ],
+  "desc": "Cold doesn't bother you."
+ },
+ "bear_trap": {
+  "name": "Bear Trap",
+  "discipline": "fieldcraft",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "control",
+  "kind": "control",
+  "target": "enemy",
+  "ap": 5,
+  "range": 40,
+  "save": {
+   "stat": "dex"
+  },
+  "effects": [
+   {
+    "type": "status",
+    "status": "rooted",
+    "duration": 5
+   }
+  ],
+  "damage": "5d6",
+  "damage_type": "force",
+  "desc": "Iron jaws."
+ },
+ "iron_constitution": {
+  "name": "Iron Constitution",
+  "discipline": "fieldcraft",
+  "tier": 5,
+  "pool": "neutral",
+  "school": "neutral",
+  "stat": "wis",
+  "color": "#90b070",
+  "template": "passive",
+  "kind": "passive",
+  "target": "self",
+  "ap": 0,
+  "modifiers": [
+   {
+    "target": "resist:poison",
+    "add": 50
+   },
+   {
+    "target": "save:con",
+    "add": 2
+   }
+  ],
+  "desc": "Nothing makes you sick."
+ }
+}

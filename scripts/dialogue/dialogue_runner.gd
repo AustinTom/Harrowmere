@@ -47,6 +47,13 @@ static func apply_effects(effects: Array, receiver) -> Array:
 				GameState.shift_resonance(str(e["location"]), int(e["amount"]))
 			"log":
 				Events.post(str(e["text"]))
+			"give_xp":
+				# To the receiver's whole party when it has a combat manager, else just the receiver.
+				var amount := int(e.get("amount", 0))
+				if receiver is Node and receiver.world != null and receiver.world.combat != null:
+					receiver.world.combat.award_xp(amount, str(e.get("why", "the job")))
+				elif receiver is Object and receiver.has_method("add_xp"):
+					receiver.add_xp(amount)
 			"open_inventory":
 				requests.append("open_inventory")
 			_:

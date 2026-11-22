@@ -7,6 +7,9 @@ var combat = null
 var hud = null
 var rig = null
 var slot := 1
+var ability_page := 0
+
+const ABILITY_SLOTS := 7 ## keys 3-9
 
 
 func _p() -> Variant:
@@ -16,9 +19,23 @@ func _p() -> Variant:
 # ---------------------------------------------------------------- slots
 
 func _slot_profile() -> Dictionary:
+	return _profile_for(slot)
+
+
+func _page_abilities() -> Array:
+	var p = _p()
+	var all: Array = p.known_skills
+	var start := ability_page * ABILITY_SLOTS
+	if start >= all.size():
+		ability_page = 0
+		start = 0
+	return all.slice(start, start + ABILITY_SLOTS)
+
+
+func _profile_for(n: int) -> Dictionary:
 	var p = _p()
 	var w: Dictionary = p.weapon_data()
-	match slot:
+	match n:
 		1:
 			return {"kind": "weapon", "alt": false, "profile": Rules.attack_profile(w, false)}
 		2:
@@ -26,33 +43,57 @@ func _slot_profile() -> Dictionary:
 				return {"kind": "weapon", "alt": true, "profile": Rules.attack_profile(w, true)}
 			return {}
 		_:
-			var idx := slot - 3
-			if idx < p.known_skills.size():
-				var sid: String = p.known_skills[idx]
-				return {"kind": "skill", "id": sid, "profile": DB.get_skill(sid)}
+			var page := _page_abilities()
+			var idx := n - 3
+			if idx < page.size():
+				var sid: String = page[idx]
+				var ab: Dictionary = DB.get_ability(sid)
+				var prof := ab
+				if ab.get("kind") == "weapon":
+					prof = AbilityRules.technique_profile(w, ab)
+					prof["kind"] = "weapon"
+					prof["target"] = "enemy"
+				return {"kind": "skill", "id": sid, "profile": prof, "ability": ab}
 			return {}
+
+
+## Abilities that go on the party rather than on an enemy.
+func _is_support(sp: Dictionary) -> bool:
+	if sp.get("kind") != "skill":
+		return false
+	return str(sp["ability"].get("target", "enemy")) in ["ally", "allies", "self", "tile"] or str(sp["ability"].get("kind")) == "utility"
+
+
+func _is_self_cast(sp: Dictionary) -> bool:
+	if sp.get("kind") != "skill":
+		return false
+	var ab: Dictionary = sp["ability"]
+	return str(ab.get("target")) == "self" or int(ab.get("range", 0)) == 0 or str(ab.get("kind")) in ["summon", "utility"]
 
 
 func hotbar_text() -> String:
 	var p = _p()
 	if p == null:
 		return ""
-	var w: Dictionary = p.weapon_data()
-	var names := [str(w.get("name", "Fists")), str(w["alt"].get("label", "Alt")) if w.has("alt") else "-"]
-	for i in 2:
-		names.append(str(DB.get_skill(p.known_skills[i]).get("name", "?")) if i < p.known_skills.size() else "-")
 	var parts: PackedStringArray = []
-	for i in 4:
-		var cost := ""
-		var prof: Dictionary = {}
-		var keep := slot
-		slot = i + 1
-		prof = _slot_profile()
-		slot = keep
-		if not prof.is_empty():
-			cost = " (%d AP)" % int(prof["profile"].get("ap", 0))
-		parts.append(("[%d] %s%s" if i + 1 != slot else ">> [%d] %s%s <<") % [i + 1, names[i], cost])
-	return "   ".join(parts)
+	for n in range(1, 3 + ABILITY_SLOTS):
+		var prof := _profile_for(n)
+		if prof.is_empty():
+			if n <= 2:
+				parts.append("[%d] -" % n)
+			continue
+		var nm := ""
+		if n == 1:
+			nm = str(prof["profile"].get("name", "Fists"))
+		elif n == 2:
+			nm = str(prof["profile"].get("label", "Alt"))
+		else:
+			nm = str(prof["ability"].get("name", "?"))
+		var cost := " (%d)" % int(prof["profile"].get("ap", 0))
+		parts.append(("[%d] %s%s" if n != slot else ">> [%d] %s%s <<") % [n, nm, cost])
+	var pages := ceili(p.known_skills.size() / float(ABILITY_SLOTS))
+	var tail := ("   [ ] page %d/%d" % [ability_page + 1, pages]) if pages > 1 else ""
+	return "  ".join(parts) + tail
 
 
 # ---------------------------------------------------------------- input
@@ -83,6 +124,14 @@ func _unhandled_input(event: InputEvent) -> void:
 				combat.end_turn(p)
 			KEY_I:
 				hud.toggle_inventory()
+			KEY_C, KEY_K:
+				hud.toggle_character()
+			KEY_BRACKETLEFT:
+				ability_page = maxi(0, ability_page - 1)
+			KEY_BRACKETRIGHT:
+				ability_page += 1
+				if ability_page * ABILITY_SLOTS >= p.known_skills.size():
+					ability_page = 0
 			KEY_ESCAPE:
 				hud.close_panels()
 			KEY_1:
@@ -91,8 +140,14 @@ func _unhandled_input(event: InputEvent) -> void:
 				slot = 2
 			KEY_3:
 				slot = 3
-			KEY_4:
-				slot = 4
+				if _is_self_cast(_profile_for(slot)) and not hud.is_blocking():
+					_cast_self.call_deferred(slot)
+			KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9:
+				slot = k.keycode - KEY_0
+				if _profile_for(slot).is_empty():
+					slot = 1
+				elif _is_self_cast(_profile_for(slot)) and not hud.is_blocking():
+					_cast_self.call_deferred(slot)
 			KEY_R:
 				if p.is_dead:
 					get_tree().reload_current_scene()
@@ -108,11 +163,14 @@ func _on_click(pos: Vector2) -> void:
 	var pick: Dictionary = world.pick(rig.camera, pos)
 	var target = pick["actor"]
 	var sp := _slot_profile()
-	var is_heal: bool = sp.get("kind") == "skill" and sp["profile"].get("kind") == "heal"
+	var support := _is_support(sp)
+	if _is_self_cast(sp):
+		_cast_self(slot)
+		return
 	if target != null:
-		if target.faction == "hostile" and not is_heal:
+		if target.faction == "hostile" and not support:
 			_act_on(target)
-		elif is_heal and target.faction in ["player", "ally"]:
+		elif support and target.faction in ["player", "ally"]:
 			_act_on(target)
 		elif target != p:
 			_talk(target)
@@ -155,6 +213,19 @@ func _act_on(target) -> void:
 		await combat.do_attack(p, target, sp["alt"])
 
 
+## Self, party-wide, summon and utility abilities: cast at once on the caster.
+func _cast_self(n: int) -> void:
+	var p = _p()
+	var sp := _profile_for(n)
+	if sp.is_empty() or p.is_dead or p.busy:
+		return
+	if combat.active and not combat.can_act(p):
+		Events.post("[color=gray]Not your turn.[/color]")
+		return
+	await combat.do_cast(p, p, sp["id"])
+	slot = 1
+
+
 func _talk(target) -> void:
 	if target.dialogue_id == "":
 		Events.post("%s has nothing to say." % target.display_name)
@@ -180,7 +251,10 @@ func _examine(pos: Vector2) -> void:
 	var a = pick["actor"]
 	if a != null:
 		var w: Dictionary = a.weapon_data()
-		Events.post("[color=#9fd8ff]%s[/color]: %s %s, HP %d/%d, AC %d, wielding %s, aptitude %+d." % [a.display_name, a.race, a.faction, a.hp, a.max_hp, a.ac, w.get("name", "fists"), a.aptitude])
+		var st: PackedStringArray = []
+		for s in a.statuses:
+			st.append("%s %d" % [str(DB.statuses.get(s["id"], {}).get("name", s["id"])), int(s["rounds"])])
+		Events.post("[color=#9fd8ff]%s[/color]: level %d %s (%s), HP %d/%d, AC %d, wielding %s, %s.%s" % [a.display_name, a.sheet.level, a.sheet.race_name(), a.faction, a.hp, a.max_hp, a.ac, w.get("name", "fists"), CharacterSheet.aptitude_word(a.aptitude), ("  Effects: " + ", ".join(st)) if not st.is_empty() else ""])
 	elif pick["tile"] != null:
 		var loc: Dictionary = GameState.location_at(pick["tile"])
 		var r := int(loc.get("resonance", 50))
@@ -210,14 +284,25 @@ func _on_hover(pos: Vector2) -> void:
 			var prof: Dictionary = sp["profile"]
 			var res: int = world.resonance_at(p.tile)
 			var bonus := 0
-			if sp["kind"] == "skill":
-				bonus = Rules.mod(int(p.stats[prof.get("stat", "int")])) + Rules.PROFICIENCY
-				txt += "\n%s: hit %d%%, power x%.2f" % [prof.get("name", "?"), roundi(Rules.hit_chance(bonus, a.ac) * 100), Rules.magic_multiplier(str(prof.get("school", "arcane")), res, p.aptitude)]
+			if sp["kind"] == "skill" and prof.get("kind") != "weapon":
+				var ab: Dictionary = sp["ability"]
+				var save: Dictionary = ab.get("save", {}) if ab.get("save") is Dictionary else {}
+				if save.has("stat") or ab.get("kind") in ["control", "curse"]:
+					txt += "\n%s: %s save vs DC %d" % [ab.get("name", "?"), str(save.get("stat", "wis")).to_upper(), AbilityRules.save_dc(p, ab)]
+				else:
+					bonus = AbilityRules.cast_bonus(p, ab)
+					txt += "\n%s: hit %d%%" % [ab.get("name", "?"), roundi(Rules.hit_chance(bonus, a.ac) * 100)]
+				if AbilityRules.is_magic(ab):
+					txt += ", power x%.2f" % AbilityRules.multiplier(p, ab, res)
+				var mc := AbilityRules.misfire_chance(p, ab, res)
+				if mc > 0.0:
+					txt += ", %s %d%%" % ["misfire" if not AbilityRules.is_magic(ab) else "backfire", roundi(mc * 100)]
 			else:
 				bonus = Rules.attack_bonus(p, prof)
-				txt += "\n%s: hit %d%%" % [prof.get("name", "?"), roundi(Rules.hit_chance(bonus, a.ac) * 100)]
+				txt += "\n%s: hit %d%%" % [prof.get("label", prof.get("name", "?")), roundi(Rules.hit_chance(bonus, a.ac) * 100)]
 				if prof.get("pool") == "gear":
-					txt += ", misfire %d%%" % roundi(Rules.misfire_chance(float(prof.get("misfire", 0.02)), res, p.aptitude) * 100)
+					var base := float(prof.get("misfire", 0.02)) + float(prof.get("misfire_add", 0.0)) + Rules.mods_f(p, "misfire")
+					txt += ", misfire %d%%" % roundi(Rules.misfire_chance(base, res, p.aptitude) * 100)
 			var dist := Rules.tile_distance(p.tile, a.tile)
 			txt += "\nDistance %d ft, reach %d ft" % [dist * 5, int(prof.get("range", 5))]
 	elif a.dialogue_id != "":

@@ -2,10 +2,13 @@ extends Node
 ## Plays the pumphouse fight with the AI driving the whole party.
 ## Run: godot --headless res://tests/sim_runner.tscn -- --mode=tb|rt|toggle --seed=N
 ## Exits 0 if the fight resolved (win or loss) without hanging.
+## --arena adds generated level-8 casters, engineers and summoners to both
+## sides, to exercise every kind of ability in a real fight.
 
 var mode := "tb"
 var seed_value := 1
 var scale := 8.0
+var arena := false
 
 
 func _ready() -> void:
@@ -16,6 +19,8 @@ func _ready() -> void:
 			scale = float(arg.substr(8))
 		elif arg.begins_with("--seed="):
 			seed_value = int(arg.substr(7))
+		elif arg == "--arena":
+			arena = true
 	Rules.rng.seed = seed_value
 	GameState.preferred_mode = GameState.REAL_TIME if mode == "rt" else GameState.TURN_BASED
 	var main = load("res://scenes/main.tscn").instantiate()
@@ -32,6 +37,8 @@ func _ready() -> void:
 			iska = a
 	player.set_tile_immediate(Vector2i(22, 11))
 	iska.set_tile_immediate(Vector2i(21, 11))
+	if arena:
+		_build_arena(world, player, iska)
 	Engine.time_scale = scale
 	var t := 0.0
 	var started := false
@@ -57,3 +64,21 @@ func _ready() -> void:
 		var dag = player.inventory.find_first("frostvein_dagger")
 		print("SIM dagger identified=%s" % (dag != null and dag["identified"]))
 	get_tree().quit(0 if started and not combat.active else 1)
+
+
+func _build_arena(world, player, iska) -> void:
+	player.add_xp(CharacterSheet.xp_to_reach(8))
+	iska.add_xp(CharacterSheet.xp_to_reach(8))
+	var allies := [["priest", "dwarf"], ["engineer", "gnome"], ["necromancer", "elf"]]
+	var foes := [["mage", "elf"], ["sapper", "orc"], ["storm_priest", "human"], ["soldier", "orc"], ["necromancer", "human"]]
+	var i := 0
+	for spec in allies + foes:
+		var hostile: bool = foes.has(spec)
+		var id := "arena_%d" % i
+		DB.actor_templates[id] = {"id": id, "faction": "hostile" if hostile else "ally", "group": "pump_scavs" if hostile else "",
+			"aggro": 7 if hostile else 0, "color": "#c05050" if hostile else "#50c080",
+			"gen": {"archetype": spec[0], "level": 8, "race": spec[1], "seed": seed_value * 100 + i}}
+		var tile := Vector2i(30 + i % 3, 8 + i) if hostile else Vector2i(20, 9 + i)
+		var a = world.spawn(id, tile)
+		print("ARENA %s: %s L%d %s, abilities %s" % ["foe" if hostile else "ally", a.display_name, a.sheet.level, spec[0], a.known_skills])
+		i += 1

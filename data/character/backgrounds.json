@@ -1,0 +1,15 @@
+{
+  "none": {"name": "No background", "desc": "Nothing special. Used for generated residents and monsters.", "races": "any", "traits": [], "start_skill_ranks": {}},
+  "thawed": {"name": "The Thawed", "desc": "You were found frozen in the shelf ice and revived. You remember a world that ended centuries ago and nobody you knew is alive.", "races": "any", "traits": ["ice_memory"], "start_skill_ranks": {"lore": 1}},
+  "canal_urchin": {"name": "Canal Urchin", "desc": "Raised on the towpaths of an Old Shires mill town, living off what fell off barges.", "races": "any", "traits": ["gutter_quick"], "start_skill_ranks": {"stealth": 1}},
+  "foundry_hand": {"name": "Foundry Hand", "desc": "Ten years on a Furnace Coast foundry floor. You know heat, iron and a union song.", "races": "any", "traits": ["heat_lungs"], "start_skill_ranks": {"heavy_gear": 1}},
+  "shrine_foundling": {"name": "Shrine Foundling", "desc": "Left on a shrine step as a baby and raised by its keepers.", "races": ["human", "elf", "dwarf", "halfling", "gnome", "orc"], "traits": ["shrine_raised"], "start_skill_ranks": {"faith": 1}},
+  "collegium_dropout": {"name": "Collegium Dropout", "desc": "Two years at a wizards' college before the money or the patience ran out.", "races": ["human", "elf", "dwarf", "halfling", "gnome", "orc"], "traits": ["half_trained"], "start_skill_ranks": {"arcana": 1}},
+  "prospector": {"name": "Prospector", "desc": "You followed the retreating ice north with a pick and a claim map.", "races": "any", "traits": ["claim_sense"], "start_skill_ranks": {"survival": 1}},
+  "freeholder": {"name": "Freeholder Child", "desc": "Born on a Meltlands homestead that your family fought land agents to keep.", "races": "any", "traits": ["field_hardy"], "start_skill_ranks": {"athletics": 1}},
+  "company_clerk": {"name": "Company Clerk", "desc": "You kept the books for a Combine trading house and saw where the money really goes.", "races": "any", "traits": ["ledger_eye"], "start_skill_ranks": {"haggle": 1}},
+  "deserter": {"name": "Deserter", "desc": "You walked away from one side of the war. Nobody asks which, if you're wise.", "races": "any", "traits": ["drilled"], "start_skill_ranks": {"firearms": 1}},
+  "barrow_digger": {"name": "Barrow Digger", "desc": "You dug Firstfolk barrows for collectors, and learned which doors not to open.", "races": "any", "traits": ["grave_luck"], "start_skill_ranks": {"traps": 1}},
+  "riverboat_hand": {"name": "Riverboat Hand", "desc": "You worked the meltwater rivers on paddle steamers and poled barges.", "races": "any", "traits": ["river_legs"], "start_skill_ranks": {"throwing": 1}},
+  "patent_thief": {"name": "Patent Thief", "desc": "You copied other people's schematics for a living until a gnome lawyer caught up with you.", "races": "any", "traits": ["quick_fingers"], "start_skill_ranks": {"mechanics": 1}}
+}

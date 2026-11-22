@@ -1,0 +1,50 @@
+{
+  "blades":       {"name": "Blades", "pool": "neutral", "group": "combat", "stat": "str", "alt_stat": "dex", "desc": "Swords, knives, hookblades. Attack bonus with bladed weapons."},
+  "blunt":        {"name": "Blunt Weapons", "pool": "neutral", "group": "combat", "stat": "str", "desc": "Maces, hammers, clubs and staves."},
+  "polearms":     {"name": "Polearms", "pool": "neutral", "group": "combat", "stat": "str", "desc": "Spears, glaives and pikes. Reach weapons."},
+  "brawling":     {"name": "Brawling", "pool": "neutral", "group": "combat", "stat": "str", "desc": "Fists, knuckles and grappling."},
+  "bows":         {"name": "Bows", "pool": "neutral", "group": "combat", "stat": "dex", "desc": "Longbows, shortbows and crossbows."},
+  "throwing":     {"name": "Throwing", "pool": "neutral", "group": "combat", "stat": "dex", "desc": "Knives, axes, bottles and anything else that flies."},
+  "dodge":        {"name": "Dodge", "pool": "neutral", "group": "combat", "stat": "dex", "desc": "+1 AC for every two ranks."},
+  "firearms":     {"name": "Firearms", "pool": "gear", "group": "combat", "stat": "dex", "desc": "Pistols, carbines and rifles."},
+  "heavy_gear":   {"name": "Heavy Gear", "pool": "gear", "group": "combat", "stat": "str", "desc": "Boiler lances, rivet guns, flame projectors and other steam weapons."},
+
+  "arcana":       {"name": "Arcana", "pool": "arcane", "group": "magic", "stat": "int", "desc": "Casting arcane spells: to-hit and save DCs for every arcane school."},
+  "faith":        {"name": "Faith", "pool": "arcane", "group": "magic", "stat": "wis", "desc": "Saying divine prayers: to-hit and save DCs for every divine domain."},
+
+  "stealth":      {"name": "Stealth", "pool": "neutral", "group": "stealth", "stat": "dex", "desc": "Moving unseen and unheard."},
+  "lockpicking":  {"name": "Lockpicking", "pool": "neutral", "group": "stealth", "stat": "dex", "desc": "Opening locks without the key."},
+  "pickpocket":   {"name": "Pickpocket", "pool": "neutral", "group": "stealth", "stat": "dex", "desc": "Taking things from people who are still wearing them."},
+  "traps":        {"name": "Traps", "pool": "neutral", "group": "stealth", "stat": "int", "desc": "Finding, disarming and setting traps."},
+
+  "persuasion":   {"name": "Persuasion", "pool": "neutral", "group": "social", "stat": "cha", "desc": "Talking people round."},
+  "intimidation": {"name": "Intimidation", "pool": "neutral", "group": "social", "stat": "cha", "alt_stat": "str", "desc": "Making people afraid to say no."},
+  "deception":    {"name": "Deception", "pool": "neutral", "group": "social", "stat": "cha", "desc": "Lies, disguises and forged papers."},
+  "haggle":       {"name": "Haggle", "pool": "neutral", "group": "social", "stat": "cha", "desc": "Better prices when buying and selling."},
+  "leadership":   {"name": "Leadership", "pool": "neutral", "group": "social", "stat": "cha", "desc": "Followers: party size and morale."},
+
+  "lore":         {"name": "Lore", "pool": "neutral", "group": "knowledge", "stat": "int", "desc": "History, legends and knowing what a ruin was for."},
+  "translation":  {"name": "Translation", "pool": "neutral", "group": "knowledge", "stat": "int", "desc": "Reading old and foreign scripts, including Ossuan texts."},
+  "appraisal":    {"name": "Appraisal", "pool": "neutral", "group": "knowledge", "stat": "int", "desc": "Judging what an item is and what it is worth. Used for identification."},
+  "medicine":     {"name": "Medicine", "pool": "neutral", "group": "knowledge", "stat": "wis", "desc": "Bandages, splints and stopping bleeding without magic."},
+  "perception":   {"name": "Perception", "pool": "neutral", "group": "knowledge", "stat": "wis", "desc": "Spotting hidden doors, ambushes and lies."},
+  "survival":     {"name": "Survival", "pool": "neutral", "group": "knowledge", "stat": "wis", "desc": "Tracking, foraging and finding sites in the wild."},
+  "athletics":    {"name": "Athletics", "pool": "neutral", "group": "knowledge", "stat": "str", "desc": "Climbing, swimming, jumping and carrying more."},
+
+  "smithing":     {"name": "Smithing", "pool": "neutral", "group": "craft", "stat": "str", "desc": "Forging blades, armour and tools."},
+  "leatherwork":  {"name": "Leatherwork", "pool": "neutral", "group": "craft", "stat": "dex", "desc": "Leather armour, packs and harness."},
+  "fletching":    {"name": "Fletching", "pool": "neutral", "group": "craft", "stat": "dex", "desc": "Bows, arrows and bolts."},
+  "cooking":      {"name": "Cooking", "pool": "neutral", "group": "craft", "stat": "wis", "desc": "Meals that heal and hold off hunger."},
+  "herbalism":    {"name": "Herbalism", "pool": "neutral", "group": "craft", "stat": "wis", "desc": "Remedies, poisons and antidotes from plants."},
+
+  "alchemy":      {"name": "Alchemy", "pool": "arcane", "group": "craft", "stat": "int", "desc": "Magical potions and reagents."},
+  "scribing":     {"name": "Scribing", "pool": "arcane", "group": "craft", "stat": "int", "desc": "Scrolls and written wards."},
+  "enchanting":   {"name": "Enchanting", "pool": "arcane", "group": "craft", "stat": "int", "desc": "Binding magic into items."},
+
+  "mechanics":    {"name": "Mechanics", "pool": "gear", "group": "craft", "stat": "int", "desc": "Clockwork, locks, repairs and automatons. Also how Wrought are mended."},
+  "chemistry":    {"name": "Chemistry", "pool": "gear", "group": "craft", "stat": "int", "desc": "Powders, acids, fuels and explosives."},
+  "gunsmithing":  {"name": "Gunsmithing", "pool": "gear", "group": "craft", "stat": "dex", "desc": "Building and modifying firearms."},
+  "engineering":  {"name": "Engineering", "pool": "gear", "group": "craft", "stat": "int", "desc": "Boilers, pistons and steam engines."},
+  "galvanism":    {"name": "Galvanism", "pool": "gear", "group": "craft", "stat": "int", "desc": "Batteries, coils and galvanic devices."},
+  "lenscraft":    {"name": "Lenscraft", "pool": "gear", "group": "craft", "stat": "dex", "desc": "Lenses, scopes and optical instruments."}
+}

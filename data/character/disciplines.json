@@ -1,0 +1,341 @@
+{
+ "evocation": {
+  "name": "Evocation",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#7fd6ff",
+  "desc": "Raw force, fire, frost and lightning, thrown hard."
+ },
+ "abjuration": {
+  "name": "Abjuration",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#c8b6ff",
+  "desc": "Wards, shields and undoing other people's magic."
+ },
+ "conjuration": {
+  "name": "Conjuration",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#9fe0c0",
+  "desc": "Calling things from elsewhere: creatures, acid, mist and doors."
+ },
+ "divination": {
+  "name": "Divination",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#f0e6a0",
+  "desc": "Seeing what is hidden, far away or yet to come. Identifies magic items."
+ },
+ "enchantment": {
+  "name": "Enchantment",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "cha",
+  "color": "#ff9ad9",
+  "desc": "Bending minds: charm, fear, sleep and command."
+ },
+ "illusion": {
+  "name": "Illusion",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#b0a0ff",
+  "desc": "Light and sound that lie: veils, phantoms and blinding glare."
+ },
+ "necromancy": {
+  "name": "Necromancy",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#8a9a7a",
+  "desc": "Life force taken and spent: drains, rot and the restless dead."
+ },
+ "transmutation": {
+  "name": "Transmutation",
+  "kind": "school",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "arcana",
+  "stat": "int",
+  "color": "#e0b070",
+  "desc": "Changing what things are: stone to mud, flesh to iron, slow to fast."
+ },
+ "lantern": {
+  "name": "The Lantern",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "patron": "the Lantern Mother",
+  "color": "#9dffb0",
+  "desc": "Healing, light and the hearth. The most common faith in the north."
+ },
+ "harvest": {
+  "name": "The Harvest",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "patron": "the Old Sower",
+  "color": "#c9d96a",
+  "desc": "Growth, roots, weather and the turning year. Farmers' prayers."
+ },
+ "iron_oath": {
+  "name": "The Iron Oath",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "patron": "the Oathwarden",
+  "color": "#d8c0a0",
+  "desc": "Courage, protection and holy war. Soldiers' and guards' prayers."
+ },
+ "grave": {
+  "name": "The Grave",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "patron": "the Pale Ferryman",
+  "color": "#a8a8c8",
+  "desc": "Death, rest and turning back the dead who won't stay down."
+ },
+ "storm": {
+  "name": "The Storm",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "patron": "the Gale King",
+  "color": "#80b8ff",
+  "desc": "Wind, thunder and the sea. Sailors' and travellers' prayers."
+ },
+ "veil": {
+  "name": "The Veil",
+  "kind": "domain",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "cha",
+  "patron": "the Veiled Sister",
+  "color": "#9080a0",
+  "desc": "Secrets, luck and trickery. Smugglers' and gamblers' prayers."
+ },
+ "ballistics": {
+  "name": "Ballistics",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "gunsmithing",
+  "stat": "dex",
+  "schematic_picks": 2,
+  "color": "#c79a4a",
+  "desc": "Firearms and ammunition: building them, and shooting tricks with them."
+ },
+ "steamworks": {
+  "name": "Steamworks",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "engineering",
+  "stat": "str",
+  "schematic_picks": 2,
+  "color": "#d0a080",
+  "desc": "Boilers and pistons: steam weapons, engines and armour."
+ },
+ "galvanics": {
+  "name": "Galvanics",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "galvanism",
+  "stat": "int",
+  "schematic_picks": 2,
+  "color": "#a0c0ff",
+  "desc": "Batteries, coils and shock devices."
+ },
+ "optics": {
+  "name": "Optics",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "lenscraft",
+  "stat": "dex",
+  "schematic_picks": 2,
+  "color": "#e0e0ff",
+  "desc": "Scopes, lenses, flash lamps and assay instruments."
+ },
+ "demolition": {
+  "name": "Demolition",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "chemistry",
+  "stat": "int",
+  "schematic_picks": 2,
+  "color": "#ff9050",
+  "desc": "Powders, bombs, acids and smoke."
+ },
+ "automata": {
+  "name": "Automata",
+  "kind": "trade",
+  "pool": "gear",
+  "school": "gear",
+  "skill": "mechanics",
+  "stat": "int",
+  "schematic_picks": 2,
+  "color": "#b0b0a0",
+  "desc": "Clockwork helpers, turrets and the care of Wrought."
+ },
+ "blade": {
+  "name": "Blade",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "blades",
+  "stat": "dex",
+  "color": "#d0d0d0",
+  "desc": "Sword and knife technique: feints, ripostes and bleeding cuts."
+ },
+ "heavy_arms": {
+  "name": "Heavy Arms",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": [
+   "blunt",
+   "polearms"
+  ],
+  "stat": "str",
+  "color": "#a08070",
+  "desc": "Hammers, axes and polearms: knockdowns and cleaving blows."
+ },
+ "archery": {
+  "name": "Archery",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "bows",
+  "stat": "dex",
+  "color": "#a0c080",
+  "desc": "Aimed shots, volleys and pinning arrows."
+ },
+ "pugilism": {
+  "name": "Pugilism",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "brawling",
+  "stat": "str",
+  "color": "#c09070",
+  "desc": "Fists, holds and dirty fighting."
+ },
+ "skirmish": {
+  "name": "Skirmish",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "dodge",
+  "stat": "dex",
+  "color": "#b0d0e0",
+  "desc": "Footwork and staying where the blow isn't."
+ },
+ "shadow": {
+  "name": "Shadow",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "stealth",
+  "stat": "dex",
+  "color": "#606080",
+  "desc": "Ambush, poison and the knife in the back."
+ },
+ "command": {
+  "name": "Command",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "leadership",
+  "stat": "cha",
+  "color": "#ffd080",
+  "desc": "Rallying, ordering and steadying a party."
+ },
+ "fieldcraft": {
+  "name": "Fieldcraft",
+  "kind": "style",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "survival",
+  "stat": "wis",
+  "color": "#90b070",
+  "desc": "Field medicine, snares and living off the land."
+ },
+ "smithing": {
+  "name": "Smithing",
+  "kind": "craft",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "smithing",
+  "stat": "str",
+  "schematic_picks": 2,
+  "color": "#b08060",
+  "desc": "Craft tree. Schematics for blades, armour and tools (owned by the crafting system)."
+ },
+ "herbalism": {
+  "name": "Herbalism",
+  "kind": "craft",
+  "pool": "neutral",
+  "school": "neutral",
+  "skill": "herbalism",
+  "stat": "wis",
+  "schematic_picks": 2,
+  "color": "#80c060",
+  "desc": "Craft tree. Recipes for remedies and poisons (owned by the crafting system)."
+ },
+ "enchanting": {
+  "name": "Enchanting",
+  "kind": "craft",
+  "pool": "arcane",
+  "school": "arcane",
+  "skill": "enchanting",
+  "stat": "int",
+  "schematic_picks": 2,
+  "color": "#c080ff",
+  "desc": "Craft tree. Formulae for binding magic into items (owned by the crafting system)."
+ },
+ "consecration": {
+  "name": "Consecration",
+  "kind": "craft",
+  "pool": "arcane",
+  "school": "divine",
+  "skill": "faith",
+  "stat": "wis",
+  "schematic_picks": 2,
+  "color": "#fff0b0",
+  "desc": "Craft tree. Blessings, holy water and relics (owned by the crafting system)."
+ }
+}
