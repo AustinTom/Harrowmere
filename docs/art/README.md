@@ -9,9 +9,11 @@ update both.
 
 ## Surface finish
 
-Stylised realism: PBR (albedo, normal, roughness, metallic), shapes and colours pushed slightly
-so they read from the isometric camera. Hand-authored or procedural textures, no photo scans.
-Big forms live in geometry; fine detail is baked to normal maps.
+Gritty Victorian realism (chosen by Austin, 2026-11-22): full PBR sets (albedo, normal, roughness,
+metallic), near-real proportions (heads and hands pushed at most 5 to 10 percent for readability
+from the isometric camera), real wear and grime, desaturated base materials with strong colour only
+from light sources and faction colour. Scanned sources are fine for tiling surfaces if graded to the
+palette. Big forms live in geometry; fine detail is baked to normal maps.
 
 ## Units, scale and orientation
 
