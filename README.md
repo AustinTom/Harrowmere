@@ -25,7 +25,8 @@ Everything is primitive geometry, ready to be replaced with real models.
 | 1 to 4 | Select action: weapon, weapon alt mode, spell 1, spell 2 |
 | T | Switch turn-based and real-time (works mid-fight) |
 | Space | End your turn (turn-based) |
-| I | Inventory for you and Iska: equip, use, give items between packs |
+| I | Inventory for you and Iska: equip, use, read, identify, give items between packs |
+| B | Workbench: craft, buy trade tiers and pick schematics, enchant |
 | Mouse wheel | Zoom |
 | R | Restart after death |
 
@@ -40,6 +41,15 @@ Everything is primitive geometry, ready to be replaced with real models.
   doesn't give anyone a free refill.
 * Loot Rook Harl's "dagger, cold to the touch" and use the **Assayer's Lens** on it.
   Until it's identified, its frost damage stays dormant.
+* Open the workbench (**B**). Spend a trade point on a tier and pick 2 of its 4 schematics, then
+  craft from the starting materials. Machines come out better east of the fence (low Resonance),
+  Iska's draughts and enchantments better on the green.
+* Switch the crafter to **Iska** and bind Frost Edge onto your hookblade. Try it on the carbine
+  too: machines fight the binding and misfire more afterwards.
+* The scavengers carry two more unknown items and a schematic sheet. Identify them with Iska's
+  spell, a lens, or for coin from **Wendle Cobb** (cheap, but he can't see curses) or
+  **Hesta Lowe** (honest, sees curses, lifts them). Or equip the damp hatchet and find out.
+  See [docs/crafting.md](docs/crafting.md) for the full rules.
 * Report back to Osk: relight the boiler (Resonance drops, the chimney smokes, the green
   dulls) or leave it cold (the yard turns green). Hesta and Tam react to the choice.
 
@@ -63,13 +73,19 @@ data/                     all content is JSON, no code needed to add more
   actors.json             character templates: stats, packs, schedules, dialogue id
   dialogue.json           branching dialogue with flag conditions and effects
   areas/fennicks_landing.json   map size, locations + Resonance, structures, spawns, triggers
+  items/*.json            more items, split by family (materials, components, crafted, magic)
+  crafting/               trades and tiers, schematics/formulae/recipes, enchantments and
+                          curses, quality grades (see docs/crafting.md)
 scripts/
   core/                   autoloads: Events (signal bus), DB (data), GameState (clock, flags, Resonance)
   combat/rules.gd         pure rules: dice, attacks, spells, Resonance and misfire math
   combat/combat_manager.gd  turn-based + real-time pacing over one action API
   combat/ai.gd            enemy and follower brain (uses the same actions as the player)
   actors/actor.gd         a character: stats, pack, equipment, movement, placeholder visuals
-  inventory/inventory.gd  pack of item entries (stacking, identification, transfer)
+  inventory/inventory.gd  pack of item entries (stacking, instance data, transfer)
+  crafting/               crafting, identification, enchanting rules; ItemStats resolves an
+                          entry (quality, enchantments, curses) into usable stats
+  ui/crafting_panel.gd    the workbench
   dialogue/dialogue_runner.gd  evaluates dialogue conditions and effects
   world/world.gd          builds an area, pathfinding, aggro, followers, schedules
   world/camera_rig.gd     fixed isometric orthographic camera
@@ -83,9 +99,9 @@ tests/                    unit tests, an AI-vs-AI fight simulator, screenshot ca
   `rules.gd` (weapon `special` tags) and `dialogue_runner.gd` (dialogue effect types).
 * **Real models:** replace `Actor._build_visual()` and `World._build_structure()`; nothing else
   touches meshes.
-* **Crafting, identification skill checks, enchanting:** extend `Inventory` entries (they are
-  plain dictionaries, so quality/material/enchant fields can be added) and add actions to
-  `CombatManager`/HUD.
+* **Crafting, identification, enchanting:** built; see [docs/crafting.md](docs/crafting.md).
+  Skill checks and trade tiers go through `scripts/crafting/skill_hooks.gd`, the one adapter
+  to the character system.
 * **Residents' needs and gossip, quest templates:** hook into `World._update_schedules()` and the
   `Events` bus (`flags_changed`, `resonance_changed`).
 * **Cover, line of sight, reactions:** add to `Rules.resolve_attack()` and `World` (the grid is an
@@ -95,13 +111,13 @@ tests/                    unit tests, an AI-vs-AI fight simulator, screenshot ca
 
 ```
 godot --headless --import
-godot --headless res://tests/test_runner.tscn               # 25 rules/inventory/dialogue checks
+godot --headless res://tests/test_runner.tscn               # 92 checks: rules, inventory, dialogue, crafting, data lint
 godot --headless res://tests/sim_runner.tscn -- --mode=toggle --seed=3   # AI plays the fight, flipping modes every 4s
 ```
 `--mode` is `tb`, `rt` or `toggle`. The simulator exits non-zero if the fight hangs.
 
 ## Known gaps (on purpose, for later threads)
 
-No save/load, cover, line of sight, reactions, ammo or reloading, crafting, skill trees,
-needs/gossip, or sound. Loot goes straight into the player's pack. Out of combat, spells
+No save/load, cover, line of sight, reactions, ammo or reloading, armor/trinket slots,
+workshops or shops (Wendle's dialogue stands in), skill trees, needs/gossip, or sound. Loot goes straight into the player's pack. Out of combat, spells
 and potions cost nothing.

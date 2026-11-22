@@ -8,5 +8,15 @@
     "name": "Mend Wounds", "school": "divine", "kind": "heal",
     "ap": 4, "range": 30, "heal": "2d6", "stat": "wis", "color": "#9dffb0",
     "desc": "A short prayer that closes wounds. Divine magic leans on Resonance less than arcane."
+  },
+  "identify": {
+    "name": "Identify", "school": "arcane", "kind": "identify",
+    "ap": 4, "range": 5, "stat": "int", "color": "#c49bff",
+    "desc": "Read an item's binding pattern. Reveals enchantments and curses. Easier where Resonance runs high. A failed attempt can't be retried until tomorrow."
+  },
+  "divine_sight": {
+    "name": "Divine Sight", "school": "divine", "kind": "identify",
+    "ap": 4, "range": 5, "stat": "wis", "color": "#ffe9a8",
+    "desc": "Ask the gods what an object is. Reveals curses. Leans on Resonance less than Identify."
   }
 }

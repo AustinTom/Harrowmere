@@ -1,0 +1,4 @@
+{
+  "blackwater_hatchet": {"extends": "iron_hatchet", "name": "Blackwater Hatchet", "value": 160, "unidentified_name": "A hatchet with a damp handle", "hint": "The haft is always wet, even in the sun.", "identify_required": true, "ident_uses": 4, "magic": {"enchants": ["grave_bite"], "curse": "drowned_grip"}, "desc": "Fen-witch work. It drinks a little of whatever it cuts, and it doesn't like to be put down."},
+  "emberglass_knife": {"extends": "iron_dagger", "name": "Emberglass Knife", "value": 180, "unidentified_name": "A knife warm to the touch", "hint": "Warm as a hearthstone. Snow melts off it.", "identify_required": true, "magic": {"enchants": ["ember_edge"]}, "desc": "A Collegium apprentice's test piece, a good one."}
+}

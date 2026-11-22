@@ -103,5 +103,9 @@ func _ready() -> void:
 	check(receiver["inventory"].count("healing_draught") == 2, "quest reward given")
 	check(DialogueRunner.entry_node(warden) == "after_cold", "warden remembers the choice")
 
+	var ct = preload("res://tests/crafting_tests.gd").new()
+	ct.t = self
+	ct.run()
+
 	print("\n%d checks, %d failures" % [checks, failures])
 	get_tree().quit(1 if failures > 0 else 0)

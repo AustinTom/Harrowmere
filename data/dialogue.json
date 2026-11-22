@@ -70,6 +70,9 @@
         "text": "The shrine of the Lantern Mother has stood on this green since before the ice. When the Combine lit that boiler, the spring went still and my prayers came back empty. Two winters cold, and she answers again.",
         "options": [
           {"text": "What is Resonance?", "next": "resonance"},
+          {"text": "Could you look at something I found?", "effects": [{"type": "open_appraisal"}], "next": ""},
+          {"text": "Can you lift a curse?", "effects": [{"type": "lift_curse"}], "next": ""},
+          {"text": "Can you spare some lantern essence? (20 coin)", "effects": [{"type": "buy_item", "item": "lantern_essence", "cost": 20}], "next": "intro"},
           {"text": "Goodbye.", "next": ""}
         ]
       },
@@ -77,8 +80,14 @@
         "text": "Call it what the scholars do. It's how thickly the world runs with the sacred and the strange. Here on the green it runs deep. In the pumphouse yard it's thin as frost. Spells and prayers follow it. Machines hate it.",
         "options": [{"text": "Goodbye.", "next": ""}]
       },
-      "after_lit": {"text": "You chose the boiler. I can feel the spring going still again.", "options": [{"text": "Goodbye.", "next": ""}]},
-      "after_cold": {"text": "Bless you. Listen, the spring is singing.", "options": [{"text": "Goodbye.", "next": ""}]}
+      "after_lit": {"text": "You chose the boiler. I can feel the spring going still again.", "options": [
+        {"text": "Could you look at something I found?", "effects": [{"type": "open_appraisal"}], "next": ""},
+        {"text": "Can you lift a curse?", "effects": [{"type": "lift_curse"}], "next": ""},
+        {"text": "Goodbye.", "next": ""}]},
+      "after_cold": {"text": "Bless you. Listen, the spring is singing.", "options": [
+        {"text": "Could you look at something I found?", "effects": [{"type": "open_appraisal"}], "next": ""},
+        {"text": "Can you lift a curse?", "effects": [{"type": "lift_curse"}], "next": ""},
+        {"text": "Goodbye.", "next": ""}]}
     }
   },
   "tam": {
@@ -98,6 +107,44 @@
       "hesta": {"text": "Hesta's a good soul. Hesta also doesn't have four children.", "options": [{"text": "Goodbye.", "next": ""}]},
       "after_lit": {"text": "Wages! Real wages! Drinks are on me, once I've been paid.", "options": [{"text": "Goodbye.", "next": ""}]},
       "after_cold": {"text": "Well. Your call. My kids will learn to eat shrine songs, then.", "options": [{"text": "Goodbye.", "next": ""}]}
+    }
+  },
+  "wendle": {
+    "entries": [{"node": "intro"}],
+    "nodes": {
+      "intro": {
+        "text": "Wendle Cobb, Engineers' Guild, Meltlands chapter of one. I sell what the Guild lets me, appraise what it doesn't, and keep my lathe well away from that shrine. The green is murder on fine work. Do your tinkering east of the fence, where Resonance is low.",
+        "options": [
+          {"text": "Appraise something for me.", "effects": [{"type": "open_appraisal"}], "next": ""},
+          {"text": "What schematics do you sell?", "next": "schematics"},
+          {"text": "I need materials.", "next": "materials"},
+          {"text": "How does crafting work around here?", "next": "howto"},
+          {"text": "Goodbye.", "next": ""}
+        ]
+      },
+      "schematics": {
+        "text": "Guild copies, all above board. Mostly.",
+        "options": [
+          {"text": "Teach me the Brass Spring schematic. (30 coin)", "effects": [{"type": "learn_schematic", "schematic": "brass_spring", "cost": 30}], "next": "schematics"},
+          {"text": "Teach me the Ground Lens schematic. (25 coin)", "effects": [{"type": "learn_schematic", "schematic": "ground_lens", "cost": 25}], "next": "schematics"},
+          {"text": "Sell me the Rifle Scope schematic sheet. (40 coin)", "effects": [{"type": "buy_item", "item": "schematic_rifle_scope", "cost": 40}], "next": "schematics"},
+          {"text": "Back.", "next": "intro"}
+        ]
+      },
+      "materials": {
+        "text": "Brass, glass and coal I've got. Essences you'll want from the shrine-keeper, and don't tell the Guild I said so.",
+        "options": [
+          {"text": "Brass ingot x2. (16 coin)", "effects": [{"type": "buy_item", "item": "brass_ingot", "qty": 2, "cost": 16}], "next": "materials"},
+          {"text": "Glass blank x2. (7 coin)", "effects": [{"type": "buy_item", "item": "glass_blank", "qty": 2, "cost": 7}], "next": "materials"},
+          {"text": "Coal x3. (3 coin)", "effects": [{"type": "buy_item", "item": "coal_lump", "qty": 3, "cost": 3}], "next": "materials"},
+          {"text": "Assayer's Lens. (25 coin)", "effects": [{"type": "buy_item", "item": "assayer_lens", "cost": 25}], "next": "materials"},
+          {"text": "Back.", "next": "intro"}
+        ]
+      },
+      "howto": {
+        "text": "Every trade has five tiers. Each tier you earn, you pick two of its four schematics, so no two engineers know the same things. Anything else you find or buy on paper. Parts chain: a trigger needs a spring and a housing, and a carbine needs the trigger. Press B for your workbench.",
+        "options": [{"text": "Back.", "next": "intro"}]
+      }
     }
   },
   "iska": {

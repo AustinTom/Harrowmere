@@ -1,0 +1,92 @@
+{
+  "ballistics": {
+    "name": "Ballistics",
+    "pool": "gear",
+    "skill": "mechanics",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["brass_spring", "ratchet_housing", "rifled_barrel", "rifle_stock"], "2": ["clockwork_trigger", "percussion_lock", "cap_pistol", "assayer_lens_ballistic"], "3": ["repeating_carbine"]},
+    "desc": "Firearms and their parts. Better in dead industrial districts."
+  },
+  "steamworks": {
+    "name": "Steamworks",
+    "pool": "gear",
+    "skill": "mechanics",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["pressure_valve", "boiler_shell", "copper_coil", "steam_gauge"], "2": ["pocket_boiler", "boiler_lance", "steam_maul"]},
+    "desc": "Boilers, pistons and pressure. Everything burns coal."
+  },
+  "galvanics": {
+    "name": "Galvanics",
+    "pool": "gear",
+    "skill": "mechanics",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["voltaic_cell", "insulated_wire", "induction_coil", "spark_baton"]},
+    "desc": "Stored lightning made by chemistry, not spells. The Combine's newest trade."
+  },
+  "optics": {
+    "name": "Optics",
+    "pool": "gear",
+    "skill": "mechanics",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["ground_lens", "assayer_lens", "brass_spyglass", "rifle_scope"]},
+    "desc": "Lenses, sights and analysers, including the Assayer's Lens."
+  },
+  "demolition": {
+    "name": "Demolition",
+    "pool": "gear",
+    "skill": "chemistry",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["black_powder", "fuse_cord", "powder_charge", "smoke_pot"]},
+    "desc": "Powder, charges and fuses."
+  },
+  "automata": {
+    "name": "Automata",
+    "pool": "gear",
+    "skill": "mechanics",
+    "tiered": true,
+    "kind": "schematic",
+    "tiers": {"1": ["gear_train", "wind_key", "automaton_frame", "clockwork_core"]},
+    "desc": "Clockwork machines. Tier 1 is parts; the machines come later."
+  },
+  "smithing": {
+    "name": "Smithing",
+    "pool": "neutral",
+    "skill": "smithing",
+    "tiered": false,
+    "kind": "recipe",
+    "tiers": {},
+    "desc": "Blades, axes and shields. Recipes come from smiths and slates, not tiers. Works the same at any Resonance."
+  },
+  "herbalism": {
+    "name": "Herbalism",
+    "pool": "arcane",
+    "skill": "alchemy",
+    "tiered": true,
+    "kind": "formula",
+    "tiers": {"1": ["healing_draught", "ward_salve", "distil_frost", "distil_ember"]},
+    "desc": "Draughts and essence distilling. Herbs that grow where Resonance is high."
+  },
+  "enchanting": {
+    "name": "Enchanting",
+    "pool": "arcane",
+    "skill": "enchanting",
+    "tiered": true,
+    "kind": "formula",
+    "tiers": {"1": ["ench_frost_edge", "ench_ember_edge", "ench_warding", "ench_keen_glyph"], "2": ["ench_storm_brand", "ench_focus_glyph", "ench_chill_bite"]},
+    "desc": "Binding essences and glyphs onto items. Formulae from the Collegium, tomes and ruins."
+  },
+  "consecration": {
+    "name": "Consecration",
+    "pool": "divine",
+    "skill": "faith",
+    "tiered": true,
+    "kind": "formula",
+    "tiers": {"1": ["lantern_water", "ench_lantern_blessing", "ench_holy_ward"]},
+    "desc": "Priestly craft: blessings and holy water. Divine work leans on Resonance less than arcane."
+  }
+}

@@ -5,13 +5,13 @@
   },
   "repeating_carbine": {
     "name": "Repeating Carbine", "type": "weapon", "pool": "gear",
-    "damage": "1d10", "ap": 4, "range": 90, "ranged": true, "misfire": 0.03,
+    "damage": "1d10", "ap": 4, "range": 90, "ranged": true, "misfire": 0.03, "gear_content": 0.8,
     "weight": 4, "value": 120,
     "desc": "Ballistics, tier 3 schematic. Clockwork drum, rifled barrel, walnut stock. Jams more often where magic runs thick."
   },
   "boiler_lance": {
     "name": "Boiler Lance", "type": "weapon", "pool": "gear",
-    "damage": "1d8", "ap": 3, "range": 10, "misfire": 0.01,
+    "damage": "1d8", "ap": 3, "range": 10, "misfire": 0.01, "gear_content": 0.9,
     "alt": { "label": "Charged Boiler Lance", "damage": "3d8", "ap": 6, "misfire": 0.05, "burst_damage": "1d8" },
     "weight": 6, "value": 90,
     "desc": "Steamworks, tier 2 schematic. A pocket boiler drives the head forward. Overcharge it for a huge hit, and pray the boiler holds."
@@ -31,14 +31,16 @@
   "starglass_staff": {
     "name": "Starglass Staff", "type": "weapon", "pool": "arcane",
     "damage": "1d6", "ap": 2, "range": 5, "spell_power": 2,
+    "tags": ["focus"], "enchant_slots_bonus": 1,
     "weight": 3, "value": 150,
     "desc": "Foci, Collegium formula. Adds +2 spell power. Glows brighter at high Resonance. In a factory district it is just a stick."
   },
   "frostvein_dagger": {
     "name": "Frostvein Dagger", "type": "weapon", "pool": "arcane",
     "damage": "1d4", "ap": 2, "range": 5, "finesse": true,
-    "bonus_damage": "1d6", "bonus_type": "cold", "special": ["slow_on_crit"],
+    "magic": {"enchants": ["frost_edge", "chill_bite"]}, "ident_dc": 13,
     "identify_required": true, "unidentified_name": "A dagger, cold to the touch",
+    "hint": "Frost forms on the blade, even indoors.",
     "weight": 1, "value": 200,
     "desc": "Ossuan work. An ice blade that never melts: +1d6 cold that scales with Resonance, and a critical hit slows the target (3 AP)."
   },
@@ -49,8 +51,8 @@
   },
   "assayer_lens": {
     "name": "Assayer's Lens", "type": "consumable", "stack": true,
-    "identify": true, "ap": 0, "weight": 0.2, "value": 25,
-    "desc": "Identifies one unknown item in the user's pack, or the party's."
+    "identify": true, "identify_bonus": 8, "ap": 0, "weight": 0.2, "value": 25,
+    "desc": "Optics, tier 1 schematic. A Gear check (+8) to identify one unknown item. Works best where Resonance is low, can miss curses, and is used up either way."
   },
   "coin": {
     "name": "Coin", "type": "misc", "stack": true, "weight": 0, "value": 1,

@@ -22,6 +22,10 @@ var _dlg_opts: VBoxContainer
 var _dlg_actor = null
 var _dlg_data: Dictionary = {}
 var _banner_time := 0.0
+var crafting_panel = null
+var _pop: PanelContainer
+var _pop_text: RichTextLabel
+var _pop_opts: VBoxContainer
 
 
 func _ready() -> void:
@@ -44,7 +48,7 @@ func _ready() -> void:
 	_hotbar.add_theme_color_override("font_color", Color("#ffd84d"))
 	pv.add_child(_hotbar)
 	var keys := Label.new()
-	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-4: action   T: turn-based <-> real-time   Space: end turn   I: inventory   Wheel: zoom"
+	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-4: action   T: turn-based <-> real-time   Space: end turn   I: inventory   B: workbench   Wheel: zoom"
 	keys.add_theme_color_override("font_color", Color("#9aa7b3"))
 	keys.add_theme_font_size_override("font_size", 13)
 	pv.add_child(keys)
@@ -96,9 +100,13 @@ func _ready() -> void:
 	var it := Label.new()
 	it.text = "Inventory   (I or Esc to close. Hover an item for details.)"
 	iv.add_child(it)
+	var inv_scroll := ScrollContainer.new()
+	inv_scroll.custom_minimum_size = Vector2(900, 600)
+	inv_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	iv.add_child(inv_scroll)
 	_inv_row = HBoxContainer.new()
 	_inv_row.add_theme_constant_override("separation", 24)
-	iv.add_child(_inv_row)
+	inv_scroll.add_child(_inv_row)
 	_inv.visible = false
 
 	_dlg = _panel(root, true)
@@ -113,6 +121,25 @@ func _ready() -> void:
 	_dlg_opts = VBoxContainer.new()
 	dv.add_child(_dlg_opts)
 	_dlg.visible = false
+
+	crafting_panel = preload("res://scripts/ui/crafting_panel.gd").new()
+	crafting_panel.hud = self
+	crafting_panel.world = world
+	root.add_child(crafting_panel)
+
+	# Small choice popup: identify methods, appraisal, curse lifting.
+	_pop = _panel(root, true)
+	_pop.custom_minimum_size = Vector2(620, 0)
+	var pv2 := VBoxContainer.new()
+	_pop.add_child(pv2)
+	_pop_text = RichTextLabel.new()
+	_pop_text.bbcode_enabled = true
+	_pop_text.fit_content = true
+	_pop_text.custom_minimum_size = Vector2(600, 0)
+	pv2.add_child(_pop_text)
+	_pop_opts = VBoxContainer.new()
+	pv2.add_child(_pop_opts)
+	_pop.visible = false
 
 	Events.log_message.connect(_on_log)
 	Events.inventory_changed.connect(_on_inventory_changed)
@@ -185,6 +212,10 @@ func _process(delta: float) -> void:
 		_center(_dlg, 170)
 	if _inv.visible:
 		_center(_inv)
+	if crafting_panel.visible:
+		_center(crafting_panel)
+	if _pop.visible:
+		_center(_pop, -40)
 
 
 func banner(text: String, c := Color.WHITE, secs := 2.0) -> void:
@@ -226,18 +257,30 @@ func toggle_inventory() -> void:
 		refresh_inventory()
 
 
+func toggle_crafting() -> void:
+	if crafting_panel.visible:
+		crafting_panel.visible = false
+	else:
+		_inv.visible = false
+		crafting_panel.open()
+
+
 func close_panels() -> void:
 	_inv.visible = false
+	crafting_panel.visible = false
+	_pop.visible = false
 	close_dialogue()
 
 
 func is_blocking() -> bool:
-	return _dlg.visible
+	return _dlg.visible or _pop.visible or crafting_panel.visible
 
 
 func _on_inventory_changed() -> void:
 	if _inv.visible:
 		refresh_inventory.call_deferred()
+	if crafting_panel.visible:
+		crafting_panel.refresh.call_deferred()
 
 
 func refresh_inventory() -> void:
@@ -270,18 +313,133 @@ func refresh_inventory() -> void:
 				_btn(row, "Equip", func(): combat.do_equip(a, e))
 			if item.get("type") == "consumable":
 				_btn(row, "Use", func(): combat.do_use_item(a, e))
+			if item.get("type") == "schematic":
+				_btn(row, "Read", func(): combat.do_read(a, e))
+			if not e["identified"]:
+				_btn(row, "Identify", func(): open_identify(e))
+			if ItemStats.is_stuck(e):
+				continue
 			for other in members:
 				if other != a and not other.is_dead:
 					_btn(row, "Give to " + other.display_name.split(" ")[0], func(): _give(a, e, other))
 
 
 func _give(from, e: Dictionary, to) -> void:
+	if ItemStats.is_stuck(e):
+		return
 	var was_equipped: bool = e["equipped"]
 	e["equipped"] = false
 	from.inventory.transfer(e, to.inventory)
 	Events.post("%s gives %s to %s." % [from.display_name, DB.entry_name(e), to.display_name])
 	if was_equipped:
 		from.equip_entry(null)
+
+
+# ---------------------------------------------------------------- popups
+
+func _show_popup(text: String, options: Array) -> void:
+	_pop_text.text = text
+	for c in _pop_opts.get_children():
+		c.queue_free()
+	for o in options:
+		var b := Button.new()
+		b.text = o["text"]
+		b.focus_mode = Control.FOCUS_NONE
+		b.disabled = o.get("disabled", false)
+		b.tooltip_text = o.get("tip", "")
+		b.pressed.connect(o["cb"])
+		_pop_opts.add_child(b)
+	_btn(_pop_opts, "Close", func(): _pop.visible = false)
+	_pop.visible = true
+	_pop.reset_size()
+
+
+func _post_all(lines: Array) -> void:
+	for l in lines:
+		Events.post(l)
+
+
+## Every identification method the party has for one item.
+func open_identify(e: Dictionary) -> void:
+	var res: int = world.resonance_at(world.player.tile)
+	var opts: Array = []
+	for o in Identification.options(e, world.party_all(), res):
+		var label := "%s   %d%%   (%s)" % [o["label"], roundi(o["chance"] * 100), o["note"]]
+		var cb: Callable
+		if o["kind"] == "spell":
+			var caster = o["actor"]
+			var sid: String = o["skill"]
+			cb = func(): _post_all(Identification.by_spell(caster, e, sid, world.resonance_at(caster.tile))["lines"]); open_identify_refresh(e)
+		else:
+			var user = o["actor"]
+			var lens: Dictionary = o["lens"]
+			var pack = o["pack"]
+			cb = func(): _post_all(Identification.by_lens(user, e, lens, pack, world.resonance_at(user.tile))["lines"]); open_identify_refresh(e)
+		opts.append({"text": label, "cb": cb, "disabled": o["chance"] <= 0.0})
+	var who = _holder_of(e)
+	if who != null and ItemStats.base(e).get("type") == "weapon" and not e["equipped"]:
+		opts.append({"text": "%s: equip it and find out (a curse would wake at once)" % who.display_name.split(" ")[0],
+			"cb": func(): combat.do_equip(who, e); _pop.visible = false})
+	var txt := "[b]%s[/b]\n%s\nDifficulty %d. Resonance here is %d: spells read better where it's high, lenses where it's low. Appraisers in town (Wendle Cobb, Hesta Lowe) will do it for coin." % [
+		DB.entry_name(e), ItemStats.base(e).get("hint", ""), Identification.dc(e), res]
+	_show_popup(txt, opts)
+
+
+func open_identify_refresh(e: Dictionary) -> void:
+	if e.get("identified", false):
+		_pop.visible = false
+	else:
+		open_identify(e)
+
+
+func _holder_of(e: Dictionary):
+	for a in world.party_all():
+		if a.inventory.entries.has(e):
+			return a
+	return null
+
+
+## Paid identification by an NPC appraiser.
+func open_appraisal(appraiser) -> void:
+	var a: Dictionary = DB.get_actor_template(appraiser.template_id).get("appraiser", {})
+	var opts: Array = []
+	for m in world.party_all():
+		for e in m.inventory.entries:
+			var unknown_curse: bool = a.get("reveals_curses", false) and e["identified"] and not ItemStats.curse_known(e) and ItemStats.base(e).has("magic")
+			if e["identified"] and not unknown_curse:
+				continue
+			var cost := Identification.fee(a, e)
+			opts.append({"text": "%s (%s)   %d coin" % [DB.entry_name(e), m.display_name.split(" ")[0], cost],
+				"cb": func(): _post_all(Identification.by_appraiser(appraiser, world.player, e)["lines"]); open_appraisal(appraiser)})
+	var txt := "[b]%s[/b] will name your finds for a fee. You have %d coin.%s" % [appraiser.display_name, world.player.inventory.count("coin"),
+		"" if a.get("reveals_curses", false) else "\n[color=gray]A lens-and-gauge man. Curses don't show on gauges.[/color]"]
+	if opts.is_empty():
+		txt += "\nNothing unknown in the party's packs."
+	_show_popup(txt, opts)
+
+
+## Priest service: lift a known curse for coin.
+func open_lift_curse(priest) -> void:
+	var a: Dictionary = DB.get_actor_template(priest.template_id).get("appraiser", {})
+	var fee := int(a.get("lift_curse_fee", 0))
+	var opts: Array = []
+	if fee > 0:
+		for m in world.party_all():
+			for e in m.inventory.entries:
+				if ItemStats.is_cursed(e) and ItemStats.curse_known(e):
+					opts.append({"text": "%s (%s)   %d coin" % [DB.entry_name(e), m.display_name.split(" ")[0], fee], "cb": func():
+						if world.player.inventory.count("coin") < fee:
+							Events.post("[color=gray]%d coin needed.[/color]" % fee)
+							return
+						world.player.inventory.remove_id("coin", fee)
+						Identification.lift_curse(e)
+						m.refresh_stats()
+						Events.post("[color=#ffe9a8]%s prays over the %s. The curse lifts.[/color]" % [priest.display_name, DB.entry_name(e)])
+						open_lift_curse(priest)})
+	var txt := "[b]%s[/b]: %s" % [priest.display_name, "\"Show me what's got its hooks in you.\"" if fee > 0 else "\"That's priest's work, not mine.\""]
+	if fee > 0 and opts.is_empty():
+		txt += "\nNo known curses in the party's packs. (An unknown curse has to wake first, or be named.)"
+	_show_popup(txt, opts)
 
 
 func _btn(parent: Control, text: String, cb: Callable) -> void:
@@ -314,7 +472,7 @@ func _show_node(id: String) -> void:
 		close_dialogue()
 		return
 	var node: Dictionary = nodes[id]
-	DialogueRunner.apply_effects(node.get("effects", []), world.player)
+	DialogueRunner.apply_effects(node.get("effects", []), world.player, _dlg_actor)
 	_dlg_text.text = "[b][color=#ffd84d]%s[/color][/b]\n%s" % [_dlg_actor.display_name, node.get("text", "")]
 	for c in _dlg_opts.get_children():
 		c.queue_free()
@@ -326,7 +484,8 @@ func _show_node(id: String) -> void:
 
 
 func _choose(o: Dictionary) -> void:
-	var req := DialogueRunner.apply_effects(o.get("effects", []), world.player)
+	var speaker = _dlg_actor
+	var req := DialogueRunner.apply_effects(o.get("effects", []), world.player, speaker)
 	var nxt = o.get("next", "")
 	if nxt == null or str(nxt) == "":
 		close_dialogue()
@@ -335,3 +494,9 @@ func _choose(o: Dictionary) -> void:
 	if req.has("open_inventory"):
 		_inv.visible = true
 		refresh_inventory()
+	if req.has("open_crafting"):
+		crafting_panel.open()
+	if req.has("open_appraisal") and speaker != null:
+		open_appraisal(speaker)
+	if req.has("lift_curse") and speaker != null:
+		open_lift_curse(speaker)

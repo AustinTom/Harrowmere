@@ -194,7 +194,7 @@ func _on_actor_died(a) -> void:
 	if a.faction == "hostile" and player != null and not player.is_dead:
 		var got: PackedStringArray = []
 		for e in a.inventory.entries.duplicate():
-			player.inventory.add(e["id"], int(e["qty"]), e["identified"])
+			player.inventory.add_entry(e)
 			got.append(DB.entry_name(e) + (" x%d" % e["qty"] if e["qty"] > 1 else ""))
 		a.inventory.clear()
 		if not got.is_empty():
