@@ -35,6 +35,8 @@ class FakeSheetActor:
 		return true
 	func schematic_picks_left(_id: String) -> int:
 		return 3 - sheet["schematics"].size()
+	func pick_schematic(_discipline: String, id: String) -> void:
+		sheet["schematics"].append(id)
 	func skill_bonus(_id: String) -> int:
 		return 7
 

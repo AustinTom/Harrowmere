@@ -8,6 +8,8 @@ extends RefCounted
 ##   actor.skill_bonus(skill_id) -> int        total check bonus for a skill
 ##   actor.spend_points(kind, amount) -> bool  spend character points ("trade")
 ##
+##   actor.pick_schematic(discipline, id)      records a tier pick on the sheet
+##
 ## Skill ids used by crafting: mechanics, chemistry, smithing, alchemy,
 ## enchanting, faith, appraisal.
 
@@ -97,6 +99,10 @@ static func picks_left(actor, discipline: String, t: int) -> int:
 
 ## Tells the character sheet about a tier pick so it's saved and counted there.
 static func record_pick(actor, schematic_id: String) -> void:
+	var disc := str(DB.get_schematic(schematic_id).get("discipline", ""))
+	if actor.has_method("pick_schematic"):
+		actor.pick_schematic(disc, schematic_id)
+		return
 	var sheet = actor.get("sheet")
 	if sheet != null and sheet.get("schematics") is Array and not sheet.schematics.has(schematic_id):
 		sheet.schematics.append(schematic_id)
