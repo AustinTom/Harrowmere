@@ -1,0 +1,876 @@
+{
+ "_doc": "World layout for the resident simulation. Cities are listed by hand with districts; towns are generated per region (count, size range, specialties) unless listed under named_towns. target_total scales generated town sizes so the whole world lands near the target. map = region centre on the world map (south is low y); settlements scatter within map_radius of it and link by road to their nearest neighbours. anchors = hand-written characters (actors.json templates) who live in the town as residents: they count toward its population, hold their job, and hear gossip, but keep their own schedule and dialogue.",
+ "target_total": 25000,
+ "regions": [
+  {
+   "id": "old_shires",
+   "name": "The Old Shires",
+   "resonance": [
+    10,
+    30
+   ],
+   "held_by": {
+    "combine": 0.5,
+    "meridian": 0.25,
+    "compact": 0.25
+   },
+   "race_mix": {
+    "human": 62,
+    "halfling": 14,
+    "gnome": 10,
+    "dwarf": 5,
+    "orc": 4,
+    "elf": 3,
+    "wrought": 2
+   },
+   "towns": 14,
+   "town_pop": [
+    50,
+    220
+   ],
+   "threat": 15,
+   "specialties": {
+    "farming": 4,
+    "canal": 3,
+    "mill": 3,
+    "crossroads": 2,
+    "foundry": 1
+   },
+   "neighbors": [
+    "furnace_coast",
+    "meltlands"
+   ],
+   "cities": [
+    {
+     "id": "aldermoot",
+     "name": "Aldermoot",
+     "pop": 3000,
+     "held_by": "combine",
+     "capital": true,
+     "districts": [
+      {
+       "id": "crown_hill",
+       "name": "Crown Hill",
+       "kind": "noble",
+       "resonance": 30
+      },
+      {
+       "id": "canal_ward",
+       "name": "Canal Ward",
+       "kind": "docks",
+       "resonance": 18
+      },
+      {
+       "id": "gaslight_row",
+       "name": "Gaslight Row",
+       "kind": "industrial",
+       "resonance": 8
+      },
+      {
+       "id": "old_bells",
+       "name": "Old Bells",
+       "kind": "temple",
+       "resonance": 46
+      },
+      {
+       "id": "fairmarket",
+       "name": "Fairmarket",
+       "kind": "market",
+       "resonance": 24
+      },
+      {
+       "id": "sootside",
+       "name": "Sootside",
+       "kind": "slum",
+       "resonance": 12
+      },
+      {
+       "id": "registry_close",
+       "name": "Registry Close",
+       "kind": "civic",
+       "resonance": 22
+      }
+     ]
+    },
+    {
+     "id": "brannock",
+     "name": "Brannock",
+     "pop": 1500,
+     "held_by": "meridian",
+     "districts": [
+      {
+       "id": "millrace",
+       "name": "Millrace",
+       "kind": "industrial",
+       "resonance": 20
+      },
+      {
+       "id": "brannock_green",
+       "name": "Brannock Green",
+       "kind": "temple",
+       "resonance": 44
+      },
+      {
+       "id": "tollgate",
+       "name": "Tollgate",
+       "kind": "market",
+       "resonance": 28
+      },
+      {
+       "id": "low_lanes",
+       "name": "Low Lanes",
+       "kind": "residential",
+       "resonance": 26
+      }
+     ]
+    }
+   ],
+   "map": [
+    0,
+    0
+   ]
+  },
+  {
+   "id": "furnace_coast",
+   "name": "The Furnace Coast",
+   "resonance": [
+    0,
+    20
+   ],
+   "held_by": {
+    "combine": 0.85,
+    "meridian": 0.15
+   },
+   "race_mix": {
+    "human": 44,
+    "orc": 30,
+    "gnome": 10,
+    "dwarf": 8,
+    "halfling": 4,
+    "wrought": 3,
+    "elf": 1
+   },
+   "towns": 16,
+   "town_pop": [
+    60,
+    250
+   ],
+   "threat": 30,
+   "specialties": {
+    "mining": 5,
+    "foundry": 4,
+    "fishing": 3,
+    "crossroads": 1
+   },
+   "neighbors": [
+    "old_shires",
+    "meltlands"
+   ],
+   "cities": [
+    {
+     "id": "cinderhythe",
+     "name": "Cinderhythe",
+     "pop": 2500,
+     "held_by": "combine",
+     "districts": [
+      {
+       "id": "the_stacks",
+       "name": "The Stacks",
+       "kind": "industrial",
+       "resonance": 2
+      },
+      {
+       "id": "patent_square",
+       "name": "Patent Square",
+       "kind": "civic",
+       "resonance": 6
+      },
+      {
+       "id": "union_yards",
+       "name": "Union Yards",
+       "kind": "slum",
+       "resonance": 4
+      },
+      {
+       "id": "slagwater",
+       "name": "Slagwater",
+       "kind": "docks",
+       "resonance": 3
+      },
+      {
+       "id": "brassway",
+       "name": "Brassway",
+       "kind": "market",
+       "resonance": 8
+      },
+      {
+       "id": "chapel_end",
+       "name": "Chapel End",
+       "kind": "temple",
+       "resonance": 22
+      }
+     ]
+    },
+    {
+     "id": "port_gallow",
+     "name": "Port Gallow",
+     "pop": 1500,
+     "held_by": "combine",
+     "districts": [
+      {
+       "id": "gallow_quay",
+       "name": "Gallow Quay",
+       "kind": "docks",
+       "resonance": 10
+      },
+      {
+       "id": "net_lanes",
+       "name": "Net Lanes",
+       "kind": "residential",
+       "resonance": 16
+      },
+      {
+       "id": "drydock",
+       "name": "Drydock",
+       "kind": "industrial",
+       "resonance": 5
+      },
+      {
+       "id": "saltmarket",
+       "name": "Saltmarket",
+       "kind": "market",
+       "resonance": 14
+      }
+     ]
+    },
+    {
+     "id": "kettlemouth",
+     "name": "Kettlemouth",
+     "pop": 1000,
+     "held_by": "combine",
+     "districts": [
+      {
+       "id": "pithead",
+       "name": "Pithead",
+       "kind": "industrial",
+       "resonance": 3
+      },
+      {
+       "id": "kettle_rows",
+       "name": "Kettle Rows",
+       "kind": "slum",
+       "resonance": 7
+      },
+      {
+       "id": "lamp_street",
+       "name": "Lamp Street",
+       "kind": "market",
+       "resonance": 11
+      },
+      {
+       "id": "seawall",
+       "name": "Seawall",
+       "kind": "docks",
+       "resonance": 15
+      }
+     ]
+    }
+   ],
+   "map": [
+    170,
+    -10
+   ]
+  },
+  {
+   "id": "meltlands",
+   "name": "The Meltlands",
+   "resonance": [
+    40,
+    60
+   ],
+   "held_by": {
+    "compact": 0.4,
+    "combine": 0.35,
+    "meridian": 0.25
+   },
+   "race_mix": {
+    "human": 46,
+    "halfling": 26,
+    "dwarf": 7,
+    "gnome": 7,
+    "elf": 6,
+    "orc": 6,
+    "wrought": 2
+   },
+   "towns": 15,
+   "town_pop": [
+    40,
+    200
+   ],
+   "threat": 35,
+   "specialties": {
+    "farming": 6,
+    "mill": 2,
+    "shrine": 2,
+    "crossroads": 2,
+    "logging": 2
+   },
+   "neighbors": [
+    "old_shires",
+    "furnace_coast",
+    "spiremarch",
+    "drowned_vale",
+    "shelf"
+   ],
+   "named_towns": [
+    {
+     "id": "fennicks_landing",
+     "name": "Fennick's Landing",
+     "pop": 80,
+     "resonance": 50,
+     "held_by": "meridian",
+     "specialty": "farming",
+     "threat": 55,
+     "area": "res://data/areas/fennicks_landing.json",
+     "anchors": [
+      {
+       "template": "osk_brannel",
+       "job": "warden",
+       "age": 58
+      },
+      {
+       "template": "hesta_lowe",
+       "job": "shrine_keeper",
+       "age": 46
+      },
+      {
+       "template": "tam_fairweather",
+       "job": "porter",
+       "age": 31
+      }
+     ]
+    }
+   ],
+   "cities": [
+    {
+     "id": "fennicks_cross",
+     "name": "Fennick's Cross",
+     "pop": 1500,
+     "held_by": "compact",
+     "districts": [
+      {
+       "id": "ferry_end",
+       "name": "Ferry End",
+       "kind": "docks",
+       "resonance": 48
+      },
+      {
+       "id": "landbank_row",
+       "name": "Landbank Row",
+       "kind": "civic",
+       "resonance": 38
+      },
+      {
+       "id": "harvest_square",
+       "name": "Harvest Square",
+       "kind": "market",
+       "resonance": 52
+      },
+      {
+       "id": "the_shrines",
+       "name": "The Shrines",
+       "kind": "temple",
+       "resonance": 70
+      },
+      {
+       "id": "newbuild",
+       "name": "Newbuild",
+       "kind": "residential",
+       "resonance": 50
+      }
+     ]
+    },
+    {
+     "id": "hollowbridge",
+     "name": "Hollowbridge",
+     "pop": 1000,
+     "held_by": "combine",
+     "districts": [
+      {
+       "id": "pump_quarter",
+       "name": "Pump Quarter",
+       "kind": "industrial",
+       "resonance": 30
+      },
+      {
+       "id": "bridgefoot",
+       "name": "Bridgefoot",
+       "kind": "market",
+       "resonance": 46
+      },
+      {
+       "id": "reed_houses",
+       "name": "Reed Houses",
+       "kind": "residential",
+       "resonance": 55
+      },
+      {
+       "id": "lantern_hill",
+       "name": "Lantern Hill",
+       "kind": "temple",
+       "resonance": 64
+      }
+     ]
+    }
+   ],
+   "map": [
+    40,
+    160
+   ]
+  },
+  {
+   "id": "spiremarch",
+   "name": "The Spiremarch",
+   "resonance": [
+    60,
+    80
+   ],
+   "held_by": {
+    "compact": 0.8,
+    "meridian": 0.2
+   },
+   "race_mix": {
+    "human": 40,
+    "dwarf": 30,
+    "elf": 10,
+    "halfling": 8,
+    "gnome": 5,
+    "orc": 6,
+    "wrought": 1
+   },
+   "towns": 10,
+   "town_pop": [
+    40,
+    180
+   ],
+   "threat": 30,
+   "specialties": {
+    "shrine": 3,
+    "mining": 2,
+    "logging": 2,
+    "crossroads": 2,
+    "smuggling": 1
+   },
+   "neighbors": [
+    "meltlands",
+    "shelf"
+   ],
+   "cities": [
+    {
+     "id": "vaelstrand",
+     "name": "Vaelstrand",
+     "pop": 2000,
+     "held_by": "compact",
+     "districts": [
+      {
+       "id": "collegium_heights",
+       "name": "Collegium Heights",
+       "kind": "campus",
+       "resonance": 86
+      },
+      {
+       "id": "temple_stair",
+       "name": "Temple Stair",
+       "kind": "temple",
+       "resonance": 80
+      },
+      {
+       "id": "lowmarket",
+       "name": "Lowmarket",
+       "kind": "market",
+       "resonance": 66
+      },
+      {
+       "id": "rope_walk",
+       "name": "Rope Walk",
+       "kind": "residential",
+       "resonance": 70
+      },
+      {
+       "id": "the_cut",
+       "name": "The Cut",
+       "kind": "slum",
+       "resonance": 62
+      },
+      {
+       "id": "gatehold",
+       "name": "Gatehold",
+       "kind": "civic",
+       "resonance": 68
+      }
+     ]
+    },
+    {
+     "id": "highcairn",
+     "name": "Highcairn",
+     "pop": 800,
+     "held_by": "compact",
+     "districts": [
+      {
+       "id": "deep_gate",
+       "name": "Deep Gate",
+       "kind": "industrial",
+       "resonance": 58
+      },
+      {
+       "id": "cairn_hall",
+       "name": "Cairn Hall",
+       "kind": "temple",
+       "resonance": 78
+      },
+      {
+       "id": "clanhouses",
+       "name": "Clanhouses",
+       "kind": "residential",
+       "resonance": 70
+      },
+      {
+       "id": "ore_market",
+       "name": "Ore Market",
+       "kind": "market",
+       "resonance": 64
+      }
+     ]
+    }
+   ],
+   "map": [
+    190,
+    270
+   ]
+  },
+  {
+   "id": "shelf",
+   "name": "The Shelf",
+   "resonance": [
+    70,
+    100
+   ],
+   "held_by": {
+    "compact": 0.4,
+    "combine": 0.4,
+    "meridian": 0.2
+   },
+   "race_mix": {
+    "human": 44,
+    "dwarf": 14,
+    "orc": 12,
+    "halfling": 10,
+    "gnome": 10,
+    "elf": 6,
+    "wrought": 4
+   },
+   "towns": 12,
+   "town_pop": [
+    40,
+    200
+   ],
+   "threat": 55,
+   "specialties": {
+    "boomtown": 6,
+    "mining": 2,
+    "logging": 1,
+    "crossroads": 1,
+    "shrine": 1
+   },
+   "neighbors": [
+    "meltlands",
+    "spiremarch"
+   ],
+   "cities": [
+    {
+     "id": "lastlight",
+     "name": "Lastlight",
+     "pop": 1200,
+     "held_by": "combine",
+     "districts": [
+      {
+       "id": "claims_office",
+       "name": "Claims Office",
+       "kind": "civic",
+       "resonance": 72
+      },
+      {
+       "id": "tent_city",
+       "name": "Tent City",
+       "kind": "slum",
+       "resonance": 82
+      },
+      {
+       "id": "assay_street",
+       "name": "Assay Street",
+       "kind": "market",
+       "resonance": 76
+      },
+      {
+       "id": "engine_yard",
+       "name": "Engine Yard",
+       "kind": "industrial",
+       "resonance": 64
+      }
+     ]
+    },
+    {
+     "id": "frostgate",
+     "name": "Frostgate",
+     "pop": 800,
+     "held_by": "compact",
+     "districts": [
+      {
+       "id": "icewall",
+       "name": "Icewall",
+       "kind": "civic",
+       "resonance": 90
+      },
+      {
+       "id": "thaw_market",
+       "name": "Thaw Market",
+       "kind": "market",
+       "resonance": 86
+      },
+      {
+       "id": "pilgrim_rest",
+       "name": "Pilgrim Rest",
+       "kind": "temple",
+       "resonance": 96
+      },
+      {
+       "id": "melt_rows",
+       "name": "Melt Rows",
+       "kind": "residential",
+       "resonance": 84
+      }
+     ]
+    }
+   ],
+   "map": [
+    60,
+    370
+   ]
+  },
+  {
+   "id": "drowned_vale",
+   "name": "The Drowned Vale",
+   "resonance": [
+    25,
+    75
+   ],
+   "held_by": {
+    "meridian": 0.5,
+    "compact": 0.3,
+    "combine": 0.2
+   },
+   "race_mix": {
+    "elf": 34,
+    "human": 36,
+    "halfling": 10,
+    "orc": 6,
+    "gnome": 6,
+    "dwarf": 6,
+    "wrought": 2
+   },
+   "towns": 6,
+   "town_pop": [
+    40,
+    160
+   ],
+   "threat": 35,
+   "specialties": {
+    "stilt": 3,
+    "fishing": 2,
+    "smuggling": 1
+   },
+   "neighbors": [
+    "meltlands"
+   ],
+   "cities": [
+    {
+     "id": "saltglass",
+     "name": "Saltglass",
+     "pop": 1500,
+     "held_by": "meridian",
+     "districts": [
+      {
+       "id": "memory_houses",
+       "name": "The Memory Houses",
+       "kind": "campus",
+       "resonance": 74
+      },
+      {
+       "id": "stilt_market",
+       "name": "Stilt Market",
+       "kind": "market",
+       "resonance": 50
+      },
+      {
+       "id": "pump_barges",
+       "name": "Pump Barges",
+       "kind": "industrial",
+       "resonance": 26
+      },
+      {
+       "id": "glass_quay",
+       "name": "Glass Quay",
+       "kind": "docks",
+       "resonance": 44
+      },
+      {
+       "id": "drowned_steps",
+       "name": "Drowned Steps",
+       "kind": "residential",
+       "resonance": 60
+      }
+     ]
+    },
+    {
+     "id": "murrow",
+     "name": "Murrow",
+     "pop": 600,
+     "held_by": "meridian",
+     "districts": [
+      {
+       "id": "murrow_piers",
+       "name": "Murrow Piers",
+       "kind": "docks",
+       "resonance": 46
+      },
+      {
+       "id": "reedmarket",
+       "name": "Reedmarket",
+       "kind": "market",
+       "resonance": 52
+      },
+      {
+       "id": "the_sunk",
+       "name": "The Sunk",
+       "kind": "slum",
+       "resonance": 58
+      }
+     ]
+    }
+   ],
+   "map": [
+    -140,
+    180
+   ]
+  }
+ ],
+ "town_names": {
+  "_doc": "Generated town names are a first part plus a second part. Edit freely; the generator never repeats a name.",
+  "first": [
+   "Ash",
+   "Barrow",
+   "Brine",
+   "Cold",
+   "Copper",
+   "Crane",
+   "Dun",
+   "Ember",
+   "Fallow",
+   "Fen",
+   "Flint",
+   "Gorse",
+   "Grey",
+   "Hallow",
+   "Hart",
+   "Heron",
+   "Iron",
+   "Kettle",
+   "Lark",
+   "Lea",
+   "Marl",
+   "Mere",
+   "Mill",
+   "Moss",
+   "Nettle",
+   "Oak",
+   "Otter",
+   "Peat",
+   "Quarry",
+   "Raven",
+   "Reed",
+   "Rook",
+   "Rush",
+   "Salt",
+   "Sedge",
+   "Shale",
+   "Slate",
+   "Sorrel",
+   "Stave",
+   "Tallow",
+   "Thorn",
+   "Tide",
+   "Tinder",
+   "Wad",
+   "Weir",
+   "Whin",
+   "Wick",
+   "Willow",
+   "Wren",
+   "Yarrow"
+  ],
+  "second": [
+   "acre",
+   "bank",
+   "beck",
+   "bridge",
+   "brook",
+   "by",
+   "cote",
+   "croft",
+   "dale",
+   "dyke",
+   "end",
+   "ferry",
+   "field",
+   "fold",
+   "ford",
+   "gate",
+   "hithe",
+   "holm",
+   "hope",
+   "hurst",
+   "lade",
+   "ley",
+   "lock",
+   "marsh",
+   "mouth",
+   "ness",
+   "pool",
+   "reach",
+   "ridge",
+   "rise",
+   "set",
+   "shaw",
+   "stead",
+   "stow",
+   "thorpe",
+   "toft",
+   "wark",
+   "wash",
+   "well",
+   "wick",
+   "worth"
+  ],
+  "banned": [
+   "Ashbury",
+   "Stillwater",
+   "Tarant",
+   "Dernholm",
+   "Caladon",
+   "Roseborough",
+   "Tulla",
+   "Ashwick"
+  ]
+ },
+ "map_radius": 80
+}

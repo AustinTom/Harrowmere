@@ -45,6 +45,8 @@ func get_actor_template(id: String) -> Dictionary:
 
 
 func get_dialogue(id: String) -> Dictionary:
+	if id.begins_with("res:"):
+		return Residents.build_dialogue(int(id.substr(4)))
 	return dialogues.get(id, {})
 
 

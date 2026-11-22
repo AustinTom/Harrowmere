@@ -1,0 +1,358 @@
+{
+ "_doc": "Quest templates fire from the simulation when a resident's needs, traits, problem and town state fit (giver block) and the town fits (town block). The sim only creates a quest HOOK: giver, filled roles, solution paths and war effects. The quest system turns a hook into objectives. needs: '<30' or '>70'. roles pick other residents: job_tags:a|b, same_job, neighbour, household, authority, outsider (someone in another town of the region). chance = per eligible giver per day. war = which power each solution path tips toward (applied when the quest system reports the outcome). town: resonance [lo,hi], threat_min, kinds, held_by, changed_hands_within (days since a power took the town).",
+ "templates": {
+  "debt": {
+   "name": "A debt come due",
+   "chance": 0.02,
+   "cooldown": 20,
+   "giver": {
+    "needs": {
+     "money": "<25"
+    },
+    "min_age": "adult"
+   },
+   "roles": {
+    "creditor": "job_tags:shady|trade|wealthy"
+   },
+   "solutions": [
+    "talk",
+    "pay",
+    "steal",
+    "fight"
+   ],
+   "war": {
+    "pay": "combine",
+    "steal": "meridian"
+   },
+   "pitch": "I owe {creditor} more than I'll earn this season. If you could talk them round, or find the coin somewhere..."
+  },
+  "feud": {
+   "name": "Bad blood",
+   "chance": 0.015,
+   "cooldown": 25,
+   "giver": {
+    "needs": {
+     "belonging": "<35"
+    },
+    "traits_any": [
+     "hothead",
+     "greedy",
+     "recluse"
+    ]
+   },
+   "roles": {
+    "rival": "neighbour"
+   },
+   "solutions": [
+    "talk",
+    "fight",
+    "spell",
+    "machine"
+   ],
+   "pitch": "{rival} has been moving my fence posts a foot a night. Next time I'm taking a shovel to them. Unless you'd sort it first."
+  },
+  "missing_person": {
+   "name": "Never came home",
+   "chance": 0.01,
+   "cooldown": 30,
+   "giver": {
+    "needs": {
+     "belonging": "<45"
+    },
+    "problem": "missing_relative"
+   },
+   "roles": {
+    "missing": "outsider"
+   },
+   "town": {
+    "threat_min": 25
+   },
+   "solutions": [
+    "track",
+    "spell",
+    "machine",
+    "talk"
+   ],
+   "pitch": "{missing} went up the road to {missing_town} and hasn't sent word. That's not like them."
+  },
+  "sabotage": {
+   "name": "Undercut",
+   "chance": 0.012,
+   "cooldown": 25,
+   "giver": {
+    "needs": {
+     "money": "<45"
+    },
+    "traits_any": [
+     "ambitious",
+     "greedy"
+    ],
+    "tags_any": [
+     "trade",
+     "craft",
+     "gear_craft",
+     "arcane_craft"
+    ]
+   },
+   "roles": {
+    "rival": "same_job"
+   },
+   "solutions": [
+    "talk",
+    "steal",
+    "machine",
+    "spell"
+   ],
+   "war": {
+    "machine": "combine",
+    "spell": "compact"
+   },
+   "pitch": "{rival} is selling below cost. Someone's paying them to ruin me, and I'd like to know who."
+  },
+  "claim_dispute": {
+   "name": "Two names on one deed",
+   "chance": 0.015,
+   "cooldown": 30,
+   "giver": {
+    "tags_any": [
+     "farm",
+     "prospect"
+    ]
+   },
+   "roles": {
+    "rival": "job_tags:farm|prospect",
+    "registrar": "job_tags:clerk|authority"
+   },
+   "town": {
+    "kinds": [
+     "town"
+    ]
+   },
+   "solutions": [
+    "talk",
+    "forge",
+    "fight",
+    "pay"
+   ],
+   "war": {
+    "forge": "meridian",
+    "pay": "combine"
+   },
+   "pitch": "The Assay Office says {rival} filed on my land first. I've worked that ground six years. Ask {registrar} how that happened."
+  },
+  "cursed_object": {
+   "name": "It whispers",
+   "chance": 0.008,
+   "cooldown": 40,
+   "giver": {
+    "needs": {
+     "safety": "<55"
+    }
+   },
+   "town": {
+    "resonance": [
+     45,
+     100
+    ]
+   },
+   "solutions": [
+    "spell",
+    "machine",
+    "steal",
+    "talk"
+   ],
+   "war": {
+    "spell": "compact",
+    "machine": "combine"
+   },
+   "pitch": "My grandmother's brooch came out of the ice with her. Since then the dog won't sleep in the house."
+  },
+  "strike": {
+   "name": "Down tools",
+   "chance": 0.02,
+   "cooldown": 20,
+   "giver": {
+    "needs": {
+     "money": "<35"
+    },
+    "tags_any": [
+     "labor_gear",
+     "labor"
+    ]
+   },
+   "roles": {
+    "boss": "job_tags:authority|wealthy"
+   },
+   "town": {
+    "resonance": [
+     0,
+     50
+    ]
+   },
+   "solutions": [
+    "talk",
+    "fight",
+    "machine",
+    "pay"
+   ],
+   "war": {
+    "talk": "meridian",
+    "fight": "combine",
+    "machine": "combine"
+   },
+   "pitch": "{boss} cut our pay again. We're thinking of walking out. Would you stand with us, or at least carry a letter?"
+  },
+  "failing_harvest": {
+   "name": "Grey fields",
+   "chance": 0.02,
+   "cooldown": 30,
+   "giver": {
+    "needs": {
+     "conviction": "<40"
+    },
+    "tags_any": [
+     "farm"
+    ]
+   },
+   "town": {
+    "resonance": [
+     0,
+     45
+    ]
+   },
+   "solutions": [
+    "spell",
+    "machine",
+    "talk"
+   ],
+   "war": {
+    "spell": "compact",
+    "machine": "combine"
+   },
+   "pitch": "The seed won't take since the pumps came. Either the shrine needs waking, or I need one of those Combine threshers. Can't afford either."
+  },
+  "protection": {
+   "name": "Something on the road",
+   "chance": 0.02,
+   "cooldown": 15,
+   "giver": {
+    "needs": {
+     "safety": "<35"
+    }
+   },
+   "town": {
+    "threat_min": 40
+   },
+   "solutions": [
+    "fight",
+    "machine",
+    "spell",
+    "talk"
+   ],
+   "pitch": "Two carts didn't make it in from {road_town} this week. Whatever's out there, someone should deal with it before it comes here."
+  },
+  "sick_relative": {
+   "name": "Fever in the house",
+   "chance": 0.015,
+   "cooldown": 25,
+   "giver": {
+    "problem": "sick_child"
+   },
+   "roles": {
+    "healer": "job_tags:care"
+   },
+   "solutions": [
+    "spell",
+    "machine",
+    "pay",
+    "track"
+   ],
+   "war": {
+    "spell": "compact",
+    "machine": "combine"
+   },
+   "pitch": "{healer} says it's lung-rot and wants more than I have. A priest might pray it off, or there's a Combine tonic, if you trust it."
+  },
+  "lost_item": {
+   "name": "Dropped on the road",
+   "chance": 0.015,
+   "cooldown": 20,
+   "giver": {
+    "problem": "lost_keepsake"
+   },
+   "solutions": [
+    "track",
+    "spell",
+    "pay"
+   ],
+   "pitch": "I lost my mother's ring somewhere between here and {road_town}. I'd pay to have it back."
+  },
+  "faith_crisis": {
+   "name": "Two masters",
+   "chance": 0.012,
+   "cooldown": 30,
+   "giver": {
+    "needs": {
+     "conviction": "<35"
+    }
+   },
+   "roles": {
+    "boss": "authority"
+   },
+   "solutions": [
+    "talk",
+    "steal",
+    "spell"
+   ],
+   "war": {
+    "spell": "compact",
+    "talk": "meridian"
+   },
+   "pitch": "{boss} says anyone caught at the shrine loses their place. I don't know whether to pray or keep my job."
+  },
+  "smuggling": {
+   "name": "No questions",
+   "chance": 0.01,
+   "cooldown": 20,
+   "giver": {
+    "tags_any": [
+     "shady",
+     "dock"
+    ],
+    "factions_any": [
+     "lamplit_ring"
+    ]
+   },
+   "solutions": [
+    "carry",
+    "talk",
+    "fight"
+   ],
+   "war": {
+    "carry": "meridian",
+    "fight": "combine"
+   },
+   "pitch": "There's a crate needs to reach {road_town} without the Assay Office seeing it. Good pay, and nobody opens it."
+  },
+  "town_fallen": {
+   "name": "New masters",
+   "chance": 0.05,
+   "cooldown": 10,
+   "giver": {
+    "opinion_of_holder": "<-40"
+   },
+   "solutions": [
+    "talk",
+    "fight",
+    "steal"
+   ],
+   "war": {
+    "fight": "_rival_of_holder"
+   },
+   "pitch": "Since {holder} took the town, they've been going door to door. I need my papers out of the {holder_office} before they read them.",
+   "town": {
+    "changed_hands_within": 30
+   }
+  }
+ }
+}

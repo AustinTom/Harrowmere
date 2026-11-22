@@ -1,0 +1,30 @@
+{
+  "_doc": "Factions the resident sim knows about. powers = the three warring sides (the player never joins them). minor = joinable groups; residents can belong to them too. lean = which power the group tips toward. join = which residents tend to belong (by job tag, race, region).",
+  "powers": {
+    "combine": {"name": "The Combine", "side": "gear", "lean": -1},
+    "compact": {"name": "The Spire Compact", "side": "magic", "lean": 1},
+    "meridian": {"name": "The Meridian", "side": "balance", "lean": 0}
+  },
+  "minor": {
+    "freeholders": {"name": "Freeholders' League", "leans": "meridian", "rivals": ["assay_office"],
+      "join": {"tags": ["farm", "prospect"], "races": {"halfling": 2.0}, "regions": {"meltlands": 1.5, "shelf": 1.5}, "chance": 0.25}},
+    "tideless": {"name": "The Tideless", "leans": "meridian", "rivals": [],
+      "join": {"races": {"elf": 1.0}, "regions": {"drowned_vale": 1.0}, "race_only": ["elf"], "chance": 0.6}},
+    "engineers_guild": {"name": "Engineers' Guild", "leans": "combine", "rivals": ["enchanters_circle"],
+      "join": {"tags": ["gear_craft"], "races": {"gnome": 2.0}, "chance": 0.5}},
+    "enchanters_circle": {"name": "Enchanters' Circle", "leans": "compact", "rivals": ["engineers_guild"],
+      "join": {"tags": ["arcane_craft", "scholar"], "chance": 0.45}},
+    "lamplit_ring": {"name": "The Lamplit Ring", "leans": "meridian", "rivals": ["constabulary"],
+      "join": {"tags": ["shady", "dock"], "traits": {"greedy": 2.0}, "chance": 0.12}},
+    "house_corvane": {"name": "House Corvane", "leans": "combine", "rivals": [],
+      "join": {"tags": ["trade"], "regions": {"old_shires": 2.0, "furnace_coast": 1.5}, "chance": 0.2}},
+    "lantern_mothers": {"name": "Lantern Mothers", "leans": "compact", "rivals": [],
+      "join": {"tags": ["faith"], "regions": {"meltlands": 1.5}, "chance": 0.5}},
+    "foundry_union": {"name": "Foundry Union", "leans": "meridian", "rivals": ["house_corvane"],
+      "join": {"tags": ["labor_gear"], "races": {"orc": 2.0}, "chance": 0.45}},
+    "assay_office": {"name": "The Assay Office", "leans": "combine", "rivals": ["freeholders"],
+      "join": {"tags": ["clerk"], "chance": 0.5}},
+    "constabulary": {"name": "The Constabulary", "leans": "meridian", "rivals": ["lamplit_ring"],
+      "join": {"tags": ["guard"], "chance": 0.8}}
+  }
+}

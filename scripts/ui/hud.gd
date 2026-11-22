@@ -298,13 +298,18 @@ func open_dialogue(actor) -> void:
 	var dlg: Dictionary = DB.get_dialogue(actor.dialogue_id)
 	if dlg.is_empty():
 		return
+	if _dlg_actor != null and is_instance_valid(_dlg_actor):
+		_dlg_actor.busy = false
 	_dlg_actor = actor
+	actor.busy = true # stands still while you talk
 	_dlg_data = dlg
 	_show_node(DialogueRunner.entry_node(dlg))
 
 
 func close_dialogue() -> void:
 	_dlg.visible = false
+	if _dlg_actor != null and is_instance_valid(_dlg_actor) and not _dlg_actor.is_dead:
+		_dlg_actor.busy = false
 	_dlg_actor = null
 
 

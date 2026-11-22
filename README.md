@@ -43,6 +43,17 @@ Everything is primitive geometry, ready to be replaced with real models.
 * Report back to Osk: relight the boiler (Resonance drops, the chimney smokes, the green
   dulls) or leave it cold (the yard turns green). Hesta and Tam react to the choice.
 
+## Residents
+
+Fennick's Landing now has about 80 generated residents with homes, jobs, families and daily
+schedules. People who are outdoors walk the map: to the well, the market and the shrine by
+day, home or to the tavern in the evening. Click one to talk: they tell you their job and
+hours, the latest gossip (including what you did at the pumphouse) and how life is going, and
+some have a problem you can take on. They're part of a simulated world of about 25,000
+people across 86 towns and cities. See [docs/residents.md](docs/residents.md).
+
+![Residents](docs/screenshots/09_residents_evening.png)
+
 ## Rules in one paragraph
 
 D&D-style: d20 + ability modifier + proficiency (+2) against AC, natural 20 crits (double
@@ -72,6 +83,7 @@ scripts/
   inventory/inventory.gd  pack of item entries (stacking, identification, transfer)
   dialogue/dialogue_runner.gd  evaluates dialogue conditions and effects
   world/world.gd          builds an area, pathfinding, aggro, followers, schedules
+  sim/                    resident simulation: generation, schedules, LOD ticks, gossip, quest hooks
   world/camera_rig.gd     fixed isometric orthographic camera
   ui/hud.gd, ui/player_controller.gd   UI and input
 tests/                    unit tests, an AI-vs-AI fight simulator, screenshot capture
@@ -97,11 +109,13 @@ tests/                    unit tests, an AI-vs-AI fight simulator, screenshot ca
 godot --headless --import
 godot --headless res://tests/test_runner.tscn               # 25 rules/inventory/dialogue checks
 godot --headless res://tests/sim_runner.tscn -- --mode=toggle --seed=3   # AI plays the fight, flipping modes every 4s
+godot --headless res://tests/resident_tests.tscn            # 40 resident simulation checks
+godot --headless res://tests/town_preview.tscn -- --settlement=fennicks_landing --days=7
 ```
 `--mode` is `tb`, `rt` or `toggle`. The simulator exits non-zero if the fight hangs.
 
 ## Known gaps (on purpose, for later threads)
 
 No save/load, cover, line of sight, reactions, ammo or reloading, crafting, skill trees,
-needs/gossip, or sound. Loot goes straight into the player's pack. Out of combat, spells
+or sound. Loot goes straight into the player's pack. Out of combat, spells
 and potions cost nothing.
