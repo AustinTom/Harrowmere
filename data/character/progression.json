@@ -1,0 +1,226 @@
+{
+ "max_level": 50,
+ "xp_formula": "250 * (level - 1) * level",
+ "xp_to_reach": [
+  0,
+  0,
+  500,
+  1500,
+  3000,
+  5000,
+  7500,
+  10500,
+  14000,
+  18000,
+  22500,
+  27500,
+  33000,
+  39000,
+  45500,
+  52500,
+  60000,
+  68000,
+  76500,
+  85500,
+  95000,
+  105000,
+  115500,
+  126500,
+  138000,
+  150000,
+  162500,
+  175500,
+  189000,
+  203000,
+  217500,
+  232500,
+  248000,
+  264000,
+  280500,
+  297500,
+  315000,
+  333000,
+  351500,
+  370500,
+  390000,
+  410000,
+  430500,
+  451500,
+  473000,
+  495000,
+  517500,
+  540500,
+  564000,
+  588000,
+  612500
+ ],
+ "xp_value_formula": "round(50 * level * (1 + level / 10)) * grade_xp",
+ "proficiency": {
+  "base": 2,
+  "every_levels": 8,
+  "desc": "Proficiency = 2 + floor((level - 1) / 8): +2 at level 1, +8 at level 49."
+ },
+ "skill_bonus": {
+  "desc": "Rank 0 = 0 (untrained). Rank r >= 1 = proficiency + (r - 1). Trait and item modifiers add on top."
+ },
+ "character_points": {
+  "start": 5,
+  "per_level": 1,
+  "bonus_every_levels": 5,
+  "bonus": 1
+ },
+ "creation": {
+  "stat_base": 8,
+  "stat_points": 20,
+  "stat_max_before_race": 17,
+  "cost": [
+   {
+    "up_to": 13,
+    "cost": 1
+   },
+   {
+    "up_to": 15,
+    "cost": 2
+   },
+   {
+    "up_to": 17,
+    "cost": 3
+   }
+  ],
+  "desc": "Every stat starts at 8. Spend 20 points: 1 each up to 13, 2 each for 14-15, 3 each for 16-17. Race modifiers apply after."
+ },
+ "stat_raise": {
+  "cap": 20,
+  "cost": [
+   {
+    "below": 14,
+    "cost": 1
+   },
+   {
+    "below": 18,
+    "cost": 2
+   },
+   {
+    "below": 20,
+    "cost": 3
+   }
+  ],
+  "desc": "After creation a +1 costs 1 CP below 14, 2 CP from 14 to 17, 3 CP for 18 and 19. Natural cap 20; items and effects can go higher."
+ },
+ "skill_ranks": {
+  "max": 5,
+  "cost": 1,
+  "level_req": [
+   0,
+   1,
+   4,
+   8,
+   14,
+   20
+  ],
+  "stat_req": [
+   0,
+   0,
+   11,
+   13,
+   15,
+   17
+  ],
+  "names": [
+   "Untrained",
+   "Trained",
+   "Practised",
+   "Expert",
+   "Master",
+   "Grandmaster"
+  ]
+ },
+ "tiers": {
+  "max": 5,
+  "cost": 1,
+  "level_req": [
+   0,
+   1,
+   5,
+   10,
+   15,
+   20
+  ],
+  "stat_req": [
+   0,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "skill_rank_req": [
+   0,
+   1,
+   1,
+   2,
+   3,
+   4
+  ],
+  "aptitude_req": {
+   "arcane": [
+    0,
+    0,
+    0,
+    0,
+    25,
+    50
+   ],
+   "gear": [
+    0,
+    0,
+    0,
+    0,
+    -25,
+    -50
+   ]
+  },
+  "desc": "Buying tier t of a discipline costs 1 CP and needs: tier t-1, the level, the discipline's key stat and its governing skill rank shown here. Tiers 4 and 5 of Arcane disciplines need aptitude >= 25 / 50, Gear disciplines <= -25 / -50. Neutral disciplines have no aptitude gate."
+ },
+ "aptitude": {
+  "skill_rank_weight": 1,
+  "tier_weight": 2,
+  "neutral_weight": 1,
+  "damping": 5,
+  "min": -100,
+  "max": 100,
+  "desc": "aptitude = race base + round(100 * (A - G) / (A + G + N + 5)), where A, G and N are the weighted points spent in Arcane, Gear and Neutral skill ranks (x1) and discipline tiers (x2). Plus 'aptitude' modifiers. Clamped to -100..100."
+ },
+ "hp": {
+  "desc": "Max HP = race hp_base + CON score + (level - 1) * max(1, race hp_per_level + CON mod), times the grade's hp multiplier, plus hp_max modifiers."
+ },
+ "ac": {
+  "desc": "AC = 10 + DEX mod + floor(Dodge rank / 2) + natural_ac + armour + ac modifiers."
+ },
+ "ap": {
+  "base": 6,
+  "desc": "6 AP per round, plus ap_max modifiers (minimum 1)."
+ },
+ "grades": {
+  "minion": {
+   "hp_mult": 0.6,
+   "xp_mult": 0.6
+  },
+  "standard": {
+   "hp_mult": 1.0,
+   "xp_mult": 1.0
+  },
+  "elite": {
+   "hp_mult": 1.5,
+   "xp_mult": 2.0
+  },
+  "boss": {
+   "hp_mult": 2.5,
+   "xp_mult": 4.0
+  },
+  "hero": {
+   "hp_mult": 1.25,
+   "xp_mult": 1.0
+  }
+ }
+}

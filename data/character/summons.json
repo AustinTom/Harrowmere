@@ -1,0 +1,276 @@
+{
+ "familiar": {
+  "name": "Familiar",
+  "faction": "ally",
+  "color": "#9fe0c0",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 3,
+   "race": "",
+   "seed": 7919
+  },
+  "natural_weapon": {
+   "name": "Bite",
+   "damage": "1d4",
+   "ap": 2,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "spectral_hound": {
+  "name": "Spectral Hound",
+  "faction": "ally",
+  "color": "#9fe0c0",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 6,
+   "race": "",
+   "seed": 15838
+  },
+  "natural_weapon": {
+   "name": "Bite",
+   "damage": "1d8",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "ember_spirit": {
+  "name": "Ember Spirit",
+  "faction": "ally",
+  "color": "#ff8a3d",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 9,
+   "race": "",
+   "seed": 23757
+  },
+  "natural_weapon": {
+   "name": "Burning Touch",
+   "damage": "2d6",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "meltwater_spirit": {
+  "name": "Meltwater Spirit",
+  "faction": "ally",
+  "color": "#7fb2ff",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 12,
+   "race": "",
+   "seed": 31676
+  },
+  "natural_weapon": {
+   "name": "Crushing Wave",
+   "damage": "2d8",
+   "ap": 3,
+   "range": 10,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "gate_beast": {
+  "name": "Gate Beast",
+  "faction": "ally",
+  "color": "#6a4a8a",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 15,
+   "race": "",
+   "seed": 39595
+  },
+  "natural_weapon": {
+   "name": "Rending Claws",
+   "damage": "3d8",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "risen_bones": {
+  "name": "Risen Bones",
+  "faction": "ally",
+  "color": "#d8d0b8",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "thug",
+   "level": 6,
+   "race": "",
+   "seed": 15838
+  },
+  "natural_weapon": {
+   "name": "Rusted Blade",
+   "damage": "1d8",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "ghoul": {
+  "name": "Ghoul",
+  "faction": "ally",
+  "color": "#8a9a7a",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "beast",
+   "level": 12,
+   "race": "",
+   "seed": 31676
+  },
+  "natural_weapon": {
+   "name": "Claws",
+   "damage": "2d6",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "barrow_wight": {
+  "name": "Barrow Wight",
+  "faction": "ally",
+  "color": "#a8a8c8",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "soldier",
+   "level": 15,
+   "race": "",
+   "seed": 39595
+  },
+  "natural_weapon": {
+   "name": "Barrow Blade",
+   "damage": "2d8",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "arcane"
+  }
+ },
+ "clockwork_beetle": {
+  "name": "Clockwork Beetle",
+  "faction": "ally",
+  "color": "#c79a4a",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "construct",
+   "level": 3,
+   "race": "",
+   "seed": 7919
+  },
+  "natural_weapon": {
+   "name": "Mandibles",
+   "damage": "1d6",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "gear"
+  }
+ },
+ "spring_turret": {
+  "name": "Spring Turret",
+  "faction": "ally",
+  "color": "#c79a4a",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "construct",
+   "level": 6,
+   "race": "",
+   "seed": 15838
+  },
+  "natural_weapon": {
+   "name": "Spring Bolt",
+   "damage": "1d10",
+   "ap": 3,
+   "range": 60,
+   "ranged": true,
+   "type": "weapon",
+   "pool": "gear"
+  }
+ },
+ "brass_hound": {
+  "name": "Brass Hound",
+  "faction": "ally",
+  "color": "#d0a060",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "construct",
+   "level": 9,
+   "race": "",
+   "seed": 23757
+  },
+  "natural_weapon": {
+   "name": "Steel Jaws",
+   "damage": "2d6",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "gear"
+  }
+ },
+ "iron_bulwark": {
+  "name": "Iron Bulwark",
+  "faction": "ally",
+  "color": "#8a8a8a",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "construct",
+   "level": 12,
+   "race": "",
+   "seed": 31676
+  },
+  "natural_weapon": {
+   "name": "Iron Fist",
+   "damage": "2d8",
+   "ap": 3,
+   "range": 5,
+   "type": "weapon",
+   "pool": "gear"
+  }
+ },
+ "steam_colossus": {
+  "name": "Steam Colossus",
+  "faction": "ally",
+  "color": "#b0b0a0",
+  "summoned": true,
+  "grade": "minion",
+  "gen": {
+   "archetype": "construct",
+   "level": 15,
+   "race": "",
+   "seed": 39595
+  },
+  "natural_weapon": {
+   "name": "Piston Arm",
+   "damage": "3d10",
+   "ap": 4,
+   "range": 10,
+   "type": "weapon",
+   "pool": "gear"
+  }
+ }
+}

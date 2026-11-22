@@ -1,0 +1,127 @@
+{
+  "human": {
+    "name": "Human", "plural": "Humans",
+    "size": "medium", "body": {"skeleton": "humanoid", "height_m": 1.75, "scale": [1.0, 1.0, 1.0]},
+    "hp_base": 10, "hp_per_level": 6, "lifespan": 80,
+    "stat_mods": {}, "aptitude_base": 0, "traits": [],
+    "default_heritage": "lowlander",
+    "heritages": {
+      "lowlander": {
+        "name": "Lowlander",
+        "stat_mods": {}, "aptitude_base": -5,
+        "traits": ["adaptable"],
+        "lore": "Southern stock from the Old Shires: canal towns, mill towns and market towns. They have no standout gift, which is why they learn a little of everything and end up running most of it."
+      },
+      "godtouched": {
+        "name": "Godtouched",
+        "stat_mods": {"wis": 2, "cha": 1, "con": -2}, "aptitude_base": 35,
+        "traits": ["god_mark", "sense_magic", "machine_curse"],
+        "lore": "One child in a few hundred is born with a god's mark: a pale sigil on the skin that warms near shrines. They are revered in shrine towns, refused service in Combine towns, and machines go wrong in their hands."
+      }
+    },
+    "lore": "The majority everywhere, from the canal cities of the south to the newest meltwater camp. Humans built the first factories and the first temples both, and most of the war's soldiers on all three sides are human.",
+    "standing": {"combine": 0, "spire_compact": 0, "meridian": 0},
+    "names": {
+      "given_m": ["Aldric", "Bram", "Corwin", "Davin", "Edric", "Fenn", "Garrett", "Hollis", "Ivo", "Jory", "Kester", "Lowell", "Marten", "Niall", "Osric", "Perrin", "Quill", "Roland", "Silas", "Tobin", "Ulric", "Wendel"],
+      "given_f": ["Ada", "Brina", "Cressa", "Dora", "Elsbeth", "Fenna", "Greta", "Hesta", "Ilse", "Jessa", "Katrin", "Linnet", "Maud", "Nell", "Orla", "Prue", "Rosalind", "Sabine", "Tilda", "Una", "Wren", "Yara"],
+      "given_x": ["Ash", "Briar", "Rowan", "Sage", "Tam", "Lark"],
+      "family_prefix": ["Ash", "Black", "Brann", "Cold", "Fair", "Fenn", "Grey", "Hollow", "Iron", "Kettle", "Low", "Marsh", "Mill", "North", "Oak", "Red", "Salt", "Stone", "Thorn", "Weather", "White", "Wyn"],
+      "family_suffix": ["by", "croft", "dale", "el", "field", "ford", "gate", "ham", "hill", "ley", "mere", "more", "ridge", "ton", "wick", "well", "weather", "wood"]
+    }
+  },
+  "elf": {
+    "name": "Elf", "plural": "Elves", "folk_name": "the Tideless",
+    "size": "medium", "body": {"skeleton": "humanoid", "height_m": 1.8, "scale": [0.95, 1.03, 0.95]},
+    "hp_base": 8, "hp_per_level": 5, "lifespan": 400,
+    "stat_mods": {"dex": 2, "int": 1, "con": -1, "cha": -1}, "aptitude_base": 15,
+    "traits": ["ossuan_script", "keen_senses", "tide_breath"],
+    "lore": "Long-lived descendants of the Ossuan Hegemony, the empire that tried to fuse magic and machine and froze the north doing it. They live in the Drowned Vale among the sunken towers of their ancestors. Most people still blame them for the ice, and many elves privately agree.",
+    "standing": {"combine": -10, "spire_compact": 5, "meridian": 0},
+    "names": {
+      "given_m": ["Aerith", "Caelan", "Eirn", "Faelor", "Iskan", "Lirien", "Maelis", "Nerion", "Orrin", "Saelis", "Thaliel", "Vaelor"],
+      "given_f": ["Aelys", "Ciriel", "Elowen", "Iska", "Lethra", "Maelith", "Nimue", "Orlaith", "Sylvar", "Thessaly", "Vaesha", "Ysolde"],
+      "given_x": ["Eirlan", "Ithil", "Saelen", "Vell"],
+      "family_prefix": ["Ae", "Cae", "Ith", "Lir", "Mae", "Nae", "Oss", "Sae", "Thal", "Vael", "Ys"],
+      "family_suffix": ["dris", "lith", "mar", "nesse", "rin", "sael", "thil", "vell", "wen", "ys"]
+    }
+  },
+  "dwarf": {
+    "name": "Dwarf", "plural": "Dwarves",
+    "size": "medium", "body": {"skeleton": "humanoid_short", "height_m": 1.35, "scale": [1.04, 0.9, 1.04]},
+    "hp_base": 12, "hp_per_level": 7, "lifespan": 250,
+    "stat_mods": {"str": 2, "con": 2, "dex": -1, "cha": -1}, "aptitude_base": 0,
+    "traits": ["stoneblood", "darkvision", "deliberate", "spell_clumsy"],
+    "lore": "Mountain clans of the Spiremarch who claim Firstfolk blood and guard the old barrows beneath their halls. The clans are split down the middle: sell the ore rights to the Combine and grow rich, or keep the deep halls sacred and stay poor.",
+    "standing": {"combine": 5, "spire_compact": 0, "meridian": 5},
+    "names": {
+      "given_m": ["Borin", "Dagna", "Grum", "Harl", "Korrin", "Mord", "Osk", "Rurik", "Thrain", "Ulfar", "Vond", "Brokk"],
+      "given_f": ["Agna", "Bera", "Dalla", "Gerd", "Helka", "Ingrid", "Kolla", "Runa", "Sigra", "Thora", "Vigdis", "Yrsa"],
+      "given_x": ["Bryn", "Kell", "Tor"],
+      "family_prefix": ["Anvil", "Barrow", "Coal", "Deep", "Flint", "Gran", "Hammer", "Iron", "Oath", "Rune", "Slate", "Under"],
+      "family_suffix": ["beard", "brand", "delve", "fist", "forge", "hall", "helm", "mantle", "nel", "shield", "stone", "vein"]
+    }
+  },
+  "halfling": {
+    "name": "Halfling", "plural": "Halflings",
+    "size": "small", "body": {"skeleton": "humanoid_small", "height_m": 1.05, "scale": [0.78, 0.78, 0.78]},
+    "hp_base": 8, "hp_per_level": 5, "lifespan": 120,
+    "stat_mods": {"dex": 2, "cha": 1, "str": -2}, "aptitude_base": 0,
+    "traits": ["lucky", "light_step", "born_trader", "short_reach"],
+    "lore": "Small farming folk who led the first wave of settlers into the Meltlands when the ice drew back. Liked by almost everyone and underestimated by all, they are the backbone of the Freeholders.",
+    "standing": {"combine": 0, "spire_compact": 0, "meridian": 10},
+    "names": {
+      "given_m": ["Bertram", "Cob", "Dunstan", "Fosco", "Hobb", "Lotho", "Milo", "Pip", "Rufus", "Tam", "Wilcome", "Ned"],
+      "given_f": ["Bell", "Daisy", "Elsie", "Hilda", "Lily", "Marigold", "Myrtle", "Peony", "Poppy", "Rose", "Tansy", "Bryony"],
+      "given_x": ["Bramble", "Clover", "Jem"],
+      "family_prefix": ["Apple", "Barley", "Bramble", "Fair", "Good", "Green", "Hay", "Honey", "Meadow", "Puddle", "Sweet", "Thistle"],
+      "family_suffix": ["barrow", "bottom", "brook", "bury", "foot", "hedge", "hill", "leaf", "row", "weather", "wick", "worth"]
+    }
+  },
+  "gnome": {
+    "name": "Gnome", "plural": "Gnomes",
+    "size": "small", "body": {"skeleton": "humanoid_small", "height_m": 1.0, "scale": [0.78, 0.78, 0.78]},
+    "hp_base": 7, "hp_per_level": 5, "lifespan": 200,
+    "stat_mods": {"int": 2, "dex": 1, "str": -1, "con": -1}, "aptitude_base": -35,
+    "traits": ["tinker", "patent_mind", "spell_backfire"],
+    "lore": "Clever tinkerers drawn north by the boom. They run the workshops and patent offices of every city, are prized by the Combine, mocked by mages, and quietly own a surprising share of everything.",
+    "standing": {"combine": 15, "spire_compact": -10, "meridian": 0},
+    "names": {
+      "given_m": ["Bimble", "Dobbin", "Fizzwick", "Gimlet", "Nackle", "Orbin", "Pell", "Quibb", "Sprocket", "Tock", "Wendle", "Zook"],
+      "given_f": ["Bree", "Dimble", "Ellywick", "Fennet", "Lissa", "Nyx", "Pipa", "Quilla", "Sprig", "Tinna", "Wisp", "Zanna"],
+      "given_x": ["Cog", "Dib", "Ratch"],
+      "family_prefix": ["Brass", "Cog", "Copper", "Gear", "Glim", "Pin", "Spark", "Spring", "Tin", "Whistle", "Wick", "Zinc"],
+      "family_suffix": ["bottle", "bolt", "dial", "gauge", "lock", "nozzle", "pin", "sprocket", "toggle", "valve", "whirr", "wright"]
+    }
+  },
+  "orc": {
+    "name": "Orc", "plural": "Orcs",
+    "size": "medium", "body": {"skeleton": "humanoid_large", "height_m": 1.95, "scale": [1.1, 1.08, 1.1]},
+    "hp_base": 12, "hp_per_level": 7, "lifespan": 70,
+    "stat_mods": {"str": 2, "con": 1, "int": -1, "cha": -1}, "aptitude_base": -10,
+    "traits": ["foundry_hardened", "menacing", "relentless"],
+    "lore": "Proud, strong clans who work the mines and foundries of the Furnace Coast. Feared in the old southern cities, they run the unions and the foundry floors, and every factory owner on the coast knows a strike can close them in a day.",
+    "standing": {"combine": 5, "spire_compact": -5, "meridian": 0},
+    "names": {
+      "given_m": ["Bagrash", "Durz", "Garruk", "Grom", "Hrok", "Karg", "Morz", "Ruuk", "Shagar", "Thrak", "Urzag", "Varg"],
+      "given_f": ["Agra", "Bashka", "Durga", "Garza", "Kasha", "Mogra", "Ozka", "Rasha", "Shura", "Tagra", "Ugra", "Zarka"],
+      "given_x": ["Brakk", "Ruz", "Zog"],
+      "family_prefix": ["Ash", "Black", "Blood", "Cinder", "Coal", "Iron", "Kiln", "Red", "Slag", "Smoke", "Soot", "Tusk"],
+      "family_suffix": ["breaker", "crusher", "fist", "fang", "hammer", "jaw", "maw", "pick", "shaft", "shovel", "tooth", "vein"]
+    }
+  },
+  "wrought": {
+    "name": "Wrought", "plural": "Wrought",
+    "size": "medium", "body": {"skeleton": "humanoid", "height_m": 1.85, "scale": [1.05, 1.02, 1.05]},
+    "hp_base": 14, "hp_per_level": 7, "lifespan": 0,
+    "stat_mods": {"str": 1, "con": 3, "cha": -2, "wis": -1}, "aptitude_base": -100,
+    "traits": ["construct", "no_magic", "repair_only", "ossuan_passage", "upgradeable"],
+    "lore": "Ossuan automatons that woke up in the thawing ruins with minds of their own and no memory of why. Feared by most, prized by the Combine, hunted by zealots. They can never use magic, and healing magic slides off them; they are mended with tools.",
+    "standing": {"combine": 10, "spire_compact": -20, "meridian": -5},
+    "names": {
+      "given_m": [], "given_f": [],
+      "given_x": ["Axle", "Beacon", "Cinder", "Dial", "Ember", "Gauge", "Keel", "Lantern", "Meridian", "Piston", "Quill", "Rivet", "Tally", "Vane"],
+      "family_prefix": ["Unit", "Pattern", "Series", "Model"],
+      "family_suffix": [" I", " II", " III", " IV", " VII", " IX", " XII", " XIV"]
+    }
+  }
+}

@@ -1,41 +1,41 @@
 {
   "fists": {
-    "name": "Fists", "type": "weapon", "pool": "neutral",
+    "name": "Fists", "type": "weapon", "pool": "neutral", "skill": "brawling",
     "damage": "1d3", "ap": 2, "range": 5
   },
   "repeating_carbine": {
-    "name": "Repeating Carbine", "type": "weapon", "pool": "gear",
+    "name": "Repeating Carbine", "type": "weapon", "pool": "gear", "skill": "firearms",
     "damage": "1d10", "ap": 4, "range": 90, "ranged": true, "misfire": 0.03,
     "weight": 4, "value": 120,
     "desc": "Ballistics, tier 3 schematic. Clockwork drum, rifled barrel, walnut stock. Jams more often where magic runs thick."
   },
   "boiler_lance": {
-    "name": "Boiler Lance", "type": "weapon", "pool": "gear",
+    "name": "Boiler Lance", "type": "weapon", "pool": "gear", "skill": "heavy_gear",
     "damage": "1d8", "ap": 3, "range": 10, "misfire": 0.01,
     "alt": { "label": "Charged Boiler Lance", "damage": "3d8", "ap": 6, "misfire": 0.05, "burst_damage": "1d8" },
     "weight": 6, "value": 90,
     "desc": "Steamworks, tier 2 schematic. A pocket boiler drives the head forward. Overcharge it for a huge hit, and pray the boiler holds."
   },
   "fen_hookblade": {
-    "name": "Fen Hookblade", "type": "weapon", "pool": "neutral",
+    "name": "Fen Hookblade", "type": "weapon", "pool": "neutral", "skill": "blades",
     "damage": "1d8", "ap": 3, "range": 10, "special": ["trip"],
     "weight": 3, "value": 30,
     "desc": "Smithing, common Fenfolk pattern. The hook can trip a target, costing them 2 AP. Works the same anywhere, magic or not."
   },
   "shelf_longbow": {
-    "name": "Shelf Longbow", "type": "weapon", "pool": "neutral",
+    "name": "Shelf Longbow", "type": "weapon", "pool": "neutral", "skill": "bows",
     "damage": "1d8", "ap": 3, "range": 150, "ranged": true, "special": ["silent"],
     "weight": 2, "value": 45,
     "desc": "Fletching, Freeholder design. Yew and ash, horn nocks. Quiet and reliable."
   },
   "starglass_staff": {
-    "name": "Starglass Staff", "type": "weapon", "pool": "arcane",
+    "name": "Starglass Staff", "type": "weapon", "pool": "arcane", "skill": "blunt",
     "damage": "1d6", "ap": 2, "range": 5, "spell_power": 2,
     "weight": 3, "value": 150,
     "desc": "Foci, Collegium formula. Adds +2 spell power. Glows brighter at high Resonance. In a factory district it is just a stick."
   },
   "frostvein_dagger": {
-    "name": "Frostvein Dagger", "type": "weapon", "pool": "arcane",
+    "name": "Frostvein Dagger", "type": "weapon", "pool": "arcane", "skill": "blades",
     "damage": "1d4", "ap": 2, "range": 5, "finesse": true,
     "bonus_damage": "1d6", "bonus_type": "cold", "special": ["slow_on_crit"],
     "identify_required": true, "unidentified_name": "A dagger, cold to the touch",
