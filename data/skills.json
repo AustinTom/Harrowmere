@@ -1,0 +1,12 @@
+{
+  "arcane_bolt": {
+    "name": "Arcane Bolt", "school": "arcane", "kind": "attack",
+    "ap": 4, "range": 60, "damage": "2d6", "stat": "int", "color": "#7fd6ff",
+    "desc": "A bolt of raw arcane force. Strength follows local Resonance and the caster's aptitude."
+  },
+  "mend_wounds": {
+    "name": "Mend Wounds", "school": "divine", "kind": "heal",
+    "ap": 4, "range": 30, "heal": "2d6", "stat": "wis", "color": "#9dffb0",
+    "desc": "A short prayer that closes wounds. Divine magic leans on Resonance less than arcane."
+  }
+}

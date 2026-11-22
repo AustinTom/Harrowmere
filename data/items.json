@@ -1,0 +1,59 @@
+{
+  "fists": {
+    "name": "Fists", "type": "weapon", "pool": "neutral",
+    "damage": "1d3", "ap": 2, "range": 5
+  },
+  "repeating_carbine": {
+    "name": "Repeating Carbine", "type": "weapon", "pool": "gear",
+    "damage": "1d10", "ap": 4, "range": 90, "ranged": true, "misfire": 0.03,
+    "weight": 4, "value": 120,
+    "desc": "Ballistics, tier 3 schematic. Clockwork drum, rifled barrel, walnut stock. Jams more often where magic runs thick."
+  },
+  "boiler_lance": {
+    "name": "Boiler Lance", "type": "weapon", "pool": "gear",
+    "damage": "1d8", "ap": 3, "range": 10, "misfire": 0.01,
+    "alt": { "label": "Charged Boiler Lance", "damage": "3d8", "ap": 6, "misfire": 0.05, "burst_damage": "1d8" },
+    "weight": 6, "value": 90,
+    "desc": "Steamworks, tier 2 schematic. A pocket boiler drives the head forward. Overcharge it for a huge hit, and pray the boiler holds."
+  },
+  "fen_hookblade": {
+    "name": "Fen Hookblade", "type": "weapon", "pool": "neutral",
+    "damage": "1d8", "ap": 3, "range": 10, "special": ["trip"],
+    "weight": 3, "value": 30,
+    "desc": "Smithing, common Fenfolk pattern. The hook can trip a target, costing them 2 AP. Works the same anywhere, magic or not."
+  },
+  "shelf_longbow": {
+    "name": "Shelf Longbow", "type": "weapon", "pool": "neutral",
+    "damage": "1d8", "ap": 3, "range": 150, "ranged": true, "special": ["silent"],
+    "weight": 2, "value": 45,
+    "desc": "Fletching, Freeholder design. Yew and ash, horn nocks. Quiet and reliable."
+  },
+  "starglass_staff": {
+    "name": "Starglass Staff", "type": "weapon", "pool": "arcane",
+    "damage": "1d6", "ap": 2, "range": 5, "spell_power": 2,
+    "weight": 3, "value": 150,
+    "desc": "Foci, Collegium formula. Adds +2 spell power. Glows brighter at high Resonance. In a factory district it is just a stick."
+  },
+  "frostvein_dagger": {
+    "name": "Frostvein Dagger", "type": "weapon", "pool": "arcane",
+    "damage": "1d4", "ap": 2, "range": 5, "finesse": true,
+    "bonus_damage": "1d6", "bonus_type": "cold", "special": ["slow_on_crit"],
+    "identify_required": true, "unidentified_name": "A dagger, cold to the touch",
+    "weight": 1, "value": 200,
+    "desc": "Ossuan work. An ice blade that never melts: +1d6 cold that scales with Resonance, and a critical hit slows the target (3 AP)."
+  },
+  "healing_draught": {
+    "name": "Healing Draught", "type": "consumable", "stack": true,
+    "heal": "2d4+2", "ap": 2, "weight": 0.5, "value": 15,
+    "desc": "Restores 2d4+2 HP. Costs 2 AP in combat."
+  },
+  "assayer_lens": {
+    "name": "Assayer's Lens", "type": "consumable", "stack": true,
+    "identify": true, "ap": 0, "weight": 0.2, "value": 25,
+    "desc": "Identifies one unknown item in the user's pack, or the party's."
+  },
+  "coin": {
+    "name": "Coin", "type": "misc", "stack": true, "weight": 0, "value": 1,
+    "desc": "Combine scrip and old Compact silver, both spend the same here."
+  }
+}

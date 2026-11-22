@@ -1,0 +1,38 @@
+{
+  "name": "Fennick's Landing",
+  "region": "The Meltlands",
+  "size": [40, 30],
+  "locations": [
+    {"id": "shrine_green", "name": "Shrine Green", "rect": [0, 0, 20, 30], "resonance": 72},
+    {"id": "pumphouse_yard", "name": "Pumphouse Yard", "rect": [20, 0, 20, 30], "resonance": 18}
+  ],
+  "structures": [
+    {"kind": "shrine", "rect": [5, 6, 2, 2]},
+    {"kind": "well", "rect": [12, 12, 1, 1]},
+    {"kind": "house", "rect": [1, 15, 4, 3]},
+    {"kind": "house", "rect": [9, 19, 4, 4]},
+    {"kind": "house", "rect": [2, 24, 5, 3]},
+    {"kind": "house", "rect": [14, 3, 4, 3]},
+    {"kind": "pumphouse", "rect": [27, 4, 6, 5]},
+    {"kind": "coal", "rect": [23, 13, 2, 2]},
+    {"kind": "coal", "rect": [35, 19, 2, 2]},
+    {"kind": "crate", "rect": [31, 12, 1, 1]},
+    {"kind": "crate", "rect": [26, 18, 1, 1]},
+    {"kind": "fence", "rect": [20, 0, 1, 10]},
+    {"kind": "fence", "rect": [20, 16, 1, 14]}
+  ],
+  "spawns": [
+    {"template": "player", "tile": [8, 12]},
+    {"template": "iska", "tile": [7, 13]},
+    {"template": "osk_brannel", "tile": [11, 10]},
+    {"template": "hesta_lowe", "tile": [7, 9]},
+    {"template": "tam_fairweather", "tile": [17, 19]},
+    {"template": "scav_boss", "tile": [30, 14]},
+    {"template": "scav_hook", "tile": [32, 16]},
+    {"template": "scav_brute", "tile": [29, 17]}
+  ],
+  "triggers": [
+    {"on": "group_cleared", "group": "pump_scavs", "flag": "quest_pump", "value": "cleared",
+     "unless": ["cleared", "done"], "log": "The pumphouse yard is quiet. Osk Brannel will want to hear."}
+  ]
+}

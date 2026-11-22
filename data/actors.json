@@ -1,0 +1,60 @@
+{
+  "player": {
+    "name": "Wayfarer", "faction": "player", "color": "#4f7cc9", "race": "human",
+    "stats": {"str": 14, "dex": 14, "con": 14, "int": 12, "wis": 10, "cha": 10},
+    "hp": 30, "ac": 14, "ap": 6, "aptitude": 0,
+    "skills": ["arcane_bolt"],
+    "inventory": [
+      {"id": "fen_hookblade"}, {"id": "repeating_carbine"}, {"id": "shelf_longbow"},
+      {"id": "healing_draught", "qty": 2}, {"id": "assayer_lens", "qty": 1}, {"id": "coin", "qty": 12}
+    ],
+    "equip": "fen_hookblade"
+  },
+  "iska": {
+    "name": "Iska Vell", "faction": "ally", "follows_player": true, "color": "#8f6cc4", "race": "elf",
+    "stats": {"str": 8, "dex": 14, "con": 10, "int": 16, "wis": 13, "cha": 12},
+    "hp": 20, "ac": 12, "ap": 6, "aptitude": 60,
+    "skills": ["arcane_bolt", "mend_wounds"],
+    "inventory": [{"id": "starglass_staff"}, {"id": "healing_draught", "qty": 1}],
+    "equip": "starglass_staff", "dialogue": "iska"
+  },
+  "osk_brannel": {
+    "name": "Osk Brannel", "faction": "neutral", "color": "#a0703c", "race": "dwarf",
+    "stats": {"str": 14, "dex": 10, "con": 15, "int": 11, "wis": 13, "cha": 11},
+    "hp": 22, "ac": 13, "dialogue": "warden",
+    "schedule": [{"hour": 6, "tile": [11, 10]}, {"hour": 12, "tile": [16, 13]}, {"hour": 19, "tile": [3, 19]}]
+  },
+  "hesta_lowe": {
+    "name": "Hesta Lowe", "faction": "neutral", "color": "#d9d2b4", "race": "human",
+    "stats": {"str": 9, "dex": 10, "con": 11, "int": 12, "wis": 16, "cha": 13},
+    "hp": 14, "ac": 10, "aptitude": 40, "dialogue": "hesta",
+    "schedule": [{"hour": 5, "tile": [7, 9]}, {"hour": 13, "tile": [13, 13]}, {"hour": 15, "tile": [7, 9]}, {"hour": 21, "tile": [4, 23]}]
+  },
+  "tam_fairweather": {
+    "name": "Tam Fairweather", "faction": "neutral", "color": "#6d8a4a", "race": "halfling",
+    "stats": {"str": 11, "dex": 13, "con": 12, "int": 10, "wis": 10, "cha": 12},
+    "hp": 12, "ac": 11, "aptitude": -30, "dialogue": "tam",
+    "schedule": [{"hour": 6, "tile": [17, 19]}, {"hour": 10, "tile": [18, 11]}, {"hour": 16, "tile": [13, 12]}, {"hour": 20, "tile": [11, 24]}]
+  },
+  "scav_boss": {
+    "name": "Rook Harl", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#b94a3c",
+    "stats": {"str": 10, "dex": 14, "con": 12, "int": 10, "wis": 10, "cha": 12},
+    "hp": 14, "ac": 13, "ap": 6, "aptitude": -30,
+    "inventory": [{"id": "repeating_carbine"}, {"id": "frostvein_dagger"}, {"id": "coin", "qty": 25}],
+    "equip": "repeating_carbine"
+  },
+  "scav_hook": {
+    "name": "Scavenger", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#9c5a3c",
+    "stats": {"str": 12, "dex": 12, "con": 11, "int": 9, "wis": 9, "cha": 8},
+    "hp": 10, "ac": 12, "ap": 6, "aptitude": -10,
+    "inventory": [{"id": "fen_hookblade"}, {"id": "healing_draught", "qty": 1}],
+    "equip": "fen_hookblade"
+  },
+  "scav_brute": {
+    "name": "Scavenger Brute", "faction": "hostile", "group": "pump_scavs", "aggro": 7, "color": "#7e3b30",
+    "stats": {"str": 13, "dex": 10, "con": 14, "int": 8, "wis": 9, "cha": 8},
+    "hp": 15, "ac": 11, "ap": 6, "aptitude": -40,
+    "inventory": [{"id": "boiler_lance"}, {"id": "coin", "qty": 6}],
+    "equip": "boiler_lance"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "warden": {
+    "entries": [
+      {"if": {"pump_choice": "lit"}, "node": "after_lit"},
+      {"if": {"pump_choice": "cold"}, "node": "after_cold"},
+      {"if": {"quest_pump": "cleared"}, "node": "report"},
+      {"if": {"quest_pump": "active"}, "node": "waiting"},
+      {"node": "intro"}
+    ],
+    "nodes": {
+      "intro": {
+        "text": "You're new off the ferry road. Osk Brannel, warden of Fennick's Landing, for what that's worth this week. Scavengers have dug into the old pumphouse east of the fence. Three of them, armed with Combine surplus. They strip the boiler for scrap and shoot at anyone who comes for water.",
+        "options": [
+          {"text": "I'll clear them out.", "effects": [{"type": "set_flag", "flag": "quest_pump", "value": "active"}], "next": "accept"},
+          {"text": "What's the pumphouse for?", "next": "pump_info"},
+          {"text": "Not my concern.", "next": ""}
+        ]
+      },
+      "pump_info": {
+        "text": "It pumped meltwater off the low fields back when the Combine ran it. Nobody's lit the boiler in two winters. Hesta says that's why the shrine is breathing again. Tam says that's why nobody here has work.",
+        "options": [
+          {"text": "I'll deal with the scavengers.", "effects": [{"type": "set_flag", "flag": "quest_pump", "value": "active"}], "next": "accept"},
+          {"text": "Goodbye.", "next": ""}
+        ]
+      },
+      "accept": {
+        "text": "Good. Mind the yard. The shrine's pull is weak out there, so spells go thin, and their guns won't jam the way they do on the green. If you're clever, you'll draw them in toward the shrine.",
+        "options": [{"text": "Leave.", "next": ""}]
+      },
+      "waiting": {
+        "text": "Still three guns in my pumphouse, last I heard.",
+        "options": [{"text": "Leave.", "next": ""}]
+      },
+      "report": {
+        "text": "Quiet out there. You did it. Now the hard part: the pump. Tam wants the boiler relit, says it means wages. Hesta wants it left cold so the shrine keeps its strength. Your work cleared it, so I'll go with your word.",
+        "options": [
+          {"text": "Relight the boiler. People need work.", "effects": [
+            {"type": "set_flag", "flag": "quest_pump", "value": "done"},
+            {"type": "set_flag", "flag": "pump_choice", "value": "lit"},
+            {"type": "shift_resonance", "location": "pumphouse_yard", "amount": -15},
+            {"type": "shift_resonance", "location": "shrine_green", "amount": -12},
+            {"type": "give_item", "item": "coin", "qty": 40},
+            {"type": "log", "text": "The pumphouse boiler thumps back to life. Resonance falls across Fennick's Landing."}
+          ], "next": "lit"},
+          {"text": "Leave it cold. Let the shrine breathe.", "effects": [
+            {"type": "set_flag", "flag": "quest_pump", "value": "done"},
+            {"type": "set_flag", "flag": "pump_choice", "value": "cold"},
+            {"type": "shift_resonance", "location": "pumphouse_yard", "amount": 20},
+            {"type": "shift_resonance", "location": "shrine_green", "amount": 6},
+            {"type": "give_item", "item": "healing_draught", "qty": 2},
+            {"type": "give_item", "item": "coin", "qty": 15},
+            {"type": "log", "text": "The boiler stays cold. You feel the shrine's pull spread into the yard."}
+          ], "next": "cold"}
+        ]
+      },
+      "lit": {"text": "Then it's done. Tam will have a crew by nightfall. Here, from the town chest.", "options": [{"text": "Leave.", "next": ""}]},
+      "cold": {"text": "Hesta will be pleased. Tam won't. Take these, from the shrine stores.", "options": [{"text": "Leave.", "next": ""}]},
+      "after_lit": {"text": "Hear that thump? Wages, that is. Mind, Hesta hasn't spoken to me since.", "options": [{"text": "Leave.", "next": ""}]},
+      "after_cold": {"text": "Quiet nights. Too quiet for some.", "options": [{"text": "Leave.", "next": ""}]}
+    }
+  },
+  "hesta": {
+    "entries": [
+      {"if": {"pump_choice": "lit"}, "node": "after_lit"},
+      {"if": {"pump_choice": "cold"}, "node": "after_cold"},
+      {"node": "intro"}
+    ],
+    "nodes": {
+      "intro": {
+        "text": "The shrine of the Lantern Mother has stood on this green since before the ice. When the Combine lit that boiler, the spring went still and my prayers came back empty. Two winters cold, and she answers again.",
+        "options": [
+          {"text": "What is Resonance?", "next": "resonance"},
+          {"text": "Goodbye.", "next": ""}
+        ]
+      },
+      "resonance": {
+        "text": "Call it what the scholars do. It's how thickly the world runs with the sacred and the strange. Here on the green it runs deep. In the pumphouse yard it's thin as frost. Spells and prayers follow it. Machines hate it.",
+        "options": [{"text": "Goodbye.", "next": ""}]
+      },
+      "after_lit": {"text": "You chose the boiler. I can feel the spring going still again.", "options": [{"text": "Goodbye.", "next": ""}]},
+      "after_cold": {"text": "Bless you. Listen, the spring is singing.", "options": [{"text": "Goodbye.", "next": ""}]}
+    }
+  },
+  "tam": {
+    "entries": [
+      {"if": {"pump_choice": "lit"}, "node": "after_lit"},
+      {"if": {"pump_choice": "cold"}, "node": "after_cold"},
+      {"node": "intro"}
+    ],
+    "nodes": {
+      "intro": {
+        "text": "Coal's all I know, and none of it's moving. Scavengers took the yard, and the boiler's been dead since the Combine pulled out. You want my vote? Light it. Folk can't eat shrine songs.",
+        "options": [
+          {"text": "The shrine-keeper disagrees.", "next": "hesta"},
+          {"text": "Goodbye.", "next": ""}
+        ]
+      },
+      "hesta": {"text": "Hesta's a good soul. Hesta also doesn't have four children.", "options": [{"text": "Goodbye.", "next": ""}]},
+      "after_lit": {"text": "Wages! Real wages! Drinks are on me, once I've been paid.", "options": [{"text": "Goodbye.", "next": ""}]},
+      "after_cold": {"text": "Well. Your call. My kids will learn to eat shrine songs, then.", "options": [{"text": "Goodbye.", "next": ""}]}
+    }
+  },
+  "iska": {
+    "entries": [{"node": "intro"}],
+    "nodes": {
+      "intro": {
+        "text": "Two years at the Spire Compact's collegium before they decided I asked too many questions. I'll follow you while the pay is honest and the questions are allowed.",
+        "options": [
+          {"text": "How do your spells work out here?", "next": "spells"},
+          {"text": "Let me see your pack.", "effects": [{"type": "open_inventory"}], "next": ""},
+          {"text": "Let's go.", "next": ""}
+        ]
+      },
+      "spells": {
+        "text": "Depends where we stand. On the green my bolts hit like a mule. In that yard, like a thrown shoe. And never hand me a gun. With my hands this close to the arcane, it'll jam just from my looking at it.",
+        "options": [{"text": "Let's go.", "next": ""}]
+      }
+    }
+  }
+}
