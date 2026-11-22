@@ -1,0 +1,136 @@
+{
+ "_note": "Lighting presets per region. sun_from is a unit vector pointing FROM the scene TO the sun in Godot world space (camera looks from +X+Z). Colours are sRGB hex. resonance_grade is blended on top by local Resonance (0-100). See docs/art/README.md.",
+ "defaults": {
+  "sun_from": [
+   -0.45,
+   0.83,
+   0.32
+  ],
+  "shadow": "PCF soft, max distance 40 m, 2 cascades",
+  "tonemap": "filmic",
+  "exposure": 1.0,
+  "white": 6.0,
+  "glow": {
+   "enabled": true,
+   "hdr_threshold": 1.0,
+   "intensity": 0.6,
+   "bloom": 0.05,
+   "levels": [
+    2,
+    3,
+    4
+   ]
+  },
+  "ssao": {
+   "enabled": true,
+   "radius": 0.8,
+   "intensity": 1.4
+  },
+  "ambient_source": "color"
+ },
+ "regions": {
+  "old_shires": {
+   "sun": "#ffe6c4",
+   "sun_energy": 1.0,
+   "ambient": "#a7a9a0",
+   "ambient_energy": 0.45,
+   "fog": "#b9b2a0",
+   "fog_density": 0.006,
+   "background": "#2a2a28",
+   "mood": "hazy afternoon, canal damp, soot on everything old"
+  },
+  "furnace_coast": {
+   "sun": "#ffd2a8",
+   "sun_energy": 0.7,
+   "ambient": "#8c8378",
+   "ambient_energy": 0.5,
+   "fog": "#8a8072",
+   "fog_density": 0.02,
+   "background": "#221e1b",
+   "mood": "sun through smog, orange furnace pools, cold grey sea"
+  },
+  "meltlands": {
+   "sun": "#fff1dc",
+   "sun_energy": 1.0,
+   "ambient": "#a9bdd1",
+   "ambient_energy": 0.4,
+   "fog": "#c8d3cf",
+   "fog_density": 0.004,
+   "background": "#1d2230",
+   "mood": "wet fresh green, low mist, clean light"
+  },
+  "spiremarch": {
+   "sun": "#f4e6ff",
+   "sun_energy": 1.1,
+   "ambient": "#9a9bc4",
+   "ambient_energy": 0.5,
+   "fog": "#b9b8d6",
+   "fog_density": 0.008,
+   "background": "#1c1a2c",
+   "mood": "violet dusk on granite and snow, gilt catching light"
+  },
+  "shelf": {
+   "sun": "#e8f4ff",
+   "sun_energy": 1.3,
+   "ambient": "#b9d0e8",
+   "ambient_energy": 0.6,
+   "fog": "#dfeaf0",
+   "fog_density": 0.012,
+   "background": "#9fb4c4",
+   "mood": "glare off ice, near-whiteout, black rock and raw timber"
+  },
+  "drowned_vale": {
+   "sun": "#e4f0d8",
+   "sun_energy": 0.8,
+   "ambient": "#8fb0a4",
+   "ambient_energy": 0.5,
+   "fog": "#9fbfb4",
+   "fog_density": 0.018,
+   "background": "#1a2624",
+   "mood": "green-teal murk, reflections, bone-white Ossuan stone"
+  }
+ },
+ "interiors": {
+  "sun_energy": 0.0,
+  "ambient": "#5a5048",
+  "ambient_energy": 0.35,
+  "note": "Light from placed lamps only; owner row lamp_glow sets lamp colour."
+ },
+ "dungeons": {
+  "sun_energy": 0.0,
+  "ambient": "#2c2f3a",
+  "ambient_energy": 0.25,
+  "fog": "#14161c",
+  "fog_density": 0.03
+ },
+ "night": {
+  "sun": "#9fb4e8",
+  "sun_energy": 0.25,
+  "ambient": "#3a4258",
+  "ambient_energy": 0.35,
+  "note": "Blend toward this by time of day; emissives and lamps carry the scene."
+ },
+ "resonance_grade": {
+  "0": {
+   "saturation": 0.82,
+   "temperature_shift": 0.06,
+   "particles": "ash and smog drift",
+   "ground_decal": "soot",
+   "foliage": "dead_ground / grass_dry"
+  },
+  "50": {
+   "saturation": 1.0,
+   "temperature_shift": 0.0,
+   "particles": "none",
+   "ground_decal": "none",
+   "foliage": "grass"
+  },
+  "100": {
+   "saturation": 1.12,
+   "temperature_shift": -0.05,
+   "particles": "arcane motes, slow upward",
+   "ground_decal": "faint rune glow at shrines",
+   "foliage": "meltland_lush"
+  }
+ }
+}
