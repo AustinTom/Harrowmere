@@ -27,7 +27,7 @@ func _ready() -> void:
 	var v := VBoxContainer.new()
 	add_child(v)
 	var title := Label.new()
-	title.text = "Workbench   (C or Esc to close. Hover a row for details.)"
+	title.text = "Workbench   (B or Esc to close. Hover a row for details.)"
 	v.add_child(title)
 	_who_row = HBoxContainer.new()
 	v.add_child(_who_row)

@@ -26,7 +26,7 @@ Everything is primitive geometry, ready to be replaced with real models.
 | T | Switch turn-based and real-time (works mid-fight) |
 | Space | End your turn (turn-based) |
 | I | Inventory for you and Iska: equip, use, read, identify, give items between packs |
-| C | Workbench: craft, buy trade tiers and pick schematics, enchant |
+| B | Workbench: craft, buy trade tiers and pick schematics, enchant |
 | Mouse wheel | Zoom |
 | R | Restart after death |
 
@@ -41,7 +41,7 @@ Everything is primitive geometry, ready to be replaced with real models.
   doesn't give anyone a free refill.
 * Loot Rook Harl's "dagger, cold to the touch" and use the **Assayer's Lens** on it.
   Until it's identified, its frost damage stays dormant.
-* Open the workbench (**C**). Spend a trade point on a tier and pick 2 of its 4 schematics, then
+* Open the workbench (**B**). Spend a trade point on a tier and pick 2 of its 4 schematics, then
   craft from the starting materials. Machines come out better east of the fence (low Resonance),
   Iska's draughts and enchantments better on the green.
 * Switch the crafter to **Iska** and bind Frost Edge onto your hookblade. Try it on the carbine

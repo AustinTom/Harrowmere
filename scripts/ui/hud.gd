@@ -48,7 +48,7 @@ func _ready() -> void:
 	_hotbar.add_theme_color_override("font_color", Color("#ffd84d"))
 	pv.add_child(_hotbar)
 	var keys := Label.new()
-	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-4: action   T: turn-based <-> real-time   Space: end turn   I: inventory   C: workbench   Wheel: zoom"
+	keys.text = "Left-click: move / attack / talk   Right-click: examine   1-4: action   T: turn-based <-> real-time   Space: end turn   I: inventory   B: workbench   Wheel: zoom"
 	keys.add_theme_color_override("font_color", Color("#9aa7b3"))
 	keys.add_theme_font_size_override("font_size", 13)
 	pv.add_child(keys)

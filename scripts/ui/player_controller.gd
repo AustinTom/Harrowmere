@@ -83,7 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				combat.end_turn(p)
 			KEY_I:
 				hud.toggle_inventory()
-			KEY_C:
+			KEY_B:
 				hud.toggle_crafting()
 			KEY_ESCAPE:
 				hud.close_panels()

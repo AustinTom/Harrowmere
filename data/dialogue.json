@@ -142,7 +142,7 @@
         ]
       },
       "howto": {
-        "text": "Every trade has five tiers. Each tier you earn, you pick two of its four schematics, so no two engineers know the same things. Anything else you find or buy on paper. Parts chain: a trigger needs a spring and a housing, and a carbine needs the trigger. Press C for your workbench.",
+        "text": "Every trade has five tiers. Each tier you earn, you pick two of its four schematics, so no two engineers know the same things. Anything else you find or buy on paper. Parts chain: a trigger needs a spring and a housing, and a carbine needs the trigger. Press B for your workbench.",
         "options": [{"text": "Back.", "next": "intro"}]
       }
     }
