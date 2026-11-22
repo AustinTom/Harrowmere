@@ -52,8 +52,14 @@ func _ready() -> void:
 		mode, seed_value, started, started and not combat.active, victory, t, toggles, player.hp, iska.hp,
 		GameState.get_flag("quest_pump", "")])
 	if victory:
-		var lens = player.inventory.find_first("assayer_lens")
-		await combat.do_use_item(player, lens)
+		# Identify the loot: Iska's spell first, then the player's lenses.
 		var dag = player.inventory.find_first("frostvein_dagger")
+		if dag != null:
+			for line in Identification.by_spell(iska, dag, "identify", world.resonance_at(iska.tile))["lines"]:
+				Events.post(line)
+			while not dag["identified"] and player.inventory.find_first("assayer_lens") != null:
+				var lens = player.inventory.find_first("assayer_lens")
+				for line in Identification.by_lens(player, dag, lens, player.inventory, world.resonance_at(player.tile))["lines"]:
+					Events.post(line)
 		print("SIM dagger identified=%s" % (dag != null and dag["identified"]))
 	get_tree().quit(0 if started and not combat.active else 1)

@@ -15,12 +15,14 @@ var faction := "neutral" # player, ally, neutral, hostile
 var stats := {"str": 10, "dex": 10, "con": 10, "int": 10, "wis": 10, "cha": 10}
 var max_hp := 10
 var hp := 10
-var ac := 10
+var ac := 10 ## effective AC (base_ac + equipment); Rules reads this
+var base_ac := 10
 var ap_max := 6
 var ap: float = 6.0
 var ap_debt := 0
 var aptitude := 0 # -100 Gear ... 0 balanced ... +100 Arcane
 var inventory := Inventory.new()
+var crafting := CraftingKnowledge.new() ## schematics known, tier picks (see scripts/crafting)
 var known_skills: Array = []
 var schedule: Array = []
 var dialogue_id := ""
@@ -60,7 +62,8 @@ func apply_template(tpl: Dictionary) -> void:
 		stats[k] = int(s[k])
 	max_hp = int(tpl.get("hp", 10))
 	hp = max_hp
-	ac = int(tpl.get("ac", 10))
+	base_ac = int(tpl.get("ac", 10))
+	ac = base_ac
 	ap_max = int(tpl.get("ap", 6))
 	ap = ap_max
 	aptitude = int(tpl.get("aptitude", 0))
@@ -75,9 +78,15 @@ func apply_template(tpl: Dictionary) -> void:
 	_build_visual()
 	inventory.changed.connect(_update_weapon_visual)
 	for inv in tpl.get("inventory", []):
-		inventory.add(str(inv["id"]), int(inv.get("qty", 1)), inv.get("identified", null))
+		var extra := {}
+		for k in ["quality", "enchants", "curse"]:
+			if inv.has(k):
+				extra[k] = inv[k]
+		inventory.add(str(inv["id"]), int(inv.get("qty", 1)), inv.get("identified", null), extra)
+	crafting = CraftingKnowledge.from_dict(tpl.get("crafting", {}))
+	Crafting.unlock_patents(self)
 	if tpl.has("equip"):
-		equip_entry(inventory.find_first(str(tpl["equip"])))
+		equip_entry(inventory.find_first(str(tpl["equip"])), true)
 
 
 # ---------------------------------------------------------------- equipment
@@ -89,27 +98,43 @@ func equipped_entry() -> Variant:
 	return null
 
 
-## The equipped weapon's data. Unidentified magic items keep their hidden
-## powers dormant until identified.
+## The equipped weapon's effective data (quality, enchantments, curses; see
+## ItemStats). Unidentified magic items keep their hidden powers dormant.
 func weapon_data() -> Dictionary:
 	var e = equipped_entry()
 	if e == null:
 		return DB.get_item("fists").duplicate(true)
-	var d: Dictionary = DB.get_item(e["id"]).duplicate(true)
-	if not e["identified"]:
-		d["name"] = d.get("unidentified_name", d.get("name", "?"))
-		for k in ["bonus_damage", "special", "spell_power"]:
-			d.erase(k)
-	return d
+	return ItemStats.resolve(e)
 
 
-func equip_entry(e) -> void:
+## True if the equipped item is cursed and won't let go.
+func equipment_stuck() -> bool:
+	var e = equipped_entry()
+	return e != null and ItemStats.is_stuck(e)
+
+
+## Equips an entry (null to unequip). Refuses if a sticky curse holds the
+## current item, unless `force`. Waking curses are announced in the log.
+func equip_entry(e, force := false) -> bool:
+	var cur = equipped_entry()
+	if not force and cur != null and cur != e and ItemStats.is_stuck(cur):
+		Events.post("[color=#ff8a65]%s can't let go of the %s. The curse holds it.[/color]" % [display_name, ItemStats.display_name(cur)])
+		return false
 	for x in inventory.entries:
 		x["equipped"] = false
 	if e != null:
 		e["equipped"] = true
+		if not force:
+			for line in Identification.on_equip(self, e):
+				Events.post(line)
+	refresh_stats()
 	inventory.changed.emit()
 	Events.inventory_changed.emit()
+	return true
+
+
+func refresh_stats() -> void:
+	ac = base_ac + int(weapon_data().get("ac_bonus", 0))
 
 
 func spell_power() -> int:

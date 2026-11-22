@@ -32,7 +32,8 @@ static func visible_options(node: Dictionary) -> Array:
 
 
 ## Applies effects. Returns UI requests (like "open_inventory") for the caller.
-static func apply_effects(effects: Array, receiver) -> Array:
+## `speaker` is the NPC talking (trainers, appraisers, shopkeepers).
+static func apply_effects(effects: Array, receiver, speaker = null) -> Array:
 	var requests: Array = []
 	for e in effects:
 		match str(e.get("type", "")):
@@ -49,6 +50,27 @@ static func apply_effects(effects: Array, receiver) -> Array:
 				Events.post(str(e["text"]))
 			"open_inventory":
 				requests.append("open_inventory")
+			"open_crafting":
+				requests.append("open_crafting")
+			"open_appraisal":
+				requests.append("open_appraisal")
+			"lift_curse":
+				requests.append("lift_curse")
+			"buy_item":
+				if receiver != null:
+					var cost := int(e.get("cost", 0))
+					var qty := int(e.get("qty", 1))
+					var nm: String = DB.get_item(str(e["item"])).get("name", e["item"])
+					if receiver.inventory.count("coin") < cost:
+						Events.post("[color=gray]%s costs %d coin. You have %d.[/color]" % [nm, cost, receiver.inventory.count("coin")])
+					else:
+						receiver.inventory.remove_id("coin", cost)
+						receiver.inventory.add(str(e["item"]), qty)
+						Events.post("Bought %s x%d for %d coin." % [nm, qty, cost])
+			"learn_schematic":
+				if receiver != null:
+					var r := Crafting.buy_schematic(receiver, receiver, str(e["schematic"]), int(e.get("cost", 0)))
+					Events.post(("[color=#9fe07f]%s[/color]" if r["ok"] else "[color=gray]%s[/color]") % r["msg"])
 			_:
 				push_warning("Unknown dialogue effect: " + str(e))
 	return requests

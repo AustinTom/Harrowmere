@@ -365,6 +365,8 @@ func do_use_item(actor, entry: Dictionary) -> bool:
 		actor.heal(amt)
 		Events.post("%s drinks a %s and recovers %d HP." % [actor.display_name, item["name"], amt])
 	elif item.get("identify", false):
+		# Quick use: the lens goes to the first unknown item in the party's packs.
+		# The inventory's "Identify" button lets you choose the item and method.
 		var found = null
 		for holder in [actor] + world.party_all():
 			for e in holder.inventory.entries:
@@ -376,15 +378,41 @@ func do_use_item(actor, entry: Dictionary) -> bool:
 		if found == null:
 			Events.post("There is nothing unknown in the party's packs.")
 			return false
-		found["identified"] = true
-		var real: Dictionary = DB.get_item(found["id"])
-		Events.post("[color=#9fd8ff]%s studies it through the Assayer's Lens. It is a [b]%s[/b].[/color] %s" % [actor.display_name, real.get("name", "?"), real.get("desc", "")])
+		var r := Identification.by_lens(actor, found, entry, actor.inventory, world.resonance_at(actor.tile))
+		for line in r["lines"]:
+			Events.post(line)
+		return true
+	elif item.get("lift_curse", false):
+		var target = null
+		for e in actor.inventory.entries:
+			if ItemStats.is_cursed(e) and ItemStats.curse_known(e):
+				target = e
+				break
+		if target == null:
+			Events.post("%s has no known curse to wash away." % actor.display_name)
+			return false
+		var cname: String = DB.get_enchantment(ItemStats.curse_id(target)).get("name", "curse")
+		Identification.lift_curse(target)
+		Events.post("[color=#ffe9a8]%s pours the %s over the %s. The %s lifts.[/color]" % [actor.display_name, item["name"], ItemStats.display_name(target), cname])
 	actor.inventory.remove_one(entry)
 	return true
 
 
+## Reads a schematic, formula or recipe sheet (out of combat).
+func do_read(actor, entry: Dictionary) -> bool:
+	if actor.is_dead or (active and actor.in_combat):
+		Events.post("No time to study now.")
+		return false
+	var r := Crafting.learn_from_item(actor, entry)
+	Events.post(("[color=#9fe07f]%s[/color]" if r["ok"] else "%s") % r["msg"])
+	return r["ok"]
+
+
 func do_equip(actor, entry: Dictionary) -> bool:
 	if actor.is_dead or actor.busy:
+		return false
+	if actor.equipment_stuck():
+		actor.equip_entry(entry) # posts why it fails
 		return false
 	if active and actor.in_combat:
 		if not can_act(actor):
@@ -393,8 +421,8 @@ func do_equip(actor, entry: Dictionary) -> bool:
 		if not await wait_for_ap(actor, 2.0):
 			_note_no_ap(actor)
 			return false
-	actor.equip_entry(entry)
 	Events.post("%s readies the %s." % [actor.display_name, DB.entry_name(entry)])
+	actor.equip_entry(entry)
 	return true
 
 
@@ -411,6 +439,9 @@ func _apply(attacker, target, r: Dictionary) -> void:
 	if r["self_damage"] > 0:
 		attacker.take_damage(r["self_damage"])
 	if r["damage"] > 0:
+		if r["hit"] and attacker.has_method("equipped_entry"):
+			for line in Identification.on_hit(attacker, attacker.equipped_entry()):
+				Events.post(line)
 		target.take_damage(r["damage"], r["crit"])
 	elif r["heal"] > 0:
 		target.heal(r["heal"])

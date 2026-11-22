@@ -27,6 +27,7 @@
     {"template": "osk_brannel", "tile": [11, 10]},
     {"template": "hesta_lowe", "tile": [7, 9]},
     {"template": "tam_fairweather", "tile": [17, 19]},
+    {"template": "wendle_cobb", "tile": [16, 7]},
     {"template": "scav_boss", "tile": [30, 14]},
     {"template": "scav_hook", "tile": [32, 16]},
     {"template": "scav_brute", "tile": [29, 17]}

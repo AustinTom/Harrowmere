@@ -70,6 +70,21 @@ static func magic_multiplier(school: String, resonance: int, aptitude: int) -> f
 
 ## Chance a Gear device fails. Rises with Resonance above 40 and with the
 ## user's arcane aptitude; Gear-leaning users get a small reliability bonus.
+## Gear-powered extra damage (galvanic shocks, steam) is the mirror image:
+## strongest where Resonance is dead, weakest where magic runs thick.
+static func gear_multiplier(resonance: int, aptitude: int) -> float:
+	var r := resonance / 100.0
+	return clampf(lerpf(1.3, 0.7, r) * (1.0 - aptitude / 200.0), 0.1, 2.5)
+
+
+static func extra_multiplier(school: String, resonance: int, aptitude: int) -> float:
+	if school == "gear":
+		return gear_multiplier(resonance, aptitude)
+	if school == "neutral":
+		return 1.0
+	return magic_multiplier(school, resonance, aptitude)
+
+
 static func misfire_chance(base: float, resonance: int, aptitude: int) -> float:
 	var c := base + maxf(0.0, resonance - 40) * 0.006 + maxf(0.0, aptitude) * 0.002 - maxf(0.0, -aptitude) * 0.001
 	return clampf(c, 0.0, 0.9)
@@ -92,7 +107,7 @@ static func attack_stat(profile: Dictionary) -> String:
 
 
 static func attack_bonus(attacker, profile: Dictionary) -> int:
-	return mod(int(attacker.stats[attack_stat(profile)])) + PROFICIENCY
+	return mod(int(attacker.stats[attack_stat(profile)])) + PROFICIENCY + int(profile.get("to_hit", 0))
 
 
 static func hit_chance(bonus: int, ac: int) -> float:
@@ -129,13 +144,20 @@ static func resolve_attack(attacker, target, p: Dictionary, resonance: int) -> D
 	if not r["hit"]:
 		r["lines"].append("%s attacks %s with %s: %d+%d=%d vs AC %d, miss." % [an, tn, wn, d, bonus, total, ac])
 		return r
-	var dmg := roll_dice(str(p.get("damage", "1d3")), r["crit"]) + mod(int(attacker.stats[attack_stat(p)]))
+	var dmg := roll_dice(str(p.get("damage", "1d3")), r["crit"]) + mod(int(attacker.stats[attack_stat(p)])) + int(p.get("damage_flat", 0))
 	var extra_txt := ""
+	var extras: Array = p.get("extra_damage", []).duplicate()
 	if p.has("bonus_damage"):
-		var mult := magic_multiplier("arcane", resonance, int(attacker.aptitude))
-		var extra := roundi(roll_dice(str(p["bonus_damage"]), r["crit"]) * mult)
+		extras.append({"dice": p["bonus_damage"], "type": p.get("bonus_type", "arcane"), "school": "arcane"})
+	var bits: PackedStringArray = []
+	for x in extras:
+		var school := str(x.get("school", "arcane"))
+		var mult := extra_multiplier(school, resonance, int(attacker.aptitude))
+		var extra := roundi(roll_dice(str(x.get("dice", "1d4")), r["crit"]) * mult)
 		dmg += extra
-		extra_txt = " (incl. %d %s, x%.2f from Resonance)" % [extra, p.get("bonus_type", "arcane"), mult]
+		bits.append("%d %s x%.2f" % [extra, x.get("type", school), mult])
+	if not bits.is_empty():
+		extra_txt = " (incl. %s at Resonance %d)" % [", ".join(bits), resonance]
 	dmg = maxi(1, dmg)
 	r["damage"] = dmg
 	r["lines"].append("%s hits %s with %s%s: %d+%d=%d vs AC %d, [b]%d damage[/b]%s." % [an, tn, wn, " [color=#ffd700]CRITICAL[/color]" if r["crit"] else "", d, bonus, total, ac, dmg, extra_txt])

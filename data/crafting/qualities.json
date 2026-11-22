@@ -1,0 +1,6 @@
+{
+  "crude": {"name": "Crude", "to_hit": -1, "damage_flat": -1, "misfire_mult": 1.5, "value_mult": 0.5, "enchant_slots": 0, "desc": "It works. Mostly."},
+  "standard": {"name": "Standard", "value_mult": 1.0, "enchant_slots": 1, "desc": "Workmanlike."},
+  "fine": {"name": "Fine", "to_hit": 1, "misfire_mult": 0.75, "value_mult": 1.6, "enchant_slots": 2, "ac_bonus": 0, "desc": "Careful work: +1 to hit, fewer misfires, two enchant slots."},
+  "masterwork": {"name": "Masterwork", "to_hit": 1, "damage_flat": 1, "misfire_mult": 0.5, "value_mult": 2.5, "enchant_slots": 3, "ac_bonus": 1, "desc": "A craftsman's best: +1 to hit, +1 damage, half the misfires, three enchant slots."}
+}

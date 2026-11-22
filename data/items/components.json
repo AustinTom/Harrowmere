@@ -1,0 +1,23 @@
+{
+  "brass_spring": {"name": "Brass Spring", "type": "component", "stack": true, "weight": 0.1, "value": 12, "desc": "Ballistics component. Drives triggers and clockwork."},
+  "ratchet_housing": {"name": "Ratchet Housing", "type": "component", "stack": true, "weight": 0.3, "value": 14, "desc": "Ballistics component. A pawl-and-ratchet case that holds a trigger's timing."},
+  "rifled_barrel": {"name": "Rifled Barrel", "type": "component", "stack": true, "weight": 1.5, "value": 30, "desc": "Ballistics component. Bored and spiral-cut iron."},
+  "rifle_stock": {"name": "Rifle Stock", "type": "component", "stack": true, "weight": 1, "value": 10, "desc": "Ballistics component. Shaped hardwood."},
+  "clockwork_trigger": {"name": "Clockwork Trigger", "type": "component", "stack": true, "weight": 0.3, "value": 40, "desc": "Ballistics component. Spring and ratchet in one sealed lock. The heart of a repeater."},
+  "percussion_lock": {"name": "Percussion Lock", "type": "component", "stack": true, "weight": 0.3, "value": 25, "desc": "Ballistics component. Hammer and nipple for cap ignition."},
+  "pressure_valve": {"name": "Pressure Valve", "type": "component", "stack": true, "weight": 0.3, "value": 15, "desc": "Steamworks component. Lets a boiler breathe before it bursts."},
+  "boiler_shell": {"name": "Boiler Shell", "type": "component", "stack": true, "weight": 3, "value": 20, "desc": "Steamworks component. Riveted iron drum."},
+  "copper_coil": {"name": "Copper Coil", "type": "component", "stack": true, "weight": 0.5, "value": 14, "desc": "Steamworks component. Heat-exchange coil."},
+  "steam_gauge": {"name": "Steam Gauge", "type": "component", "stack": true, "weight": 0.3, "value": 18, "desc": "Steamworks component. A brass dial behind glass."},
+  "pocket_boiler": {"name": "Pocket Boiler", "type": "component", "stack": true, "weight": 3, "value": 60, "desc": "Steamworks component. A coal-fired boiler small enough to carry. Drives lances and mauls."},
+  "voltaic_cell": {"name": "Voltaic Cell", "type": "component", "stack": true, "weight": 0.5, "value": 22, "desc": "Galvanics component. Copper, zinc and brine in a jar. Stored lightning, no magic involved."},
+  "insulated_wire": {"name": "Insulated Wire", "type": "component", "stack": true, "weight": 0.2, "value": 8, "desc": "Galvanics component. Copper wire wrapped in resin-soaked cloth."},
+  "induction_coil": {"name": "Induction Coil", "type": "component", "stack": true, "weight": 0.5, "value": 30, "desc": "Galvanics component. Turns a cell's trickle into a spark."},
+  "ground_lens": {"name": "Ground Lens", "type": "component", "stack": true, "weight": 0.1, "value": 12, "desc": "Optics component. A glass blank ground true."},
+  "black_powder": {"name": "Black Powder", "type": "component", "stack": true, "weight": 0.2, "value": 6, "desc": "Demolition component. Saltpetre, sulphur and charcoal. Keep it dry and keep it away from shrines."},
+  "fuse_cord": {"name": "Fuse Cord", "type": "component", "stack": true, "weight": 0.1, "value": 3, "desc": "Demolition component. Burns at a steady hand's-breadth a second."},
+  "gear_train": {"name": "Gear Train", "type": "component", "stack": true, "weight": 0.5, "value": 20, "desc": "Automata component. Meshed brass gears on a frame."},
+  "wind_key": {"name": "Wind Key", "type": "component", "stack": true, "weight": 0.1, "value": 8, "desc": "Automata component. Winds a mainspring."},
+  "automaton_frame": {"name": "Automaton Frame", "type": "component", "stack": true, "weight": 4, "value": 45, "desc": "Automata component. An iron skeleton for a small machine."},
+  "clockwork_core": {"name": "Clockwork Core", "type": "component", "stack": true, "weight": 1, "value": 70, "desc": "Automata component. Mainspring, escapement and governor. A machine's will, such as it is."}
+}
