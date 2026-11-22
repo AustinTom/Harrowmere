@@ -30,7 +30,7 @@ OUT = ROOT / "data" / "art" / "asset_manifest.csv"
 
 COLUMNS = [
     "id", "tier", "category", "subcategory", "kind", "name", "path", "binds_to",
-    "shared_base", "count", "covers_items", "rig", "tri_budget", "texture",
+    "shared_base", "count", "covers_items", "rig", "budget_class", "tri_budget", "tex_budget", "texture",
     "maps", "placeholder", "status", "notes",
 ]
 
@@ -784,7 +784,7 @@ PROPS = [
     ("hitching_post", 1, "street", ""), ("handcart", 1, "street", ""), ("wagon", 1, "vehicle", "Pulled by ox/horse."),
     ("coach", 2, "vehicle", ""), ("rowboat", 2, "vehicle", ""), ("barge", 2, "vehicle", "Canals."), ("locomotive", 3, "vehicle", "Working train (not a wreck)."),
     ("rail_carriage", 3, "vehicle", ""), ("traction_engine", 3, "vehicle", ""), ("gravestone_*", 1, "street", "Gravestones (4)"),
-    ("statue_generic", 2, "street", ""), ("fountain", 2, "street", ""), ("banner_*", 2, "street", "Faction banners and flags (8): swap when towns change hands."),
+    ("statue_generic", 2, "street", ""), ("fountain", 2, "street", ""), ("banner", 2, "street", "Faction banner and flag: one model with an owner_* slot that swaps when a town changes hands."),
     ("war_map_table", 2, "furniture", "Faction HQs."), ("boiler_large", 1, "industrial", "Pumphouse/factory boiler; lit/cold states."),
     ("pipe_run_set", 2, "industrial", ""), ("smokestack_free", 2, "industrial", ""), ("crane_dock", 2, "industrial", ""),
     ("coal_cart", 1, "industrial", ""), ("scaffolding", 2, "industrial", ""), ("haybale", 1, "farm", ""), ("plough", 1, "farm", ""),
@@ -822,8 +822,75 @@ def _expand_paths():
             r["path"] = f"{p}{style}_<piece>.glb"
 
 
+# Budgets from the art style guide (docs/art/README.md, PR #5; draft until Austin
+# reviews it). tri_budget/tex_budget in the CSV come from here, not the tables above.
+BUDGETS = {
+    "hero": ("15000-25000", "2x 2048"),
+    "resident": ("8000-12000", "shared 2048 set per race and outfit family"),
+    "resident_part": ("part of the 8000-12000 resident", "shared 2048 set per race and outfit family"),
+    "creature": ("3000-30000", "1024-2048"),
+    "boss": ("up to 50000", "2x 2048"),
+    "held_item": ("1500-4000", "1024 or family atlas"),
+    "small_prop": ("200-2000", "shared atlas"),
+    "medium_large_prop": ("2000-20000", "shared atlas / trim sheets"),
+    "building_kit_piece": ("500-5000 per piece", "trim sheets"),
+    "house": ("20000-60000", "trim sheets"),
+    "landmark": ("100000-250000", "trim sheets + unique 2048"),
+    "animation": ("", ""),
+    "texture": ("", "see maps"),
+}
+SMALL_PROP_GROUPS = {"clutter", "lighting", "storage", "camp", "street", "farm", "dressing"}
+SMALL_NATURE = ("grass", "flowers", "reeds", "mushroom", "crops", "bush", "ice_chunks", "ore_seam")
+HELD_FAMILIES = {"dagger", "sword", "axe", "blunt", "polearm", "bow", "crossbow", "thrown", "shield", "pistol",
+                 "longgun", "heavy_gun", "gun_parts", "steam_melee", "galvanic", "staff", "wand", "rod", "focus",
+                 "tome", "ossuan_blade", "relic"}
+
+
+def _budget_class(r):
+    c, k, sub, id = r["category"], r["kind"], r["subcategory"], r["id"]
+    if c in ("textures", "terrain"):
+        return "texture"
+    if c == "animations":
+        return "animation"
+    if c == "characters":
+        if id in ("player",) or id.startswith("companion_"):
+            return "hero"
+        return "resident" if k == "model" else "resident_part"
+    if c == "creatures":
+        return "boss" if r["rig"] == "custom" else "creature"
+    if c == "items":
+        fam = sub.split("/")[1]
+        if fam == "armour":
+            return "resident_part"
+        return "held_item" if fam in HELD_FAMILIES else "small_prop"
+    if k == "kit":
+        return "building_kit_piece"
+    if c == "buildings":
+        return "landmark" if not r["shared_base"] else ("small_prop" if id.startswith(("crate", "coal", "fence")) else "medium_large_prop" if id.startswith(("well", "bridge", "dock", "rail_track", "city_wall", "canal_lock", "camp_road", "canvas_tent", "shrine")) else "house")
+    if c == "nature":
+        return "small_prop" if id.startswith(SMALL_NATURE) else "medium_large_prop"
+    return "small_prop" if sub in SMALL_PROP_GROUPS else "medium_large_prop"
+
+
+PLANT_PREFIXES = ("tree_", "bush_", "grass_", "flowers_", "reeds_", "crops_", "mushroom_")
+OWNER_SLOT_IDS = ("banner_", "uniform_", "gas_lamp_post", "lantern_post", "shop_sign_", "notice_board")
+
+
+def _apply_style_rules():
+    for r in rows:
+        r["budget_class"] = _budget_class(r)
+        r["tri_budget"], r["tex_budget"] = BUDGETS[r["budget_class"]]
+        if r["id"].startswith(PLANT_PREFIXES):
+            r["notes"] = ("Needs a healthy and a dead variant (Resonance). " + r["notes"]).strip()
+        if r["id"].startswith(OWNER_SLOT_IDS):
+            r["notes"] = ("Faction-owned part: build swappable owner_* slots, not a model per faction. " + r["notes"]).strip()
+        if r["category"] == "items":
+            r["notes"] = (r["notes"] + " Held, dropped and inventory-icon versions are this one asset.").strip()
+
+
 def write():
     _expand_paths()
+    _apply_style_rules()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     rows.sort(key=lambda r: (r["tier"], r["category"], r["subcategory"], r["id"]))
     with OUT.open("w", newline="") as f:
