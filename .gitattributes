@@ -1,0 +1,10 @@
+# Art files are binary: never diff or merge them as text.
+*.glb    binary
+*.blend  binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.webp   binary
+*.ktx2   binary
+*.exr    binary
+*.hdr    binary

@@ -4,7 +4,8 @@ A tiny slice of the Meltlands in Godot 4.3: one town corner (Fennick's Landing),
 the player plus one follower with her own pack, three residents with daily
 schedules and dialogue, one quest that shifts Resonance, and a fight at the
 pumphouse that you can play turn-based or real-time and switch between mid-fight.
-Everything is primitive geometry, ready to be replaced with real models.
+Everything is placeholder geometry until real models are dropped in: see
+[docs/art_pipeline.md](docs/art_pipeline.md).
 
 ![Town](docs/screenshots/01_town.png)
 
@@ -63,12 +64,20 @@ data/                     all content is JSON, no code needed to add more
   actors.json             character templates: stats, packs, schedules, dialogue id
   dialogue.json           branching dialogue with flag conditions and effects
   areas/fennicks_landing.json   map size, locations + Resonance, structures, spawns, triggers
+  models.json             optional model overrides (most models need no entry)
+assets/                   exported .glb models: characters/, items/, structures/, animations/
+art-src/                  your .blend sources (Godot ignores this folder)
+addons/harrowmere_art/    editor plugin: import rules + Project > Tools > Validate Harrowmere Art
+tools/art/                model viewer and art validator scenes
+tools/blender/            Blender export add-on
 scripts/
-  core/                   autoloads: Events (signal bus), DB (data), GameState (clock, flags, Resonance)
+  core/                   autoloads: Events (signal bus), DB (data), GameState (clock, flags, Resonance),
+                          Models (finds the model for a character/item/structure, or none = placeholder)
   combat/rules.gd         pure rules: dice, attacks, spells, Resonance and misfire math
   combat/combat_manager.gd  turn-based + real-time pacing over one action API
   combat/ai.gd            enemy and follower brain (uses the same actions as the player)
-  actors/actor.gd         a character: stats, pack, equipment, movement, placeholder visuals
+  actors/actor.gd         a character: stats, pack, equipment, movement, model or placeholder body
+  actors/model_animator.gd  plays clips by game name (idle, walk, attack_melee...)
   inventory/inventory.gd  pack of item entries (stacking, identification, transfer)
   dialogue/dialogue_runner.gd  evaluates dialogue conditions and effects
   world/world.gd          builds an area, pathfinding, aggro, followers, schedules
@@ -81,8 +90,8 @@ tests/                    unit tests, an AI-vs-AI fight simulator, screenshot ca
 
 * **New items, spells, NPCs, dialogue, areas:** add JSON entries. The effect vocabulary lives in
   `rules.gd` (weapon `special` tags) and `dialogue_runner.gd` (dialogue effect types).
-* **Real models:** replace `Actor._build_visual()` and `World._build_structure()`; nothing else
-  touches meshes.
+* **Real models:** export from Blender into `assets/` following
+  [docs/art_pipeline.md](docs/art_pipeline.md). No code changes needed.
 * **Crafting, identification skill checks, enchanting:** extend `Inventory` entries (they are
   plain dictionaries, so quality/material/enchant fields can be added) and add actions to
   `CombatManager`/HUD.
@@ -95,10 +104,11 @@ tests/                    unit tests, an AI-vs-AI fight simulator, screenshot ca
 
 ```
 godot --headless --import
-godot --headless res://tests/test_runner.tscn               # 25 rules/inventory/dialogue checks
+godot --headless res://tests/test_runner.tscn               # 47 rules/inventory/dialogue/art pipeline checks
 godot --headless res://tests/sim_runner.tscn -- --mode=toggle --seed=3   # AI plays the fight, flipping modes every 4s
 ```
 `--mode` is `tb`, `rt` or `toggle`. The simulator exits non-zero if the fight hangs.
+`godot --headless res://tools/art/validate_art.tscn` checks every model in `assets/`.
 
 ## Known gaps (on purpose, for later threads)
 

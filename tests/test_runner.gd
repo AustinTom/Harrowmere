@@ -103,5 +103,65 @@ func _ready() -> void:
 	check(receiver["inventory"].count("healing_draught") == 2, "quest reward given")
 	check(DialogueRunner.entry_node(warden) == "after_cold", "warden remembers the choice")
 
+	await _test_art_pipeline()
+
 	print("\n%d checks, %d failures" % [checks, failures])
 	get_tree().quit(1 if failures > 0 else 0)
+
+
+## Uses the reference models in tests/fixtures/assets, which
+## tools/blender/make_test_fixtures.py builds through the Blender add-on.
+func _test_art_pipeline() -> void:
+	print("Art pipeline")
+	Models.root = "res://tests/fixtures/assets"
+	Models.reload()
+	var spec := Models.character_spec({"id": "mannequin", "race": "human"})
+	check(spec.get("path", "") == "res://tests/fixtures/assets/characters/mannequin/mannequin.glb", "finds a character by folder convention")
+	check(Models.character_spec({"id": "osk_brannel", "race": "dwarf"}).is_empty(), "no model means placeholder")
+	check(Models.character_spec({"id": "someone", "model": "mannequin"}).has("path"), "template 'model' key picks another model")
+	Models.registry["race_defaults"] = {"elf": ["mannequin"]}
+	check(Models.character_spec({"id": "random_elf", "race": "elf"}).has("path"), "race default covers generated residents")
+	check(Models.structure_spec({"kind": "house", "rect": [0, 0, 4, 3]}).has("path"), "structure found by kind and size")
+	check(Models.structure_spec({"kind": "house", "rect": [0, 0, 4, 4]}).is_empty(), "other house size falls back to placeholder")
+	Models.registry["structures"] = {"house": {"path": "res://tests/fixtures/assets/structures/house_4x3/house_4x3.glb"}}
+	check(Models.structure_spec({"kind": "house", "rect": [0, 0, 4, 4]}).has("path"), "models.json entry covers a whole kind")
+	Models.registry["characters"] = {"broken": {"path": "res://assets/characters/nope.glb"}}
+	check(Models.character_spec({"id": "broken"}).is_empty(), "missing file in models.json falls back, no crash")
+
+	var a := Actor.new()
+	add_child(a)
+	a.apply_template({"id": "mannequin", "name": "Mannequin", "race": "human",
+		"inventory": [{"id": "fen_hookblade"}, {"id": "repeating_carbine"}], "equip": "fen_hookblade"})
+	await get_tree().process_frame
+	await get_tree().process_frame
+	check(a.has_model(), "actor uses the custom model")
+	check(absf(a._height - 1.73) < 0.05, "model height measured (%.2f m)" % a._height)
+	var box := Models.bounds(a._model, a)
+	check(absf(box.position.y) < 0.02, "feet on the ground (%.3f)" % box.position.y)
+	check(a._anim.clip_for("idle") != "" and a._anim.clip_for("walk") != "", "idle and walk clips found")
+	check(a._anim.clip_for("death") != "", "'Armature|death' clip matched to death")
+	check(a._anim.clip_for("cast") == a._anim.clip_for("attack_melee"), "missing cast falls back to attack")
+	check(a._anim.player.get_animation(a._anim.clip_for("walk")).loop_mode == Animation.LOOP_LINEAR, "walk loops")
+	check(a._hand != null and a._hand.name == "socket_hand_r", "weapon socket found")
+	var hand_local: Vector3 = a.global_transform.affine_inverse() * a._hand.global_position
+	check(hand_local.x > 0.2, "model turned to face -Z: right hand on the +X side (%.2f)" % hand_local.x)
+	check(a._weapon_model != null and a._weapon_model.get_parent() == a._hand, "weapon model in the hand")
+	check(not a._weapon_mesh.visible, "placeholder weapon hidden")
+	a.equip_entry(a.inventory.find_first("repeating_carbine"))
+	check(a._weapon_model == null and a._weapon_mesh.visible, "item without a model uses the placeholder stick")
+	a.queue_free()
+
+	var p := Actor.new()
+	add_child(p)
+	p.apply_template({"id": "osk_brannel", "name": "Osk", "race": "dwarf"})
+	check(not p.has_model() and p._visual.get_child_count() >= 3, "no model: placeholder body built")
+	p.queue_free()
+
+	var v = preload("res://tools/art/art_validator.gd").new()
+	var res: Dictionary = v.validate_all("res://tests/fixtures/assets")
+	check(res["models"] == 3 and res["errors"] == 0 and res["warnings"] == 0, "fixtures pass the validator (%d errors, %d warnings)" % [res["errors"], res["warnings"]])
+	if res["warnings"] > 0:
+		print("\n".join(res["lines"]))
+
+	Models.root = "res://assets"
+	Models.reload()

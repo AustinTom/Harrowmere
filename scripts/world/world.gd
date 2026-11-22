@@ -1,7 +1,8 @@
 class_name World
 extends Node3D
 ## Builds an area from data/areas/*.json: ground per location (tinted by
-## Resonance), primitive structures, pathfinding grid and actors. Also runs
+## Resonance), structures (custom models from the Models registry, or
+## placeholder primitives), pathfinding grid and actors. Also runs
 ## out-of-combat systems: aggro, follower following, resident schedules.
 
 var area: Dictionary = {}
@@ -457,7 +458,71 @@ func _build_structure(s: Dictionary) -> void:
 	add_child(node)
 	var w := float(r.size.x)
 	var d := float(r.size.y)
-	match str(s.get("kind", "box")):
+	var kind := str(s.get("kind", "box"))
+	var model: Node3D = null
+	var spec := Models.structure_spec(s)
+	if not spec.is_empty():
+		model = Models.instantiate(spec)
+	if model != null:
+		# Footprint is centred on the node; "facing" turns the model in 90 degree steps.
+		model.rotation_degrees.y += float(s.get("facing", 0))
+		node.add_child(model)
+	else:
+		_build_structure_placeholder(node, kind, w, d)
+	_add_structure_fx(node, kind, r, model)
+
+
+## Gameplay effects that belong to a kind of structure, model or not. A model
+## can place them with Empties named marker_light / marker_smoke.
+func _add_structure_fx(node: Node3D, kind: String, r: Rect2i, model: Node3D) -> void:
+	var w := float(r.size.x)
+	var d := float(r.size.y)
+	match kind:
+		"shrine":
+			var light := OmniLight3D.new()
+			light.position = _marker_pos(node, model, "marker_light", Vector3(0, 2.3, 0))
+			light.light_color = Color("#7fd6ff")
+			light.omni_range = 8.0
+			var loc := GameState.location_at(r.position)
+			light.light_energy = int(loc.get("resonance", 50)) / 30.0
+			node.add_child(light)
+			_shrine_lights.append({"loc": loc.get("id", ""), "light": light})
+		"pumphouse":
+			var smoke := CPUParticles3D.new()
+			smoke.position = _marker_pos(node, model, "marker_smoke", Vector3(w / 2.0 - 0.9, 5.6, -d / 2.0 + 0.9))
+			smoke.amount = 30
+			smoke.lifetime = 3.0
+			smoke.direction = Vector3(0.2, 1, 0)
+			smoke.spread = 12.0
+			smoke.gravity = Vector3(0.3, 0.5, 0)
+			smoke.initial_velocity_min = 0.6
+			smoke.initial_velocity_max = 1.1
+			smoke.scale_amount_min = 0.6
+			smoke.scale_amount_max = 1.4
+			var pm2 := SphereMesh.new()
+			pm2.radius = 0.25
+			pm2.height = 0.5
+			smoke.mesh = pm2
+			var sm2 := StandardMaterial3D.new()
+			sm2.albedo_color = Color(0.25, 0.25, 0.27, 0.6)
+			sm2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			smoke.material_override = sm2
+			smoke.emitting = false
+			node.add_child(smoke)
+			_smoke.append(smoke)
+
+
+func _marker_pos(node: Node3D, model: Node3D, marker: String, fallback: Vector3) -> Vector3:
+	if model == null:
+		return fallback
+	var m := Models.find_socket(model, marker)
+	if m == null:
+		return fallback
+	return Models._local_xf(m, node).origin
+
+
+func _build_structure_placeholder(node: Node3D, kind: String, w: float, d: float) -> void:
+	match kind:
 		"house":
 			_box(node, Vector3(w - 0.1, 1.8, d - 0.1), Vector3(0, 0.9, 0), Color("#a39074"))
 			var roof := MeshInstance3D.new()
@@ -484,14 +549,6 @@ func _build_structure(s: Dictionary) -> void:
 			om.emission_energy_multiplier = 2.0
 			orb.material_override = om
 			node.add_child(orb)
-			var light := OmniLight3D.new()
-			light.position.y = 2.3
-			light.light_color = Color("#7fd6ff")
-			light.omni_range = 8.0
-			var loc := GameState.location_at(r.position)
-			light.light_energy = int(loc.get("resonance", 50)) / 30.0
-			node.add_child(light)
-			_shrine_lights.append({"loc": loc.get("id", ""), "light": light})
 		"well":
 			_cyl(node, 0.42, 0.7, Vector3(0, 0.35, 0), Color("#7f858c"))
 			_cyl(node, 0.32, 0.72, Vector3(0, 0.37, 0), Color("#2b4a5c"))
@@ -501,35 +558,13 @@ func _build_structure(s: Dictionary) -> void:
 			var chimney_pos := Vector3(w / 2.0 - 0.9, 4.2, -d / 2.0 + 0.9)
 			_cyl(node, 0.38, 2.6, chimney_pos, Color("#3b3533"))
 			_cyl(node, 0.7, 1.6, Vector3(-w / 2.0 - 0.1, 0.8, 0.8), Color("#8a6a3e")).rotation_degrees.z = 90
-			var smoke := CPUParticles3D.new()
-			smoke.position = chimney_pos + Vector3(0, 1.4, 0)
-			smoke.amount = 30
-			smoke.lifetime = 3.0
-			smoke.direction = Vector3(0.2, 1, 0)
-			smoke.spread = 12.0
-			smoke.gravity = Vector3(0.3, 0.5, 0)
-			smoke.initial_velocity_min = 0.6
-			smoke.initial_velocity_max = 1.1
-			smoke.scale_amount_min = 0.6
-			smoke.scale_amount_max = 1.4
-			var pm2 := SphereMesh.new()
-			pm2.radius = 0.25
-			pm2.height = 0.5
-			smoke.mesh = pm2
-			var sm2 := StandardMaterial3D.new()
-			sm2.albedo_color = Color(0.25, 0.25, 0.27, 0.6)
-			sm2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			smoke.material_override = sm2
-			smoke.emitting = false
-			node.add_child(smoke)
-			_smoke.append(smoke)
 		"coal":
 			_box(node, Vector3(w - 0.2, 0.6, d - 0.2), Vector3(0, 0.3, 0), Color("#1f1f22"))
 			_box(node, Vector3(w * 0.5, 0.4, d * 0.5), Vector3(0.1, 0.75, 0.1), Color("#26262a"))
 		"crate":
 			_box(node, Vector3(0.8, 0.8, 0.8), Vector3(0, 0.4, 0), Color("#8a6a3e"))
 		"fence":
-			var fsz := Vector3(0.12, 1.0, d) if r.size.x == 1 else Vector3(w, 1.0, 0.12)
+			var fsz := Vector3(0.12, 1.0, d) if w == 1.0 else Vector3(w, 1.0, 0.12)
 			_box(node, fsz, Vector3(0, 0.5, 0), Color("#5d4b3a"))
 		_:
 			_box(node, Vector3(w, 1.0, d), Vector3(0, 0.5, 0), Color("#888888"))
